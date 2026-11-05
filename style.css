@@ -3,10 +3,11 @@
    ====================================================== */
 
 :root {
-  --vinho: #6b1f2a;
-  --vinho-escuro: #4a141c;
-  --azul: #14213d;
-  --azul-medio: #1f3160;
+  --vinho: #c42f35;        /* vermelho da logo, escurecido para leitura */
+  --vermelho-logo: #eb3e42;
+  --vinho-escuro: #7d1c22;
+  --azul: #161c4e;          /* azul-marinho da logo */
+  --azul-medio: #262f78;
   --ouro: #c9a14a;
   --ouro-escuro: #9a7a2f;
   --ouro-claro: #e8d3a0;
@@ -18,7 +19,7 @@
   --serif: "Cormorant Garamond", Georgia, "Times New Roman", serif;
   --sans: "Source Sans 3", "Segoe UI", Roboto, Arial, sans-serif;
   --raio: 14px;
-  --sombra: 0 10px 30px rgba(20, 33, 61, .08);
+  --sombra: 0 10px 30px rgba(22, 28, 78, .08);
 }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -42,18 +43,18 @@ button { font: inherit; color: inherit; }
 /* ================= CABEÇALHO ================= */
 .header {
   position: sticky; top: 0; z-index: 50;
-  background: rgba(20, 33, 61, .96);
+  background: rgba(22, 28, 78, .96);
   backdrop-filter: blur(8px);
   border-bottom: 1px solid rgba(201, 161, 74, .35);
 }
 .nav { display: flex; align-items: center; justify-content: space-between; height: 72px; }
 
 .logo { display: flex; align-items: center; gap: 12px; color: #fff; }
-.logo-mark {
-  font-family: var(--serif); font-weight: 700; font-size: 1.15rem; letter-spacing: .08em;
-  border: 1.5px solid var(--ouro); color: var(--ouro); padding: 6px 10px; border-radius: 6px;
-}
-.logo-text { font-family: var(--serif); font-size: 1.05rem; line-height: 1.1; font-weight: 600; }
+.logo-img { height: 40px; width: auto; display: block; }
+.hero-logo { height: 80px; width: auto; display: block; margin-bottom: 26px; filter: drop-shadow(0 4px 14px rgba(0, 0, 0, .25)); }
+.footer-logo { height: 56px; width: auto; display: block; margin-bottom: 14px; }
+.expediente-logo { height: 80px; width: auto; display: block; margin-bottom: 22px; }
+.logo-text { border-left: 1px solid rgba(201, 161, 74, .45); padding-left: 12px; font-family: var(--serif); font-size: 1.05rem; line-height: 1.1; font-weight: 600; }
 .logo-text b { color: var(--ouro); font-weight: 700; }
 
 .menu { list-style: none; display: flex; gap: 26px; }
@@ -246,7 +247,7 @@ button { font: inherit; color: inherit; }
 .article-number { font-family: var(--serif); font-size: 2.4rem; font-weight: 700; line-height: 1; color: var(--ouro); }
 .article-category {
   font-size: .68rem; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; color: var(--vinho);
-  background: rgba(107, 31, 42, .07); padding: 5px 10px; border-radius: 6px; text-align: right;
+  background: rgba(196, 47, 53, .08); padding: 5px 10px; border-radius: 6px; text-align: right;
 }
 .article-card h3 { font-family: var(--serif); font-size: 1.32rem; line-height: 1.2; color: var(--azul); font-weight: 600; }
 .article-theme { font-size: .9rem; color: var(--texto-suave); font-style: italic; }
@@ -272,7 +273,7 @@ button { font: inherit; color: inherit; }
   border-radius: 18px; background: var(--papel); color: var(--texto); box-shadow: 0 30px 80px rgba(0, 0, 0, .35);
   overflow-y: auto;
 }
-.modal::backdrop { background: rgba(20, 33, 61, .65); backdrop-filter: blur(3px); }
+.modal::backdrop { background: rgba(22, 28, 78, .65); backdrop-filter: blur(3px); }
 .modal[open] { animation: surgir .3s ease; }
 .modal-close {
   position: sticky; top: 12px; float: right; margin: 12px 12px 0 0; width: 40px; height: 40px; border-radius: 50%;
