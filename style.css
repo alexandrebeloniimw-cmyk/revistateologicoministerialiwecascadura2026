@@ -166,10 +166,16 @@ button { font: inherit; color: inherit; }
 .note-title { font-family: var(--serif); font-size: 1.55rem; line-height: 1.15; color: var(--azul); margin-bottom: 14px; }
 .note > p:not(.note-label):not(.signature) { color: #3a3a40; font-size: 1rem; margin-bottom: 14px; text-align: justify; hyphens: auto; }
 .signature {
-  font-family: var(--serif); font-size: 1.2rem; font-weight: 600; color: var(--azul);
-  margin-top: auto; padding-top: 14px; border-top: 1px solid var(--linha);
+  display: flex; align-items: center; gap: 14px;
+  margin-top: auto; padding-top: 16px; border-top: 1px solid var(--linha);
 }
-.signature span { display: block; font-family: var(--sans); font-size: .84rem; color: var(--texto-suave); font-weight: 500; }
+.signature p { font-family: var(--serif); font-size: 1.2rem; font-weight: 600; color: var(--azul); line-height: 1.2; }
+.signature span { display: block; font-family: var(--sans); font-size: .84rem; color: var(--texto-suave); font-weight: 500; margin-top: 2px; }
+.avatar {
+  width: 84px; height: 84px; border-radius: 50%; object-fit: cover; flex-shrink: 0;
+  border: 3px solid var(--papel); box-shadow: 0 0 0 2px var(--ouro), 0 6px 14px rgba(22, 28, 78, .18);
+}
+.note-main .avatar { box-shadow: 0 0 0 2px var(--vinho), 0 6px 14px rgba(22, 28, 78, .18); }
 
 /* Editorias */
 .editoria-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 18px; margin-top: 40px; }
