@@ -367,7 +367,7 @@ problema:"De que modo a postura de Neemias diante da ruína de Jerusalém, com l
 objetivo:"Identificar, a partir de Neemias 1.1-11 e de seus desdobramentos no livro, os elementos que caracterizam a liderança de Neemias e sua aplicação à vida cristã atual.",
 sintese:"Estudo de Neemias 1.1-11, com os desdobramentos da obra (Ne 2–6) e a renovação pela leitura da Lei (Ne 8–9). A liderança de Neemias começa no coração quebrantado e na oração, mas se converte em planejamento, coragem e organização. O artigo propõe três lições: oração e ação, perseverança diante da oposição, e trabalho em equipe com renovação espiritual.",
 destaque:"Chorar diante das ruínas, orar e levantar-se para edificar.",
-refs:[],
+refs:["KIDNER, Derek. Esdras e Neemias: introdução e comentário. Tradução: Gordon Chown. São Paulo: Vida Nova; Mundo Cristão, 1985. (Série Cultura Bíblica).", "BOICE, James Montgomery. Neemias: comentário expositivo. Tradução: Lidiane Cecílio e Thiago McHertt. Brasília, DF: Monergismo, 2020.", "LOPES, Hernandes Dias. Neemias: o líder que restaurou uma nação. São Paulo: Hagnos, 2006. (Comentários expositivos Hagnos)."],
 link:"https://drive.google.com/file/d/12clD2Zp_1PhMGvb4kWEA7rfLo2XI06PV/view"
 },
 
