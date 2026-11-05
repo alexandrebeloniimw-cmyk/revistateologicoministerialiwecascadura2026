@@ -596,6 +596,58 @@ renderArtigos(artigos);
 
 
 // ======================================================
+// COMO CITAR (ABNT NBR 6023)
+// ======================================================
+
+const MESES_ABNT = ["jan.", "fev.", "mar.", "abr.", "maio", "jun.", "jul.", "ago.", "set.", "out.", "nov.", "dez."];
+const PARENTESCO = ["junior", "júnior", "filho", "neto", "sobrinho"];
+const PARTICULAS = ["de", "da", "do", "das", "dos", "e"];
+
+// "Neemias Paulo Moreira de Souza" -> "SOUZA, Neemias Paulo Moreira de"
+function autorABNT(nome) {
+  const p = nome.trim().split(/\s+/);
+  let n = 1;
+  if (PARENTESCO.includes(p[p.length - 1].toLowerCase()) && p.length > 2) n = 2;
+  const sobrenome = p.slice(-n).join(" ").toUpperCase();
+  const prenomes = p.slice(0, -n).join(" ");
+  return `${sobrenome}, ${prenomes}`;
+}
+
+function hojeABNT() {
+  const d = new Date();
+  return `${d.getDate()} ${MESES_ABNT[d.getMonth()]} ${d.getFullYear()}`;
+}
+
+// Devolve { html, texto } — o título em negrito até os dois-pontos
+function citacaoABNT(a) {
+  const i = a.titulo.indexOf(":");
+  const tit = i > -1 ? a.titulo.slice(0, i) : a.titulo;
+  const sub = i > -1 ? a.titulo.slice(i) : "";
+  const resto = `. 2026. Artigo (Curso Ministerial Teológico) – Instituto Wesleyano de Educação, Polo Cascadura, Rio de Janeiro, 2026. Disponível em: ${a.link}. Acesso em: ${hojeABNT()}.`;
+  const autor = autorABNT(a.autor);
+  return {
+    html: `${esc(autor)}. <strong>${esc(tit)}</strong>${esc(sub)}${esc(resto)}`,
+    texto: `${autor}. ${tit}${sub}${resto}`
+  };
+}
+
+async function copiarTexto(texto) {
+  try {
+    await navigator.clipboard.writeText(texto);
+    return true;
+  } catch (e) {
+    const t = document.createElement("textarea");
+    t.value = texto; t.setAttribute("readonly", ""); t.style.position = "fixed"; t.style.opacity = "0";
+    document.body.appendChild(t); t.select();
+    let ok = false;
+    try { ok = document.execCommand("copy"); } catch (_) {}
+    t.remove();
+    return ok;
+  }
+}
+
+
+// ======================================================
 // JANELA DA SÍNTESE
 // ======================================================
 
@@ -605,6 +657,7 @@ const modalBody = $("#modalBody");
 function abrirSintese(id) {
   const a = artigos.find(x => x.id === id);
   if (!a || !modal) return;
+  const cit = citacaoABNT(a);
 
   const refs = a.refs.length
     ? `<ol class="refs">${a.refs.map(r => `<li>${fmt(r)}</li>`).join("")}</ol>`
@@ -629,8 +682,23 @@ function abrirSintese(id) {
     <section><h3>Síntese do artigo</h3><p>${fmt(a.sintese)}</p></section>
     <section><h3>Principais referências</h3>${refs}</section>
 
+    <section class="cite">
+      <h3>Como citar este artigo</h3>
+      <p class="cite-text" id="citeText">${cit.html}</p>
+      <button type="button" class="cite-copy" id="citeCopy">Copiar referência</button>
+      <span class="cite-note">ABNT NBR 6023</span>
+    </section>
+
     <a href="${esc(a.link)}" target="_blank" rel="noopener" class="btn btn-primary modal-cta">Ler o artigo completo</a>
   `;
+
+  const copyBtn = $("#citeCopy");
+  copyBtn.addEventListener("click", async () => {
+    const ok = await copiarTexto(cit.texto);
+    copyBtn.textContent = ok ? "Copiado ✓" : "Selecione e copie o texto";
+    copyBtn.classList.toggle("done", ok);
+    setTimeout(() => { copyBtn.textContent = "Copiar referência"; copyBtn.classList.remove("done"); }, 2500);
+  });
 
   if (typeof modal.showModal === "function") modal.showModal();
   else modal.setAttribute("open", "");

@@ -315,6 +315,16 @@ button { font: inherit; color: inherit; }
 .refs-pending { font-size: .9rem; color: var(--texto-suave); font-style: italic; }
 .modal-cta { margin-top: 8px; }
 
+.cite { background: var(--creme); border: 1px solid var(--linha); border-left: 4px solid var(--ouro); border-radius: 12px; padding: 18px 20px; }
+.modal .cite-text { font-size: .9rem; color: #333; text-align: left; hyphens: manual; overflow-wrap: anywhere; }
+.cite-copy {
+  margin-top: 12px; border: 1.5px solid var(--azul); background: var(--papel); color: var(--azul);
+  font-weight: 600; font-size: .86rem; padding: 7px 16px; border-radius: 999px; cursor: pointer; transition: all .2s;
+}
+.cite-copy:hover { background: var(--azul); color: #fff; }
+.cite-copy.done { background: var(--azul); color: #fff; }
+.cite-note { margin-left: 10px; font-size: .76rem; color: var(--texto-suave); }
+
 /* ================= BANCA ================= */
 .banca { display: grid; grid-template-columns: 1fr 1.15fr; gap: 56px; align-items: start; }
 .banca-date { display: flex; align-items: center; gap: 16px; margin: 22px 0 14px; }
