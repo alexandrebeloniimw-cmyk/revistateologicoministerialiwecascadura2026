@@ -391,6 +391,23 @@ button { font: inherit; color: inherit; }
 .edition-current .edition-src { color: rgba(255, 255, 255, .7); }
 .edition-current.show:hover { background: linear-gradient(135deg, var(--azul) 0%, var(--azul-medio) 70%, var(--vinho-escuro) 100%); }
 
+.sister-card {
+  margin-top: 22px; display: flex; align-items: center; gap: 26px; padding: 26px 30px; border-radius: 18px; color: #fff;
+  background: radial-gradient(ellipse at 90% 0%, rgba(201, 161, 74, .25), transparent 55%),
+              linear-gradient(120deg, var(--azul) 0%, var(--azul-medio) 65%, var(--vinho-escuro) 100%);
+}
+.sister-card.show:hover { transform: translateY(-3px); box-shadow: 0 14px 34px rgba(22, 28, 78, .25); }
+.sister-logo { height: 60px; width: auto; flex-shrink: 0; }
+.sister-text { display: flex; flex-direction: column; gap: 4px; flex: 1; }
+.sister-label { text-transform: uppercase; letter-spacing: .14em; font-size: .7rem; font-weight: 700; color: var(--ouro-claro); }
+.sister-text strong { font-family: var(--serif); font-size: 1.7rem; line-height: 1.15; font-weight: 600; }
+.sister-sub { color: rgba(255, 255, 255, .8); font-size: .95rem; }
+.sister-go {
+  flex-shrink: 0; background: var(--ouro); color: var(--azul); font-weight: 700; font-size: .92rem;
+  padding: 11px 20px; border-radius: 999px; transition: background .2s;
+}
+.sister-card:hover .sister-go { background: var(--ouro-claro); }
+
 /* ================= EXPEDIENTE ================= */
 .expediente { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: start; }
 .staff { display: grid; gap: 12px; margin-top: 24px; }
@@ -489,6 +506,8 @@ button { font: inherit; color: inherit; }
   .edition-card { padding: 18px 16px 16px; }
   .normas-card { padding: 28px 20px; }
   .normas-topics ol { grid-template-columns: 1fr; }
+  .sister-card { flex-direction: column; align-items: flex-start; gap: 14px; padding: 22px 20px; }
+  .sister-text strong { font-size: 1.4rem; }
   .edition-label { font-size: .62rem; letter-spacing: .06em; }
   .faculty { columns: 1; }
   .footer-grid { grid-template-columns: 1fr; }
