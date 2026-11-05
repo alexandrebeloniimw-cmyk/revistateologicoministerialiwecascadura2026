@@ -146,22 +146,22 @@ button { font: inherit; color: inherit; }
 .section-title { font-family: var(--serif); font-weight: 600; color: var(--azul); font-size: clamp(2rem, 4vw, 2.8rem); line-height: 1.1; }
 .section-lead { color: var(--texto-suave); margin-top: 10px; max-width: 640px; }
 
-/* Editorial */
-.editorial { display: grid; grid-template-columns: 1.25fr 1fr; gap: 56px; align-items: start; }
-.editorial-text { margin-top: 24px; }
-.editorial-text p { font-size: 1.12rem; color: #333; margin-bottom: 18px; text-align: justify; hyphens: auto; }
-.editorial-text p:first-child::first-letter {
-  font-family: var(--serif); float: left; font-size: 4rem; line-height: .82;
-  padding: 6px 10px 0 0; color: var(--vinho); font-weight: 700;
+/* Editorial: três cartões */
+.editorial-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; margin-top: 36px; align-items: stretch; }
+.note {
+  background: var(--papel); border: 1px solid var(--linha); border-top: 4px solid var(--ouro);
+  border-radius: var(--raio); padding: 28px 28px 24px; display: flex; flex-direction: column;
+  box-shadow: var(--sombra);
 }
-.signature { font-family: var(--serif); font-size: 1.3rem; font-weight: 600; color: var(--azul); margin-top: 10px; text-align: right; }
-.signature span { display: block; font-family: var(--sans); font-size: .85rem; color: var(--texto-suave); font-weight: 500; }
-.signature.small { font-size: 1.12rem; margin-top: 14px; }
-
-.editorial-notes { display: grid; gap: 18px; }
-.note { background: var(--papel); border: 1px solid var(--linha); border-left: 4px solid var(--ouro); border-radius: var(--raio); padding: 24px 26px; }
-.note p { color: #3a3a40; font-size: .98rem; }
-.note-label { text-transform: uppercase; letter-spacing: .14em; font-size: .72rem; font-weight: 700; color: var(--vinho) !important; margin-bottom: 8px; }
+.note-main { border-top-color: var(--vinho); }
+.note-label { text-transform: uppercase; letter-spacing: .14em; font-size: .72rem; font-weight: 700; color: var(--vinho); margin-bottom: 8px; }
+.note-title { font-family: var(--serif); font-size: 1.55rem; line-height: 1.15; color: var(--azul); margin-bottom: 14px; }
+.note > p:not(.note-label):not(.signature) { color: #3a3a40; font-size: 1rem; margin-bottom: 14px; text-align: justify; hyphens: auto; }
+.signature {
+  font-family: var(--serif); font-size: 1.2rem; font-weight: 600; color: var(--azul);
+  margin-top: auto; padding-top: 14px; border-top: 1px solid var(--linha);
+}
+.signature span { display: block; font-family: var(--sans); font-size: .84rem; color: var(--texto-suave); font-weight: 500; }
 
 /* Editorias */
 .editoria-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 18px; margin-top: 40px; }
@@ -371,7 +371,8 @@ button { font: inherit; color: inherit; }
 
 /* ================= RESPONSIVO ================= */
 @media (max-width: 960px) {
-  .hero-grid, .editorial, .banca, .expediente { grid-template-columns: 1fr; gap: 36px; }
+  .hero-grid, .banca, .expediente { grid-template-columns: 1fr; gap: 36px; }
+  .editorial-grid { grid-template-columns: 1fr; max-width: 680px; }
   .defense-card { max-width: 420px; }
   .footer-grid { grid-template-columns: 1fr 1fr; }
   .footer-verse { grid-column: 1 / -1; }
@@ -395,7 +396,7 @@ button { font: inherit; color: inherit; }
   .criteria { grid-template-columns: repeat(2, 1fr); }
   .faculty { columns: 1; }
   .footer-grid { grid-template-columns: 1fr; }
-  .editorial-text p, .modal section p { text-align: left; }
+  .note > p:not(.note-label):not(.signature), .modal section p { text-align: left; }
   .modal-body { padding: 26px 20px 30px; }
   .modal-facts { grid-template-columns: 1fr; }
   .agenda { overflow-x: auto; }
