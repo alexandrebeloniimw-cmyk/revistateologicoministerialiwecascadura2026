@@ -4,11 +4,15 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Artigo Teológico Ministerial 2026 | IWE – Polo Cascadura</title>
-<meta name="description" content="Revista Artigo Teológico Ministerial 2026 — produção acadêmica dos seminaristas do Instituto Wesleyano de Educação, Polo Cascadura (Rio de Janeiro).">
+<meta name="description" content="Revista Artigo Teológico Ministerial 2026 — os 24 artigos da turma semipresencial do Curso Ministerial Teológico do Instituto Wesleyano de Educação, Polo Cascadura (Rio de Janeiro). Defesas em 21/11/2026.">
+<meta property="og:title" content="Artigo Teológico Ministerial 2026 · IWE Polo Cascadura">
+<meta property="og:description" content="24 artigos, 5 editorias: perguntas da Igreja de hoje respondidas com Bíblia, teologia e pesquisa.">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#14213d">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet">
 
 <link rel="stylesheet" href="style.css">
 </head>
@@ -19,58 +23,87 @@
   <div class="container nav">
     <a href="#inicio" class="logo">
       <span class="logo-mark">IWE</span>
-      <span class="logo-text">Artigo Teológico<br>Ministerial</span>
+      <span class="logo-text">Artigo Teológico<br>Ministerial <b>2026</b></span>
     </a>
 
-    <button class="mobile-menu" id="mobileMenu" aria-label="Abrir menu">
+    <button class="mobile-menu" id="mobileMenu" aria-label="Abrir menu" aria-expanded="false" aria-controls="menu">
       <span></span><span></span><span></span>
     </button>
 
-    <nav>
+    <nav aria-label="Principal">
       <ul class="menu" id="menu">
-        <li><a href="#inicio">Início</a></li>
-        <li><a href="#apresentacao">Apresentação</a></li>
-        <li><a href="#editorias">Editorias</a></li>
+        <li><a href="#editorial">Editorial</a></li>
+        <li><a href="#numeros">A turma</a></li>
         <li><a href="#artigos">Artigos</a></li>
-        <li><a href="#contato">Contato</a></li>
+        <li><a href="#banca">Banca</a></li>
+        <li><a href="#expediente">Expediente</a></li>
       </ul>
     </nav>
   </div>
 </header>
 
-<!-- ================= HERO ================= -->
+<main>
+
+<!-- ================= CAPA ================= -->
 <section class="hero" id="inicio">
-  <div class="container hero-inner">
-    <p class="hero-kicker">Instituto Wesleyano de Educação · Polo Cascadura</p>
-    <h1>Artigo Teológico<br><em>Ministerial</em> <span>2026</span></h1>
-    <p class="hero-sub">Reflexão bíblica, teológica e pastoral a serviço da Igreja: a produção acadêmica dos seminaristas reunida em uma só edição.</p>
-    <div class="hero-actions">
-      <a href="#artigos" class="btn btn-primary">Ver os artigos</a>
-      <a href="#apresentacao" class="btn btn-ghost">Sobre a revista</a>
+  <div class="container hero-grid">
+    <div class="hero-inner">
+      <p class="hero-kicker">Instituto Wesleyano de Educação<br>Curso Ministerial Teológico · Polo Cascadura</p>
+      <p class="hero-edition">Revista · Edição 2026</p>
+      <h1>Artigo<br>Teológico<br><em>Ministerial</em></h1>
+      <p class="hero-sub">Os 24 artigos da turma semipresencial do Polo Cascadura que chegam à banca examinadora: perguntas da Igreja de hoje respondidas com Bíblia, teologia e pesquisa.</p>
+      <div class="hero-actions">
+        <a href="#artigos" class="btn btn-primary">Ver os 24 artigos</a>
+        <a href="#banca" class="btn btn-ghost">Agenda da banca</a>
+      </div>
     </div>
+
+    <aside class="defense-card" aria-label="Data das defesas">
+      <p class="defense-label">Defesas na banca examinadora</p>
+      <div class="defense-date">
+        <strong>21</strong>
+        <span>NOV<br>2026</span>
+      </div>
+      <p class="defense-info">Sábado, às 8h<br>IWE · Polo Cascadura · Rio de Janeiro</p>
+      <p class="defense-count" id="countdown">&nbsp;</p>
+    </aside>
   </div>
 </section>
 
 <!-- ================= NÚMEROS ================= -->
-<section class="stats">
+<section class="stats" aria-label="Números da edição">
   <div class="container stats-grid">
-    <div class="stat-card"><strong>24</strong><span>Artigos</span></div>
-    <div class="stat-card"><strong>5</strong><span>Editorias</span></div>
-    <div class="stat-card"><strong>24</strong><span>Autores</span></div>
-    <div class="stat-card"><strong>2026</strong><span>Edição</span></div>
+    <div class="stat-card reveal"><strong>24</strong><span>Artigos</span></div>
+    <div class="stat-card reveal"><strong>5</strong><span>Editorias</span></div>
+    <div class="stat-card reveal"><strong>12</strong><span>Orientadores</span></div>
+    <div class="stat-card reveal"><strong>21/11</strong><span>Defesas · 8h</span></div>
   </div>
 </section>
 
-<!-- ================= APRESENTAÇÃO ================= -->
-<section class="section" id="apresentacao">
-  <div class="container about">
-    <div class="about-title">
-      <p class="section-kicker">Apresentação</p>
-      <h2>Teologia que nasce do ministério e volta para ele</h2>
+<!-- ================= EDITORIAL ================= -->
+<section class="section" id="editorial">
+  <div class="container editorial">
+    <div class="editorial-main reveal">
+      <p class="section-kicker">Editorial</p>
+      <h2 class="section-title">A importância do artigo acadêmico</h2>
+      <div class="editorial-text">
+        <p>O artigo acadêmico é fundamental para a formação ministerial teológica do aluno do Instituto Wesleyano de Educação. Ele desenvolve o pensamento crítico, a pesquisa bíblica, a busca por livros, autores e fontes que irá capacitá-lo, através da pesquisa, a interpretar as Escrituras com responsabilidade. Por meio da produção acadêmica, o estudante aprofunda seus conhecimentos teológicos e fortalece sua base doutrinária. Além disso, aprende a relacionar a teoria à prática, preparando-se para os desafios da liderança cristã.</p>
+        <p>O artigo acadêmico, que é visto por muitos como um desafio, torna-se uma ferramenta essencial para a formação de ministros capacitados para servir à Igreja e à sociedade.</p>
+      </div>
+      <p class="signature">Pr. Miqueias Campos Amaro<span>Diretor do IWE, Polo Cascadura</span></p>
     </div>
-    <div class="about-text">
-      <p>Esta edição reúne os artigos teológicos ministeriais produzidos pelos seminaristas do Instituto Wesleyano de Educação – Polo Cascadura. Cada texto parte de uma questão real da vida da Igreja e a examina à luz das Escrituras, da tradição metodista wesleyana e da pesquisa acadêmica.</p>
-      <p>Os trabalhos estão organizados em cinco editorias, que percorrem o cuidado pastoral, a espiritualidade, a missão, os estudos bíblicos e a formação de discípulos.</p>
+
+    <div class="editorial-notes">
+      <article class="note reveal">
+        <p class="note-label">Coordenação Pedagógica</p>
+        <p>Esta revista é fruto de um percurso pedagógico construído passo a passo: do projeto de pesquisa às orientações, das revisões à preparação para a banca. Cada aluno aprendeu que pesquisar também é um exercício de fidelidade: ouvir as Escrituras, dialogar com a tradição e devolver à Igreja o que foi aprendido. Agradecemos aos orientadores e professores o cuidado com cada trabalho e celebramos, com os alunos, a conclusão desta etapa.</p>
+        <p class="signature small">Missionária Cecília Maria<span>Coordenadora Pedagógica do IWE, Polo Cascadura</span></p>
+      </article>
+      <article class="note reveal">
+        <p class="note-label">Professor de TCC II</p>
+        <p>Cada síntese desta revista registra o percurso de uma pesquisa científica: um problema delimitado, objetivos claros, fundamentação bíblica, teológica e doutrinária, análise do fenômeno e resultados discutidos à luz das fontes. Ao tornar pública essa produção, a revista a submete à leitura crítica da banca e da comunidade e mostra que o rigor acadêmico, aliado à fidelidade às Escrituras, também serve à Igreja.</p>
+        <p class="signature small">Prof. Alexandre Prado<span>Professor de TCC II do IWE</span></p>
+      </article>
     </div>
   </div>
 </section>
@@ -83,65 +116,183 @@
     <p class="section-lead">Toque em uma editoria para ver apenas os artigos dela.</p>
 
     <div class="editoria-grid">
-      <button class="editoria-card" data-filtro="Ministério Pastoral e Família">
+      <button class="editoria-card reveal" data-filtro="Ministério Pastoral e Família">
         <span class="editoria-num">I</span>
         <h3>Ministério Pastoral e Família</h3>
-        <p>Saúde emocional, vocação e cuidado com o lar de quem pastoreia.</p>
+        <p>Depressão e burnout, inteligência emocional, família pastoral e cuidado integral.</p>
         <small>6 artigos</small>
       </button>
-      <button class="editoria-card" data-filtro="Doutrina e Espiritualidade">
+      <button class="editoria-card reveal" data-filtro="Doutrina e Espiritualidade">
         <span class="editoria-num">II</span>
         <h3>Doutrina e Espiritualidade</h3>
-        <p>Graça, oração, meios de graça e a vida na igreja local.</p>
+        <p>Novo nascimento, pneumatologia, oração, meios de graça, Escrituras e igreja local.</p>
         <small>6 artigos</small>
       </button>
-      <button class="editoria-card" data-filtro="Missão e Evangelização">
+      <button class="editoria-card reveal" data-filtro="Missão e Evangelização">
         <span class="editoria-num">III</span>
         <h3>Missão e Evangelização</h3>
-        <p>Inclusão, plantação de igrejas, missão digital e transcultural.</p>
+        <p>Libras e comunidade surda, pequenos grupos, evangelho no digital e missão transcultural.</p>
         <small>4 artigos</small>
       </button>
-      <button class="editoria-card" data-filtro="Bíblia e História">
+      <button class="editoria-card reveal" data-filtro="Bíblia e História">
         <span class="editoria-num">IV</span>
         <h3>Bíblia e História</h3>
-        <p>Amós, Neemias e a expansão do evangelho sob perseguição.</p>
+        <p>A justiça em Amós, o martírio em Atos e a reconstrução em Neemias.</p>
         <small>3 artigos</small>
       </button>
-      <button class="editoria-card" data-filtro="Educação, Discipulado e Comunhão">
+      <button class="editoria-card reveal" data-filtro="Educação, Discipulado e Comunhão">
         <span class="editoria-num">V</span>
         <h3>Educação, Discipulado e Comunhão</h3>
-        <p>Família, Escola Bíblica, juventude e formação de líderes.</p>
+        <p>Discipulado familiar, Escola Bíblica, juventude, formação de líderes e sororidade.</p>
         <small>5 artigos</small>
       </button>
     </div>
   </div>
 </section>
 
+<!-- ================= INFOGRÁFICO ================= -->
+<section class="section" id="numeros">
+  <div class="container">
+    <p class="section-kicker">Infográfico</p>
+    <h2 class="section-title">A turma em números</h2>
+    <p class="section-lead">Um retrato rápido dos 24 artigos: onde estão as pesquisas, como foram feitas e quais textos bíblicos as sustentam.</p>
+
+    <div class="info-grid">
+      <div class="info-card reveal">
+        <h3>Tipo de artigo</h3>
+        <div id="tipoArtigos"></div>
+        <p class="info-note"><b>Teológicos:</b> Teologia Sistemática, Teologia Bíblica, História da Igreja e Eclesiologia. <b>Ministério:</b> Teologia Pastoral, Teologia Prática, Missiologia, Educação Cristã e Ética Cristã.</p>
+      </div>
+
+      <div class="info-card reveal">
+        <h3>Como as pesquisas foram feitas</h3>
+        <div class="method">
+          <div><strong>23</strong><span>bibliográficas e documentais</span></div>
+          <div><strong>1</strong><span>com questionário aplicado a missionários transculturais</span></div>
+        </div>
+      </div>
+
+      <div class="info-card reveal">
+        <h3>Artigos por editoria</h3>
+        <div class="bars" id="chartEditorias"></div>
+      </div>
+
+      <div class="info-card reveal">
+        <h3>Orientadores e número de orientandos</h3>
+        <div class="bars" id="chartOrientadores"></div>
+      </div>
+
+      <div class="info-card info-wide reveal">
+        <h3>Textos bíblicos em destaque</h3>
+        <ul class="verses">
+          <li>Nm 11.11-17</li><li>Dt 6.6-9</li><li>Sl 78.1-8</li><li>Ne 1.1-11</li><li>Am 5.21-24</li>
+          <li>Mt 5.13-16</li><li>Mt 28.18-20</li><li>Jo 15.4-7</li><li>At 1.8</li><li>Atos dos Apóstolos</li>
+          <li>1Co 9.22-23</li><li>Ef 5.15-18</li><li>Ef 6.1-4</li><li>1Tm 3.4-5</li><li>1Tm 4.12-16</li><li>1Pe 3.15</li>
+        </ul>
+        <p class="info-note">Passagens centrais analisadas nos artigos, com apoio de comentaristas.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ================= ARTIGOS ================= -->
-<section class="section" id="artigos">
+<section class="section section-alt" id="artigos">
   <div class="container">
     <div class="articles-head">
       <div>
         <p class="section-kicker">Sumário</p>
-        <h2 class="section-title">Artigos da edição</h2>
+        <h2 class="section-title">Os 24 artigos desta edição</h2>
+        <p class="section-lead">Abra a síntese de cada pesquisa ou leia o artigo completo.</p>
       </div>
       <div class="search-box">
-        <input type="search" id="search" placeholder="Buscar por título, autor ou editoria…" aria-label="Buscar artigos">
+        <input type="search" id="search" placeholder="Buscar por título, autor, orientador ou tema…" aria-label="Buscar artigos">
         <button type="button" id="clearSearch" class="clear-btn" hidden>Limpar</button>
       </div>
     </div>
+
+    <div class="chips" role="group" aria-label="Filtrar por editoria">
+      <button type="button" class="chip active" data-filtro="Todas">Todas</button>
+      <button type="button" class="chip" data-filtro="Ministério Pastoral e Família">Ministério Pastoral e Família</button>
+      <button type="button" class="chip" data-filtro="Doutrina e Espiritualidade">Doutrina e Espiritualidade</button>
+      <button type="button" class="chip" data-filtro="Missão e Evangelização">Missão e Evangelização</button>
+      <button type="button" class="chip" data-filtro="Bíblia e História">Bíblia e História</button>
+      <button type="button" class="chip" data-filtro="Educação, Discipulado e Comunhão">Educação, Discipulado e Comunhão</button>
+    </div>
+    <p class="result-count" id="resultCount" aria-live="polite"></p>
 
     <div class="article-grid" id="articleGrid"></div>
     <p class="empty-msg" id="emptyMsg" hidden>Nenhum artigo encontrado para essa busca.</p>
   </div>
 </section>
 
+<!-- ================= BANCA ================= -->
+<section class="section" id="banca">
+  <div class="container banca">
+    <div class="banca-intro reveal">
+      <p class="section-kicker">Agenda · Polo Cascadura</p>
+      <h2 class="section-title">Banca examinadora</h2>
+      <div class="banca-date">
+        <strong>21</strong>
+        <div><span>de novembro de 2026</span><span>Sábado, às 8h</span></div>
+      </div>
+      <p>Nas dependências do Instituto Wesleyano de Educação, Polo Cascadura, Rio de Janeiro – RJ. Cada aluno apresenta seu artigo a dois examinadores designados pela Coordenação Pedagógica.</p>
+
+      <h3 class="criteria-title">Como a banca avalia</h3>
+      <ul class="criteria">
+        <li><strong>5</strong><span>Relevância do tema</span></li>
+        <li><strong>15</strong><span>Abordagem e profundidade</span></li>
+        <li><strong>5</strong><span>Clareza</span></li>
+        <li><strong>10</strong><span>Coesão</span></li>
+        <li><strong>15</strong><span>Linguagem e defesa oral</span></li>
+        <li class="total"><strong>50</strong><span>pontos no total</span></li>
+      </ul>
+      <p class="info-note">Cada examinador preenche a sua folha. A defesa oral tem cerca de 10 minutos, seguida das perguntas da banca.</p>
+    </div>
+
+    <div class="agenda reveal">
+      <table>
+        <thead><tr><th>#</th><th>Aluno(a)</th><th>Orientação</th></tr></thead>
+        <tbody id="agendaBody"></tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ================= EXPEDIENTE ================= -->
+<section class="section section-alt" id="expediente">
+  <div class="container expediente">
+    <div class="reveal">
+      <p class="section-kicker">Expediente</p>
+      <h2 class="section-title">Quem faz o Polo Cascadura</h2>
+      <dl class="staff">
+        <div><dt>Diretor do Polo</dt><dd>Pastor e Professor Miqueias Amaro</dd></div>
+        <div><dt>Coordenadora Pedagógica</dt><dd>Missionária Cecília Maria</dd></div>
+        <div><dt>Deão</dt><dd>Pastor e Professor Reinaldo Simeão</dd></div>
+        <div><dt>Secretaria</dt><dd>Daiana de Santana Lopes</dd></div>
+        <div><dt>Professor de TCC II</dt><dd>Prof. Alexandre Prado</dd></div>
+      </dl>
+    </div>
+    <div class="reveal">
+      <h3 class="faculty-title">Corpo docente</h3>
+      <ul class="faculty">
+        <li>Afonso Batista</li><li>Alexander Lima</li><li>Alexandre Prado</li><li>Anderson Orofino</li>
+        <li>Ed Lobato</li><li>Ederson Cruz</li><li>Fernanda Cruz</li><li>Geremias dos Anjos</li>
+        <li>Luciana Brivio</li><li>Marlon Ferreira</li><li>Miqueias Amaro</li><li>Reinaldo Simeão</li>
+        <li>Renato Neves</li><li>Roberto Canário</li><li>Roberto Tadeu</li><li>Tatiana Silva</li>
+        <li>Thiago Vogt</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+</main>
+
 <!-- ================= RODAPÉ ================= -->
 <footer class="footer" id="contato">
   <div class="container footer-grid">
     <div>
       <p class="footer-title">Instituto Wesleyano de Educação</p>
-      <p>Polo Cascadura</p>
+      <p>Curso Ministerial Teológico · Polo Cascadura</p>
       <p>Rua Coronel Magalhães, 67 – Cascadura<br>Rio de Janeiro – RJ</p>
     </div>
     <div>
@@ -154,49 +305,16 @@
     </div>
   </div>
   <div class="container footer-bottom">
-    <p>© 2026 Artigo Teológico Ministerial · IWE – Polo Cascadura</p>
+    <p>Artigo Teológico Ministerial · Turma semipresencial · Polo Cascadura · 2026 · Circulação interna</p>
   </div>
 </footer>
 
+<!-- ================= JANELA DA SÍNTESE ================= -->
+<dialog class="modal" id="articleModal" aria-labelledby="modalTitle">
+  <button type="button" class="modal-close" id="modalClose" aria-label="Fechar">×</button>
+  <div class="modal-body" id="modalBody"></div>
+</dialog>
+
 <script src="script.js"></script>
-
-<!-- Complementos: filtro pelas editorias, botão limpar, mensagem de vazio e fechar menu ao navegar -->
-<script>
-(function () {
-  const campo = document.getElementById("search");
-  const limpar = document.getElementById("clearSearch");
-  const grid = document.getElementById("articleGrid");
-  const vazio = document.getElementById("emptyMsg");
-  const menu = document.getElementById("menu");
-
-  function atualizarEstado() {
-    limpar.hidden = campo.value.trim() === "";
-    vazio.hidden = grid.children.length > 0;
-  }
-
-  function buscar(termo) {
-    campo.value = termo;
-    campo.dispatchEvent(new KeyboardEvent("keyup"));
-    atualizarEstado();
-  }
-
-  campo.addEventListener("keyup", atualizarEstado);
-  campo.addEventListener("search", () => buscar(campo.value));
-
-  limpar.addEventListener("click", () => { buscar(""); campo.focus(); });
-
-  document.querySelectorAll(".editoria-card").forEach(card => {
-    card.addEventListener("click", () => {
-      buscar(card.dataset.filtro);
-      document.getElementById("artigos").scrollIntoView({ behavior: "smooth" });
-    });
-  });
-
-  menu.querySelectorAll("a").forEach(link => {
-    link.addEventListener("click", () => menu.classList.remove("active"));
-  });
-})();
-</script>
-
 </body>
 </html>
