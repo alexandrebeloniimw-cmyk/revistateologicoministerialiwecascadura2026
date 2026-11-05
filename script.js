@@ -538,7 +538,7 @@ function renderArtigos(lista) {
   if (!articleGrid) return;
 
   articleGrid.innerHTML = lista.map((a, i) => `
-    <article class="article-card" style="animation-delay:${Math.min(i, 8) * 40}ms">
+    <article class="article-card" id="artigo-${a.numero}" style="animation-delay:${Math.min(i, 8) * 40}ms">
       <div class="article-top">
         <span class="article-number">${a.numero}</span>
         <span class="article-category">${esc(a.editoria)}</span>
@@ -648,7 +648,21 @@ async function copiarTexto(texto) {
 
 
 // ======================================================
-// JANELA DA SÍNTESE
+// LINK DIRETO E COMPARTILHAMENTO DE CADA ARTIGO
+// ======================================================
+
+const SITE_URL = "https://alexandrebeloniimw-cmyk.github.io/revistateologicoministerialiwecascadura2026/";
+
+const hashDoArtigo = a => `#artigo-${a.numero}`;
+const linkDoArtigo = a => SITE_URL + hashDoArtigo(a);
+
+function textoCompartilhar(a) {
+  return `📘 Artigo ${a.numero} · ${a.titulo}\n✍️ ${a.autor}\n\nRevista Artigo Teológico Ministerial 2026 · IWE Polo Cascadura\n${linkDoArtigo(a)}`;
+}
+
+function marcarEndereco(hash) {
+  try { history.replaceState(null, "", hash || location.pathname + location.search); } catch (e) {}
+}
 // ======================================================
 
 const modal = $("#articleModal");
@@ -689,7 +703,15 @@ function abrirSintese(id) {
       <span class="cite-note">ABNT NBR 6023</span>
     </section>
 
-    <a href="${esc(a.link)}" target="_blank" rel="noopener" class="btn btn-primary modal-cta">Ler o artigo completo</a>
+    <div class="modal-actions">
+      <a href="${esc(a.link)}" target="_blank" rel="noopener" class="btn btn-primary modal-cta">Ler o artigo completo</a>
+      <div class="share" aria-label="Compartilhar este artigo">
+        <span class="share-label">Compartilhar</span>
+        <a class="share-btn share-wa" href="https://wa.me/?text=${encodeURIComponent(textoCompartilhar(a))}" target="_blank" rel="noopener">WhatsApp</a>
+        <button type="button" class="share-btn" id="shareCopy">Copiar link</button>
+        ${navigator.share ? '<button type="button" class="share-btn" id="shareNative">Mais opções…</button>' : ""}
+      </div>
+    </div>
   `;
 
   const copyBtn = $("#citeCopy");
@@ -699,6 +721,19 @@ function abrirSintese(id) {
     copyBtn.classList.toggle("done", ok);
     setTimeout(() => { copyBtn.textContent = "Copiar referência"; copyBtn.classList.remove("done"); }, 2500);
   });
+
+  const shareCopy = $("#shareCopy");
+  shareCopy.addEventListener("click", async () => {
+    const ok = await copiarTexto(linkDoArtigo(a));
+    shareCopy.textContent = ok ? "Link copiado ✓" : linkDoArtigo(a);
+    setTimeout(() => { shareCopy.textContent = "Copiar link"; }, 2500);
+  });
+  const shareNative = $("#shareNative");
+  if (shareNative) shareNative.addEventListener("click", () => {
+    navigator.share({ title: a.titulo, text: `${a.titulo} — ${a.autor}`, url: linkDoArtigo(a) }).catch(() => {});
+  });
+
+  marcarEndereco(hashDoArtigo(a));
 
   if (typeof modal.showModal === "function") modal.showModal();
   else modal.setAttribute("open", "");
@@ -715,6 +750,25 @@ if (articleGrid) {
 if (modal) {
   $("#modalClose").addEventListener("click", () => modal.close());
   modal.addEventListener("click", e => { if (e.target === modal) modal.close(); });
+  modal.addEventListener("close", () => {
+    if (/^#artigo-\d{2}$/.test(location.hash)) marcarEndereco("");
+  });
+}
+
+// Abre a síntese quando o endereço chega com #artigo-NN
+function abrirPeloEndereco() {
+  const m = location.hash.match(/^#artigo-(\d{2})$/);
+  if (!m) return;
+  const a = artigos.find(x => x.numero === m[1]);
+  if (!a) return;
+  const card = document.getElementById(`artigo-${a.numero}`);
+  if (card) card.scrollIntoView({ block: "center" });
+  if (!modal.open) abrirSintese(a.id);
+}
+
+if (modal) {
+  window.addEventListener("hashchange", abrirPeloEndereco);
+  window.addEventListener("load", abrirPeloEndereco);
 }
 
 
