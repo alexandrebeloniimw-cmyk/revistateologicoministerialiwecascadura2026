@@ -1,0 +1,472 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Normas do Artigo Teológico Ministerial</title>
+<meta name="description" content="Normas exigidas na elaboração e revisão do Artigo Teológico Ministerial – TCC II, Instituto Wesleyano de Educação, 2026.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="icon" type="image/png" href="img/favicon.png">
+<meta name="theme-color" content="#161c4e">
+<meta property="og:title" content="Normas do Artigo Teológico Ministerial · IWE Polo Cascadura">
+<meta property="og:description" content="Formatação, estrutura, citações, referências, resumo e pesquisa de campo: as normas exigidas no TCC II em 2026.">
+<meta property="og:image" content="https://alexandrebeloniimw-cmyk.github.io/revistateologicoministerialiwecascadura2026/img/og-image.jpg">
+<style>
+/* Layout: manual acadêmico — índice fixo à esquerda no desktop, coluna única de leitura; exemplos em "folha" tipografada */
+:root{
+  --bg:#FAF6EE; --paper:#FFFFFF; --ink:#1D1D1F; --muted:#5B5B63; --line:#E6DFD0;
+  --navy:#161C4E; --gold:#9A7A2F; --gold-soft:#F4EBD9; --ok:#1E7B34; --ok-soft:#E5F2E8; --no:#C42F35; --no-soft:#F9E6E6;
+  --display:"Cormorant Garamond", Georgia, "Times New Roman", serif;
+  --body:"Source Sans 3", "Segoe UI", Arial, sans-serif;
+  --mono:"IBM Plex Mono", ui-monospace, Consolas, monospace;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{background:var(--bg);color:var(--ink);font:400 17px/1.65 var(--body);margin:0}
+a{color:var(--navy)}
+a:focus-visible,button:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+.top{color:#fff;background:radial-gradient(ellipse at 85% 10%,rgba(201,161,74,.22),transparent 55%),linear-gradient(135deg,#161c4e 0%,#262f78 60%,#7d1c22 100%)}
+.bar{background:rgba(22,28,78,.97);border-bottom:1px solid rgba(201,161,74,.35);position:sticky;top:0;z-index:10}
+.bar-in{max-width:1180px;margin:0 auto;height:64px;display:flex;align-items:center;justify-content:space-between;gap:16px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.bar a{color:#fff;text-decoration:none;display:flex;align-items:center;gap:12px;font:600 15px/1.2 var(--body)}
+.bar img{height:34px;width:auto}
+.bar .back{border:1.5px solid #c9a14a;color:#e8d3a0;padding:7px 14px;border-radius:999px;white-space:nowrap}
+.bar .back:hover{background:#c9a14a;color:#161c4e}
+.top-in{max-width:1180px;margin:0 auto;padding-block:48px 40px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.eyebrow{font:600 13px/1.3 var(--body);letter-spacing:.14em;text-transform:uppercase;color:#E8D3A0}
+h1{font:700 clamp(34px,5.6vw,56px)/1.05 var(--display);margin:12px 0 14px;text-wrap:balance;max-width:20ch;color:#fff}
+.lead{max-width:62ch;color:#D5DCEA;margin:0}
+.facts{display:flex;flex-wrap:wrap;gap:10px 28px;margin-top:26px;font-size:15px;color:#D5DCEA}
+.facts b{color:#fff;font-weight:600}
+.wrap{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:240px minmax(0,1fr);gap:48px;padding-block:40px 80px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+nav.toc{position:sticky;top:84px;align-self:start;font-size:15px}
+nav.toc p{font:600 12px/1 var(--body);letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin:0 0 12px}
+nav.toc ol{list-style:none;margin:0;padding:0;display:grid;gap:2px;counter-reset:t}
+nav.toc a{display:flex;gap:10px;padding:6px 10px;border-radius:6px;text-decoration:none;color:var(--ink)}
+nav.toc a::before{counter-increment:t;content:counter(t);font:500 12px/1.9 var(--mono);color:var(--gold);min-width:16px}
+nav.toc a:hover{background:var(--gold-soft)}
+main{min-width:0;max-width:760px}
+section{padding-top:8px;margin-bottom:56px;scroll-margin-top:80px}
+h2{font:700 clamp(28px,3.6vw,36px)/1.15 var(--display);margin:0 0 6px;color:var(--navy);text-wrap:balance}
+.num{font:500 13px/1 var(--mono);color:var(--gold);letter-spacing:.06em;display:block;margin-bottom:10px}
+h3{font:700 19px/1.3 var(--body);margin:30px 0 8px}
+p{margin:0 0 14px}
+ul.rules{list-style:none;margin:10px 0 18px;padding:0;display:grid;gap:10px}
+ul.rules li{position:relative;padding-left:22px}
+ul.rules li::before{content:"";position:absolute;left:4px;top:.68em;width:7px;height:7px;border-radius:50%;background:var(--gold)}
+.tbl{overflow-x:auto;margin:14px 0 20px;border:1px solid var(--line);border-radius:8px;background:var(--paper)}
+table{border-collapse:collapse;width:100%;font-size:15.5px;min-width:520px}
+th,td{text-align:left;padding:10px 14px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-weight:600;color:var(--muted);font-size:13px;letter-spacing:.06em;text-transform:uppercase;background:transparent}
+tr:last-child td{border-bottom:0}
+td.n{font-variant-numeric:tabular-nums;white-space:nowrap;font-weight:600}
+.sheet{background:var(--paper);border:1px solid var(--line);border-radius:4px;padding:22px 24px;margin:14px 0 20px;font-family:"Times New Roman",Times,serif;font-size:16.5px;line-height:1.55;box-shadow:0 1px 0 var(--line)}
+.sheet .cap{font:600 11px/1 var(--body);letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:12px;display:block}
+.sheet .ind{text-indent:1.25cm;text-align:justify}
+.sheet .long{margin-left:4cm;font-size:13.5px;line-height:1.25;text-align:justify}
+@media (max-width:560px){.bar a span{display:none}.sheet .long{margin-left:2rem}}
+.pair{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:12px 0 20px}
+.pair>div{border-radius:8px;padding:14px 16px;font-size:15.5px;min-width:0}
+.pair .no{background:var(--no-soft)}
+.pair .ok{background:var(--ok-soft)}
+.pair b{display:block;font:600 12px/1.3 var(--body);letter-spacing:.12em;text-transform:uppercase;margin-bottom:6px}
+.pair .no b{color:var(--no)} .pair .ok b{color:var(--ok)}
+.flow{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0 20px;font-size:15px}
+.flow span{background:var(--paper);border:1px solid var(--line);border-radius:6px;padding:8px 12px}
+.flow span b{display:block;color:var(--navy)}
+.flow i{align-self:center;color:var(--gold);font-style:normal}
+.note{border-left:3px solid var(--gold);background:var(--gold-soft);padding:12px 16px;border-radius:0 8px 8px 0;margin:14px 0 20px;font-size:16px}
+code,.mono{font-family:var(--mono);font-size:.88em}
+ol.steps{margin:10px 0 18px;padding-left:22px;display:grid;gap:8px}
+.check{columns:2;column-gap:28px;margin:12px 0}
+.check div{break-inside:avoid;margin-bottom:16px}
+.check h4{font:600 15px/1.3 var(--body);color:var(--navy);margin:0 0 6px}
+.check ul{margin:0;padding-left:18px;font-size:15.5px}
+.check li{margin-bottom:3px}
+.verbs{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0 18px}
+.verbs span{font-size:14.5px;border:1px solid var(--line);background:var(--paper);border-radius:99px;padding:3px 11px}
+footer{border-top:1px solid var(--line);padding-top:20px;color:var(--muted);font-size:14.5px}
+@media (max-width:900px){
+  .wrap{grid-template-columns:minmax(0,1fr);gap:24px}
+  nav.toc{position:static;background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:16px}
+  nav.toc ol{grid-template-columns:1fr 1fr}
+}
+@media (max-width:560px){.pair{grid-template-columns:1fr}.check{columns:1}nav.toc ol{grid-template-columns:1fr}body{font-size:16.5px}}
+</style>
+</head>
+<body>
+
+<div class="bar"><div class="bar-in">
+  <a href="./"><img src="img/logo-iwe-claro.png" alt="IWE – Instituto Wesleyano de Educação"><span>Artigo Teológico Ministerial 2026</span></a>
+  <a href="./#normas" class="back">← Voltar à revista</a>
+</div></div>
+
+<header class="top"><div class="top-in">
+  <span class="eyebrow">Instituto Wesleyano de Educação · Polo Cascadura · TCC II · 2026</span>
+  <h1>Normas do Artigo Teológico Ministerial</h1>
+  <p class="lead">Tudo o que foi exigido dos alunos na elaboração e na revisão dos artigos, reunido num só lugar: formatação, estrutura, citações, referências, resumo, pesquisa de campo e os critérios para que o artigo fosse considerado apto para a banca.</p>
+  <div class="facts">
+    <span><b>Extensão:</b> 17 a 20 páginas</span>
+    <span><b>Base:</b> ABNT NBR 6022, 6023, 6028 e 10520</span>
+    <span><b>Orientação:</b> Prof. Alexandre Prado</span>
+  </div>
+</div></header>
+
+<div class="wrap">
+<nav class="toc" aria-label="Índice">
+  <p>Índice</p>
+  <ol>
+    <li><a href="#estrutura">Estrutura e extensão</a></li>
+    <li><a href="#formatacao">Formatação</a></li>
+    <li><a href="#resumo">Resumo e palavras-chave</a></li>
+    <li><a href="#introducao">Introdução</a></li>
+    <li><a href="#secoes">Seções 1 e 2</a></li>
+    <li><a href="#secao3">Seção 3</a></li>
+    <li><a href="#consideracoes">Considerações Finais</a></li>
+    <li><a href="#citacoes">Citações</a></li>
+    <li><a href="#referencias">Referências</a></li>
+    <li><a href="#campo">Pesquisa de campo</a></li>
+    <li><a href="#apto">Artigo apto</a></li>
+    <li><a href="#checklist">Lista de verificação</a></li>
+  </ol>
+</nav>
+
+<main>
+
+<section id="estrutura">
+  <span class="num">01</span>
+  <h2>Estrutura e extensão</h2>
+  <p>O artigo segue sempre esta ordem. Quando há pesquisa de campo, os instrumentos e termos entram depois das referências, em apêndices e anexos.</p>
+  <div class="flow" aria-label="Ordem dos elementos">
+    <span>Título, autor e orientador</span><i>→</i><span>Resumo e palavras-chave</span><i>→</i><span>Introdução</span><i>→</i><span>Seção 1</span><i>→</i><span>Seção 2</span><i>→</i><span>Seção 3</span><i>→</i><span>Considerações Finais</span><i>→</i><span>Referências</span><i>→</i><span>Apêndices e anexos</span>
+  </div>
+  <h3>Número de páginas</h3>
+  <ul class="rules">
+    <li>O artigo tem <b>no mínimo 17 e no máximo 20 páginas</b>.</li>
+    <li>A contagem vai da folha em que começa a Introdução até a última linha das Considerações Finais. Resumo, referências e apêndices não entram na conta.</li>
+    <li>A contagem é feita no arquivo enviado pelo aluno, e o resultado é informado na revisão.</li>
+  </ul>
+  <div class="tbl"><table>
+    <thead><tr><th>Parte</th><th>Limite</th><th>Observação</th></tr></thead>
+    <tbody>
+      <tr><td>Introdução</td><td class="n">até 2 páginas</td><td>Tema, problema, objetivos, metodologia e estrutura.</td></tr>
+      <tr><td>Seção 1</td><td class="n">até 6 páginas</td><td>Fundamentação: conceitos, base bíblica e base doutrinária.</td></tr>
+      <tr><td>Seção 2</td><td class="n">até 6 páginas</td><td>O fenômeno estudado, em três subseções.</td></tr>
+      <tr><td>Seção 3</td><td class="n">o restante</td><td>Resultados e discussões.</td></tr>
+      <tr><td>Considerações Finais</td><td class="n">cerca de 1 página</td><td>Cinco parágrafos.</td></tr>
+    </tbody>
+  </table></div>
+  <div class="note">O artigo termina quando responde, de forma fundamentada, ao problema da Introdução. Ele não termina por atingir 20 páginas, nem se completa acrescentando citações.</div>
+</section>
+
+<section id="formatacao">
+  <span class="num">02</span>
+  <h2>Formatação</h2>
+  <h3>Página e texto</h3>
+  <ul class="rules">
+    <li>Papel A4. Margens: <b>superior e esquerda 3 cm; inferior e direita 2 cm</b>.</li>
+    <li>Fonte Times New Roman ou Arial, tamanho 12, uma só em todo o arquivo. Nunca misturar fontes.</li>
+    <li>Espaçamento 1,5 entre linhas, texto justificado, recuo de 1,25 cm na primeira linha de cada parágrafo e sem espaço extra entre parágrafos.</li>
+    <li>Número da página no canto superior direito, em tamanho 10.</li>
+    <li>Palavras estrangeiras em itálico (por exemplo, <i>burnout</i>, <i>kairos</i>, <i>member care</i>).</li>
+  </ul>
+  <h3>Título, autor e orientador</h3>
+  <ul class="rules">
+    <li>Título centralizado, em negrito e em letras maiúsculas. Se passar de uma linha, fica em espaçamento simples.</li>
+    <li>Autor alinhado à direita; orientador logo abaixo, também à direita. Os dois sem negrito e sem caixa alta, em espaçamento simples.</li>
+  </ul>
+  <h3>Títulos das seções</h3>
+  <ul class="rules">
+    <li>Seções primárias (INTRODUÇÃO, 1, 2, 3, CONSIDERAÇÕES FINAIS, REFERÊNCIAS) em negrito e MAIÚSCULAS, alinhadas à esquerda.</li>
+    <li>Subseções (1.1, 1.2, 2.1…) em negrito, só com a inicial maiúscula, alinhadas à esquerda.</li>
+    <li>Título ou subtítulo com mais de uma linha fica em espaçamento simples.</li>
+    <li>Os rótulos RESUMO e REFERÊNCIAS ficam à esquerda, não centralizados.</li>
+    <li>Os objetivos específicos aparecem em alíneas: a), b), c).</li>
+  </ul>
+  <div class="sheet" aria-label="Exemplo de página">
+    <span class="cap">Exemplo na página</span>
+    <div style="text-align:center;font-weight:bold">A CENTRALIDADE DA ORAÇÃO NA VIDA PASTORAL</div>
+    <div style="text-align:right;margin-top:10px">Autor: Nome Completo do Aluno<br>Orientador: Prof. Nome do Orientador</div>
+    <div style="margin-top:14px;font-weight:bold">1.2 Fundamentos bíblicos da oração</div>
+    <p class="ind" style="margin:6px 0 0">Texto justificado, com recuo de 1,25 cm na primeira linha e espaçamento 1,5…</p>
+  </div>
+</section>
+
+<section id="resumo">
+  <span class="num">03</span>
+  <h2>Resumo e palavras-chave</h2>
+  <p>Base: ABNT NBR 6028. O resumo é escrito por último, quando o artigo está completo, e só traz o que de fato está no artigo.</p>
+  <ul class="rules">
+    <li><b>Extensão:</b> de 100 a 250 palavras. A contagem é informada na revisão.</li>
+    <li><b>Forma:</b> parágrafo único, justificado, sem recuo na primeira linha.</li>
+    <li><b>Redação:</b> terceira pessoa do singular, sem "eu" ou "nós", com um só tempo verbal do começo ao fim.</li>
+  </ul>
+  <h3>As cinco partes, nesta ordem</h3>
+  <div class="tbl"><table>
+    <thead><tr><th>Parte</th><th>Frases</th><th>Responde a</th></tr></thead>
+    <tbody>
+      <tr><td>Contextualização</td><td class="n">1 a 2</td><td>Qual é o tema e por que ele importa?</td></tr>
+      <tr><td>Objetivo</td><td class="n">1</td><td>O que a pesquisa buscou?</td></tr>
+      <tr><td>Metodologia</td><td class="n">2 a 3</td><td>Abordagem, tipo de pesquisa, fontes, instrumentos, participantes.</td></tr>
+      <tr><td>Resultados</td><td class="n">2 a 4</td><td>Quais foram os principais achados?</td></tr>
+      <tr><td>Conclusão</td><td class="n">1 a 2</td><td>O objetivo foi alcançado? Qual é a contribuição?</td></tr>
+    </tbody>
+  </table></div>
+  <h3>O que não entra no resumo</h3>
+  <ul class="rules">
+    <li>Citações diretas ou indiretas e chamadas de autor, como "(SILVA, 2020)".</li>
+    <li>Tabelas, gráficos, figuras, fórmulas e símbolos.</li>
+    <li>Siglas sem explicação. Na primeira ocorrência, escreve-se o nome por extenso seguido da sigla.</li>
+    <li>Opiniões, juízos de valor e frases vagas, como "tema muito relevante nos dias atuais".</li>
+  </ul>
+  <h3>Palavras-chave</h3>
+  <ul class="rules">
+    <li>Logo abaixo do resumo, depois de "Palavras-chave:", de 3 a 5 termos.</li>
+    <li>Separadas por ponto e vírgula e terminadas com ponto final.</li>
+    <li>Com inicial minúscula, exceto nomes próprios (por exemplo, John Wesley).</li>
+    <li>Sem repetir o título e sem termos genéricos como "pesquisa" ou "igreja".</li>
+  </ul>
+  <div class="sheet"><span class="cap">Modelo</span><b>Palavras-chave:</b> formação pastoral; jubilação ministerial; metodismo wesleyano; cuidado pastoral.</div>
+</section>
+
+<section id="introducao">
+  <span class="num">04</span>
+  <h2>Introdução</h2>
+  <p>A Introdução apresenta o caminho que o artigo vai percorrer. Em até duas páginas, ela traz:</p>
+  <ul class="rules">
+    <li>Tema e delimitação.</li>
+    <li>Justificativa: a relevância teológico-ministerial e social.</li>
+    <li>Problema de pesquisa, em forma de pergunta, e a hipótese.</li>
+    <li>Objetivo geral e objetivos específicos, estes em alíneas.</li>
+    <li>Metodologia, com a lista dos autores que fundamentam o estudo.</li>
+    <li>A estrutura do artigo: o que cada seção vai tratar.</li>
+  </ul>
+  <h3>Coerência com o restante do artigo</h3>
+  <p>No artigo completo, a Introdução precisa estar em harmonia com o que foi desenvolvido. A revisão confere sete pontos:</p>
+  <ol class="steps">
+    <li>O tema foi desenvolvido.</li>
+    <li>A delimitação foi cumprida.</li>
+    <li>A justificativa está presente ao longo do artigo.</li>
+    <li>O problema encontrou resposta.</li>
+    <li>Os objetivos foram desenvolvidos.</li>
+    <li>A metodologia foi cumprida.</li>
+    <li>Os autores listados na metodologia aparecem no texto e nas referências, e os autores usados no texto estão na lista.</li>
+  </ol>
+  <p>Quando algum ponto falha, ajusta-se a Introdução para que ela corresponda ao que o artigo de fato fez.</p>
+</section>
+
+<section id="secoes">
+  <span class="num">05</span>
+  <h2>Seções 1 e 2</h2>
+  <div class="flow" aria-label="Lógica do artigo">
+    <span><b>Introdução</b>pergunta</span><i>→</i>
+    <span><b>Seção 1</b>fundamenta</span><i>→</i>
+    <span><b>Seção 2</b>apresenta</span><i>→</i>
+    <span><b>Seção 3</b>analisa</span><i>→</i>
+    <span><b>Considerações</b>respondem</span>
+  </div>
+  <h3>Seção 1: fundamentação (o que precisamos saber?)</h3>
+  <ul class="rules">
+    <li><b>1.1 Fundamentação conceitual:</b> os conceitos centrais do tema, com autores.</li>
+    <li><b>1.2 Base bíblica:</b> o texto bíblico sempre acompanhado de um comentarista que argumente sobre ele, com nome, obra e página.</li>
+    <li><b>1.3 Base doutrinária:</b> a doutrina, com ênfase na tradição wesleyana (Wesley, manuais de doutrina da Igreja, teólogos wesleyanos).</li>
+    <li>Cada seção começa com um parágrafo de abertura antes da primeira subseção.</li>
+  </ul>
+  <h3>Seção 2: o fenômeno (o que está acontecendo?)</h3>
+  <ul class="rules">
+    <li>Apresenta e caracteriza o fenômeno do tema na realidade atual, em três subseções.</li>
+    <li>Usa dados, pesquisas e autores para descrever o fenômeno e ligá-lo ao problema.</li>
+    <li>Cada texto ou citação fica na seção que lhe corresponde: fundamentação na Seção 1, fenômeno na Seção 2.</li>
+  </ul>
+  <h3>Para todo o artigo</h3>
+  <ul class="rules">
+    <li>Todo texto bíblico usado no artigo recebe análise, e não só os da 1.2.</li>
+    <li>Toda afirmação importante precisa de fundamentação, de preferência com citação direta.</li>
+    <li>Na área teológica, autores cristãos dão a base doutrinária; fontes seculares servem para contexto e dados.</li>
+    <li>Não repetir textos, frases ou citações já usados em outra parte do artigo.</li>
+  </ul>
+</section>
+
+<section id="secao3">
+  <span class="num">06</span>
+  <h2>Seção 3: Resultados e Discussões</h2>
+  <p>A Seção 3 responde à pergunta "o que podemos compreender?". Ela relaciona o fenômeno da Seção 2 com a fundamentação da Seção 1 e traz os resultados da pesquisa.</p>
+  <h3>3.1 Análise do fenômeno à luz da fundamentação</h3>
+  <p>Sequência: fenômeno (Seção 2) → conceito (1.1) → base bíblica (1.2) → base doutrinária (1.3) → interpretação.</p>
+  <div class="note"><b>Fenômeno + Fundamentação + Interpretação = Análise</b></div>
+  <h3>3.2 Discussão dos resultados</h3>
+  <p>Cada resultado responde a quatro perguntas:</p>
+  <div class="tbl"><table>
+    <thead><tr><th>Pergunta</th><th>Frase de partida</th></tr></thead>
+    <tbody>
+      <tr><td>O que encontrei?</td><td><i>A pesquisa identificou que…</i></td></tr>
+      <tr><td>O que significa?</td><td><i>Esse resultado demonstra que…</i></td></tr>
+      <tr><td>Por que importa?</td><td><i>Esse aspecto é relevante porque…</i></td></tr>
+      <tr><td>Qual a implicação?</td><td><i>Dessa forma…</i></td></tr>
+    </tbody>
+  </table></div>
+  <ul class="rules">
+    <li>Cada objetivo (geral e específicos) precisa ter um resultado correspondente. Se um objetivo fica sem resultado, a análise não terminou.</li>
+    <li>Os resultados são discutidos em diálogo com os autores da Seção 1: resultado → autor → comparação → interpretação.</li>
+  </ul>
+  <h3>3.3 Síntese dos resultados e implicações</h3>
+  <p>Os principais resultados, a relação entre eles, as implicações e a contribuição da pesquisa. Sem dados novos e sem discussões novas.</p>
+  <h3>Citações e voz do pesquisador na Seção 3</h3>
+  <ul class="rules">
+    <li>A Seção 3 precisa de fontes para fundamentar resultados e discussões. Não é preciso uma fonte por parágrafo, mas a seção não pode ficar só com a opinião do autor.</li>
+    <li>A citação não substitui a análise. O caminho é: <b>cite → explique → relacione → interprete</b>.</li>
+    <li>Evitar citação atrás de citação sem a voz do pesquisador.</li>
+  </ul>
+</section>
+
+<section id="consideracoes">
+  <span class="num">07</span>
+  <h2>Considerações Finais</h2>
+  <p>Base: ABNT NBR 6022. As Considerações Finais respondem ao problema da Introdução. Não são um resumo do artigo, não fazem parte da Seção 3, não trazem assunto novo e, de preferência, não trazem citações novas.</p>
+  <div class="tbl"><table>
+    <thead><tr><th>Parágrafo</th><th>Função</th><th>Frase de partida</th></tr></thead>
+    <tbody>
+      <tr><td class="n">1</td><td>Retomada do objetivo</td><td><i>O presente artigo teve como objetivo…</i></td></tr>
+      <tr><td class="n">2</td><td>Resultados</td><td><i>A pesquisa permitiu identificar…</i></td></tr>
+      <tr><td class="n">3</td><td>Resposta ao problema</td><td><i>Diante dos resultados, compreende-se…</i></td></tr>
+      <tr><td class="n">4</td><td>Contribuição</td><td><i>Nesse sentido, a pesquisa contribui…</i></td></tr>
+      <tr><td class="n">5</td><td>Encerramento</td><td><i>Por fim, considera-se…</i></td></tr>
+    </tbody>
+  </table></div>
+  <ul class="rules">
+    <li>Mostram se o problema foi respondido, se a hipótese se confirmou e se os objetivos foram alcançados.</li>
+    <li>Podem trazer as limitações do estudo e sugestões de pesquisas futuras.</li>
+  </ul>
+</section>
+
+<section id="citacoes">
+  <span class="num">08</span>
+  <h2>Citações</h2>
+  <p>Base: ABNT NBR 10520. No curso, a chamada do autor vai sempre <b>dentro da sentença</b>, e não entre parênteses no fim da frase.</p>
+  <h3>Citação direta curta (até 3 linhas)</h3>
+  <p>No corpo do texto, entre aspas duplas, com o autor na sentença e (ano, p.).</p>
+  <div class="sheet"><span class="cap">Exemplo</span><p class="ind" style="margin:0">Lopes (2008, p. 18) afirma: “Um pastor sem equilíbrio emocional pode trazer grandes prejuízos para si, para sua família e para a igreja”.</p></div>
+  <h3>Citação direta longa (mais de 3 linhas)</h3>
+  <ul class="rules">
+    <li>Recuo de 4 cm da margem esquerda, fonte tamanho 10, espaçamento simples, texto justificado.</li>
+    <li>Sem aspas e sem recuo de primeira linha.</li>
+    <li>A chamada Autor (ano, p.) vem antes, na frase que introduz a citação.</li>
+    <li>Uma linha em branco antes e outra depois.</li>
+  </ul>
+  <div class="sheet"><span class="cap">Exemplo</span>
+    <p class="ind" style="margin:0 0 10px">Sobre a missão do evangelista, Lopes (2012, p. 181) argumenta:</p>
+    <p class="long" style="margin:0">O evangelista é também um mestre. A palavra de Deus precisa ser lida, explicada e aplicada. [...] Filipe explica as Escrituras. Apresenta Jesus, não a religião, o rito ou a cultura religiosa [...]. Uma única condição é exigida: crer de todo o coração.</p>
+  </div>
+  <h3>Citação indireta (paráfrase)</h3>
+  <ul class="rules">
+    <li>O autor fica sempre na sentença, no padrão Autor (ano). Isso vale também para a Seção 3.</li>
+    <li>A citação indireta não leva página no texto. A página fica nas referências.</li>
+  </ul>
+  <div class="pair">
+    <div class="no"><b>Evite</b>A igreja primitiva enfrentou muitas perseguições (SILVA, 2012).</div>
+    <div class="ok"><b>Prefira</b>Silva (2012) destaca que a igreja primitiva enfrentou muitas perseguições.</div>
+  </div>
+  <h3>Variar as chamadas</h3>
+  <p>Evite repetir "Segundo Silva (2012)" em sequência. Escolha o verbo pelo que o autor faz: afirma (declaração), argumenta (raciocínio), defende (tese), destaca ou ressalta (ênfase), explica (conceito), observa (constatação), propõe (modelo), demonstra ou evidencia (provas), adverte (alerta).</p>
+  <div class="verbs" aria-label="Formas de chamada">
+    <span>De acordo com Silva (2012)</span><span>Conforme Silva (2012)</span><span>Para Silva (2012)</span><span>Na perspectiva de Silva (2012)</span><span>Sob a ótica de Silva (2012)</span><span>À luz da reflexão de Silva (2012)</span><span>Na leitura de Silva (2012)</span><span>Em sua obra, Silva (2012)</span><span>Silva (2012) afirma</span><span>Silva (2012) argumenta</span><span>Silva (2012) sustenta</span><span>Silva (2012) observa</span><span>Silva (2012) adverte</span>
+  </div>
+  <h3>Casos especiais</h3>
+  <ul class="rules">
+    <li><b>Sermões de Wesley:</b> sempre que possível, indique o número do sermão junto da chamada: <span class="mono">Wesley, no Sermão 24 ([s. d.]a, I.1), afirma…</span>. Em edição eletrônica sem paginação, use <span class="mono">Wesley ([s. d.], não paginado)</span>.</li>
+    <li><b>Bíblia:</b> a referência bíblica vem com a versão, por exemplo (1Tm 4.16, ARC), e todo texto bíblico recebe análise com comentarista.</li>
+    <li><b>Aplicativo Bíblia Strong:</b> é permitido. Os comentários do aplicativo são atribuídos à MCS Labs, e não a James Strong: <span class="mono">(MCS LABS, 2024, G1234)</span>.</li>
+    <li><b>Citação de citação:</b> quando o autor original não foi lido, use apud: <span class="mono">Ash (2016 apud SANTOS, 2018, p. 10)</span>.</li>
+    <li><b>Notas de rodapé:</b> quando usadas, precisam corresponder exatamente às referências.</li>
+    <li>Dentro dos parênteses, o sobrenome do autor vai em maiúsculas: <span class="mono">(IGREJA METODISTA WESLEYANA, 2015, p. 115)</span>.</li>
+  </ul>
+</section>
+
+<section id="referencias">
+  <span class="num">09</span>
+  <h2>Referências</h2>
+  <p>Base: ABNT NBR 6023.</p>
+  <ul class="rules">
+    <li>Espaçamento simples, alinhadas à margem esquerda, em ordem alfabética pelo sobrenome do autor.</li>
+    <li>Título da obra em negrito; subtítulo sem negrito.</li>
+    <li>Ao final de cada entrada, as páginas usadas no artigo: <span class="mono">p. 18-22, 60-61.</span></li>
+    <li>Toda obra citada no texto está nas referências, e toda obra das referências é citada no texto.</li>
+    <li>O ano da chamada no texto é o mesmo da referência. O ano da edição não se confunde com o ano de reimpressão.</li>
+    <li>Duas obras do mesmo autor e ano são diferenciadas por letras: 2024a, 2024b.</li>
+    <li>Obras on-line levam "Disponível em:" e "Acesso em:".</li>
+  </ul>
+  <div class="sheet"><span class="cap">Modelos</span>
+    <p style="margin:0 0 10px">LOPES, Hernandes Dias. <b>De pastor a pastor</b>. São Paulo: Hagnos, 2008. p. 18-22, 60-61.</p>
+    <p style="margin:0 0 10px">SANNER, A. Elwood. O Evangelho segundo Marcos. <i>In</i>: EARLE, Ralph (ed.). <b>Comentário Bíblico Beacon</b>: Mateus a Lucas. Rio de Janeiro: CPAD, 2006. v. 6, p. 325-326.</p>
+    <p style="margin:0">SANTOS, Valdeci. O pastor e a síndrome de burnout: uma abordagem teológico-pastoral. <b>Fides Reformata</b>, São Paulo, v. 23, n. 2, p. 9-24, 2018. Disponível em: https://cpaj.mackenzie.br. Acesso em: 16 out. 2026.</p>
+  </div>
+  <h3>Conferência das fontes</h3>
+  <p>Quando uma citação não pôde ser localizada, foi pedida a foto da folha de rosto e da página citada. A citação que não se comprova sai do texto.</p>
+</section>
+
+<section id="campo">
+  <span class="num">10</span>
+  <h2>Pesquisa de campo</h2>
+  <p>Vale para todo artigo com participantes: questionário, entrevista ou observação de pessoas identificáveis. Base: Resoluções nº 466/2012 e nº 510/2016 do Conselho Nacional de Saúde.</p>
+  <div class="tbl"><table>
+    <thead><tr><th>Documento</th><th>Quando é exigido</th><th>Onde fica no artigo</th></tr></thead>
+    <tbody>
+      <tr><td><b>TCLE</b> (Termo de Consentimento Livre e Esclarecido)</td><td>Sempre que houver participantes. Impresso: duas vias assinadas. On-line: o texto do termo na primeira seção do formulário, com a opção "Li e concordo em participar".</td><td>Apêndice, em branco, sem nomes nem assinaturas.</td></tr>
+      <tr><td><b>Instrumento de coleta</b></td><td>Sempre: o questionário ou o roteiro de entrevista.</td><td>Apêndice.</td></tr>
+      <tr><td><b>Carta de Anuência</b></td><td>Quando a coleta acontece em uma instituição ou por meio dela: na igreja, por lista ou grupo da instituição, por convite da liderança, ou com documentos internos.</td><td>Anexo, assinada.</td></tr>
+    </tbody>
+  </table></div>
+  <ul class="rules">
+    <li>A Carta de Anuência é dispensável quando cada participante é convidado diretamente, como indivíduo, sem usar a estrutura de uma instituição. Nesse caso, a metodologia explica a forma de convite.</li>
+    <li><b>Menores de 18 anos:</b> só participam com o consentimento do responsável legal e o Termo de Assentimento do próprio adolescente. Sem isso, os registros de menores são excluídos da análise.</li>
+    <li>Os participantes são identificados por código (P1, P2…), com sigilo garantido. TCLEs assinados não são inseridos no artigo.</li>
+    <li>Na metodologia, uma frase registra o TCLE e, quando houver, a anuência da instituição.</li>
+    <li>Pesquisa só bibliográfica, ou com documentos públicos, não exige TCLE nem Carta de Anuência.</li>
+  </ul>
+</section>
+
+<section id="apto">
+  <span class="num">11</span>
+  <h2>Quando o artigo é considerado apto</h2>
+  <p>As notas de revisão são <b>correções necessárias</b>. Enquanto não forem feitas, o artigo não pode ser considerado apto para a defesa. O texto continua sendo do aluno: as notas apontam o problema e sugerem caminhos, e o aluno escolhe a forma de resolver.</p>
+  <ul class="rules">
+    <li>Só é apto o artigo sem nenhuma pendência em aberto.</li>
+    <li>A cada nova versão, confere-se se os apontamentos da revisão anterior foram realizados.</li>
+    <li>O aluno sempre envia a versão corrigida a partir do arquivo revisado pelo professor.</li>
+  </ul>
+  <h3>O arquivo final para a banca</h3>
+  <ul class="rules">
+    <li>Capa (não contada nem numerada): logo e nome do instituto e do polo, "Artigo Teológico Ministerial", título, aluno, orientador, cidade e ano.</li>
+    <li>Folha do resumo com cabeçalho institucional.</li>
+    <li>Da Introdução em diante: cabeçalho "IWE · Artigo Teológico Ministerial · 2026" e número da página no canto superior direito.</li>
+    <li>Rodapé com o nome do instituto e do polo em todas as páginas, exceto a capa.</li>
+    <li>Para a banca, cada aluno recebeu também uma folha de preparação com as áreas do artigo em que a banca pode fazer perguntas.</li>
+  </ul>
+</section>
+
+<section id="checklist">
+  <span class="num">12</span>
+  <h2>Lista de verificação final</h2>
+  <div class="check">
+    <div><h4>Formatação</h4><ul><li>A4, margens 3/3/2/2 cm</li><li>Uma só fonte, tamanho 12, espaçamento 1,5</li><li>Títulos e subtítulos no padrão</li><li>17 a 20 páginas</li></ul></div>
+    <div><h4>Resumo</h4><ul><li>Parágrafo único, 100 a 250 palavras</li><li>Contexto, objetivo, método, resultados, conclusão</li><li>Sem citações nem siglas soltas</li><li>3 a 5 palavras-chave com ; e ponto final</li></ul></div>
+    <div><h4>Introdução</h4><ul><li>Tema delimitado e justificativa</li><li>Problema e hipótese</li><li>Objetivo geral e específicos em alíneas</li><li>Metodologia com lista de autores</li></ul></div>
+    <div><h4>Seção 1</h4><ul><li>Conceitos com autores</li><li>Base bíblica com comentarista</li><li>Base doutrinária wesleyana</li></ul></div>
+    <div><h4>Seção 2</h4><ul><li>Fenômeno apresentado e caracterizado</li><li>Três subseções</li><li>Ligado ao problema</li></ul></div>
+    <div><h4>Seção 3</h4><ul><li>Fenômeno relacionado à fundamentação</li><li>Um resultado para cada objetivo</li><li>Diálogo com autores e voz do pesquisador</li><li>Síntese sem dados novos</li></ul></div>
+    <div><h4>Considerações Finais</h4><ul><li>Problema respondido</li><li>Objetivos contemplados</li><li>Contribuição e encerramento</li><li>Sem citações novas</li></ul></div>
+    <div><h4>Citações e referências</h4><ul><li>Autor sempre na sentença</li><li>Página nas citações diretas</li><li>Todas as obras citadas nas referências</li><li>Páginas usadas no fim de cada referência</li></ul></div>
+    <div><h4>Pesquisa de campo</h4><ul><li>TCLE e instrumento em apêndice</li><li>Carta de Anuência, se houve instituição</li><li>Menores só com consentimento e assentimento</li></ul></div>
+  </div>
+</section>
+
+<footer>
+  <p>Instituto Wesleyano de Educação · TCC II · Artigo Teológico Ministerial 2026. Normas reunidas a partir das orientações e revisões do Prof. Alexandre Fonseca do Prado Beloni, com base nas normas ABNT NBR 6022 (artigo), NBR 6023 (referências), NBR 6028 (resumo) e NBR 10520 (citações).</p>
+</footer>
+</main>
+</div>
+</body>
+</html>
