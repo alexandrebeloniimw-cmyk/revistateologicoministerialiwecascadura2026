@@ -24,7 +24,7 @@
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-html { scroll-behavior: smooth; scroll-padding-top: 16px; }
+html { scroll-behavior: smooth; scroll-padding-top: 84px; }
 .article-card:target { outline: 3px solid var(--ouro); outline-offset: 3px; }
 
 body {
@@ -43,7 +43,7 @@ button { font: inherit; color: inherit; }
 
 /* ================= CABEÇALHO ================= */
 .header {
-  position: relative; z-index: 50;
+  position: sticky; top: 0; z-index: 50;
   background: rgba(22, 28, 78, .96);
   backdrop-filter: blur(8px);
   border-bottom: 1px solid rgba(201, 161, 74, .35);
@@ -58,9 +58,9 @@ button { font: inherit; color: inherit; }
 .logo-text { border-left: 1px solid rgba(201, 161, 74, .45); padding-left: 12px; font-family: var(--serif); font-size: 1.05rem; line-height: 1.1; font-weight: 600; }
 .logo-text b { color: var(--ouro); font-weight: 700; }
 
-.menu { list-style: none; display: flex; gap: 22px; }
+.menu { list-style: none; display: flex; gap: 18px; }
 .menu a {
-  color: rgba(255, 255, 255, .85); font-size: .95rem; font-weight: 500;
+  color: rgba(255, 255, 255, .85); font-size: .92rem; font-weight: 500; white-space: nowrap;
   position: relative; padding: 4px 0; transition: color .2s;
 }
 .menu a::after {
@@ -391,23 +391,6 @@ button { font: inherit; color: inherit; }
 .edition-current .edition-src { color: rgba(255, 255, 255, .7); }
 .edition-current.show:hover { background: linear-gradient(135deg, var(--azul) 0%, var(--azul-medio) 70%, var(--vinho-escuro) 100%); }
 
-.sister-card {
-  margin-top: 22px; display: flex; align-items: center; gap: 26px; padding: 26px 30px; border-radius: 18px; color: #fff;
-  background: radial-gradient(ellipse at 90% 0%, rgba(201, 161, 74, .25), transparent 55%),
-              linear-gradient(120deg, var(--azul) 0%, var(--azul-medio) 65%, var(--vinho-escuro) 100%);
-}
-.sister-card.show:hover { transform: translateY(-3px); box-shadow: 0 14px 34px rgba(22, 28, 78, .25); }
-.sister-logo { height: 60px; width: auto; flex-shrink: 0; }
-.sister-text { display: flex; flex-direction: column; gap: 4px; flex: 1; }
-.sister-label { text-transform: uppercase; letter-spacing: .14em; font-size: .7rem; font-weight: 700; color: var(--ouro-claro); }
-.sister-text strong { font-family: var(--serif); font-size: 1.7rem; line-height: 1.15; font-weight: 600; }
-.sister-sub { color: rgba(255, 255, 255, .8); font-size: .95rem; }
-.sister-go {
-  flex-shrink: 0; background: var(--ouro); color: var(--azul); font-weight: 700; font-size: .92rem;
-  padding: 11px 20px; border-radius: 999px; transition: background .2s;
-}
-.sister-card:hover .sister-go { background: var(--ouro-claro); }
-
 /* ================= EXPEDIENTE ================= */
 .expediente { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: start; }
 .staff { display: grid; gap: 12px; margin-top: 24px; }
@@ -480,14 +463,14 @@ button { font: inherit; color: inherit; }
   .footer-verse { grid-column: 1 / -1; }
 }
 
-/* menu recolhido abaixo de 1100px (os itens não cabem ao lado do título) */
-@media (max-width: 1100px) {
+/* menu recolhido abaixo de 1240px (os itens não cabem ao lado do título) */
+@media (max-width: 1240px) {
   .mobile-menu { display: flex; }
   .menu {
     position: absolute; top: 72px; left: 0; right: 0; flex-direction: column; gap: 0; background: var(--azul);
     max-height: 0; overflow: hidden; transition: max-height .3s ease; border-bottom: 1px solid rgba(201, 161, 74, .35);
   }
-  .menu.active { max-height: 460px; }
+  .menu.active { max-height: 600px; }
   .menu-insta a { display: inline-block !important; margin: 10px 24px 16px; }
   .menu li a { display: block; padding: 14px 24px; }
   .menu a::after { display: none; }
@@ -506,8 +489,6 @@ button { font: inherit; color: inherit; }
   .edition-card { padding: 18px 16px 16px; }
   .normas-card { padding: 28px 20px; }
   .normas-topics ol { grid-template-columns: 1fr; }
-  .sister-card { flex-direction: column; align-items: flex-start; gap: 14px; padding: 22px 20px; }
-  .sister-text strong { font-size: 1.4rem; }
   .edition-label { font-size: .62rem; letter-spacing: .06em; }
   .faculty { columns: 1; }
   .footer-grid { grid-template-columns: 1fr; }
