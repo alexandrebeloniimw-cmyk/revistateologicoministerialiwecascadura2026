@@ -24,7 +24,7 @@
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-html { scroll-behavior: smooth; scroll-padding-top: 84px; }
+html { scroll-behavior: smooth; scroll-padding-top: 16px; }
 .article-card:target { outline: 3px solid var(--ouro); outline-offset: 3px; }
 
 body {
@@ -43,7 +43,7 @@ button { font: inherit; color: inherit; }
 
 /* ================= CABEÇALHO ================= */
 .header {
-  position: sticky; top: 0; z-index: 50;
+  position: relative; z-index: 50;
   background: rgba(22, 28, 78, .96);
   backdrop-filter: blur(8px);
   border-bottom: 1px solid rgba(201, 161, 74, .35);
