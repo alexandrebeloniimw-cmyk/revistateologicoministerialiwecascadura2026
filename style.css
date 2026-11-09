@@ -498,3 +498,7 @@ button { font: inherit; color: inherit; }
   .agenda { overflow-x: auto; }
   .ag-ori { white-space: normal; }
 }
+
+/* Card de edições: 2026 + acervo 2019–2025 */
+.edition-grid.edition-grid-duo { grid-template-columns: 1fr 2fr; }
+@media (max-width: 640px) { .edition-grid.edition-grid-duo { grid-template-columns: 1fr; } }
