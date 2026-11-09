@@ -5,6 +5,16 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Acervo de Artigos Científicos 2019–2025 – IWE Polo Cascadura</title>
 <meta name="description" content="Trabalhos de Conclusão do Curso Livre em Teologia do Instituto Wesleyano de Educação – Polo Cascadura, de 2019 a 2025.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="IWE – Polo Cascadura">
+<meta property="og:title" content="Acervo de artigos científicos 2019–2025 – IWE Polo Cascadura">
+<meta property="og:description" content="Trabalhos de Conclusão do Curso Livre em Teologia com resumo, busca por tema e referência ABNT de cada artigo.">
+<meta property="og:url" content="https://alexandrebeloniimw-cmyk.github.io/revistateologicoministerialiwecascadura2026/acervo.html">
+<meta property="og:image" content="https://alexandrebeloniimw-cmyk.github.io/revistateologicoministerialiwecascadura2026/img/acervo-og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="pt_BR">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,800&family=Newsreader:opsz,wght@6..72,400;6..72,500&display=swap" rel="stylesheet">
@@ -483,7 +493,7 @@ function setYear(y,push){
 }
 $("shelf").addEventListener("click",e=>{const b=e.target.closest(".spine");if(b)setYear(b.dataset.y===year?"todos":b.dataset.y,true)});
 $("all").addEventListener("click",()=>setYear("todos",true));
-window.addEventListener("hashchange",()=>setYear(location.hash.replace("#ano-",""),false));
+window.addEventListener("hashchange",route);
 
 const fold=s=>s.normalize("NFD").replace(/[̀-ͯ]/g,"").toLowerCase();
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
@@ -604,8 +614,12 @@ document.querySelectorAll(".try").forEach(b=>b.addEventListener("click",()=>{$("
 /* ---------- ficha: resumo + ABNT ---------- */
 const SITE="https://alexandrebeloniimw-cmyk.github.io/revistateologicoministerialiwecascadura2026/acervo.html";
 const WAICON=`<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#25D366" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Z"/><path fill="#fff" d="M17.3 14.6c-.3-.1-1.7-.8-2-.9-.3-.1-.5-.1-.7.1l-.9 1.1c-.2.2-.3.2-.6.1a8.1 8.1 0 0 1-4-3.5c-.3-.5.3-.5.9-1.6.1-.2 0-.4 0-.5l-.9-2.2c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.4s1 2.8 1.2 3c.1.2 2 3.1 4.9 4.3 1.8.8 2.5.8 3.4.7.6-.1 1.7-.7 2-1.4.2-.7.2-1.2.2-1.4-.1-.1-.3-.2-.6-.3Z"/></svg>`;
-$("waPage").href="https://wa.me/?text="+encodeURIComponent("*Acervo de Artigos Científicos 2019–2025*\nInstituto Wesleyano de Educação – Polo Cascadura\n\n"+ARTIGOS.length+" trabalhos de conclusão do Curso Livre em Teologia, com resumo e referência ABNT de cada um:\n"+SITE);
-function waHref(x){return "https://wa.me/?text="+encodeURIComponent(`*${x.t||"Artigo"}*\n${x.a} – ${x.y}\nIWE Polo Cascadura\n\nLeia o PDF: https://drive.google.com/file/d/${x.id}/view\n\nVeja o acervo completo: ${SITE}`)}
+$("waPage").href="https://wa.me/?text="+encodeURIComponent(SITE+"\n\n*Acervo de Artigos Científicos 2019–2025*\nInstituto Wesleyano de Educação – Polo Cascadura\n\n"+ARTIGOS.length+" trabalhos de conclusão do Curso Livre em Teologia, com resumo, busca por tema e referência ABNT de cada um.");
+const slug=x=>"a-"+x.y+"-"+fold(x.a).replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"");
+ARTIGOS.forEach(x=>x.s=slug(x));
+const BYSLUG=Object.fromEntries(ARTIGOS.map(x=>[x.s,x]));
+const artURL=x=>SITE+"#"+x.s;
+function waHref(x){return "https://wa.me/?text="+encodeURIComponent(`${SITE}#${x.s}\n\n*${x.t||"Artigo"}*\n${x.a} – ${x.y}\n\n${x.r||""}\n\nAcesse o resumo, a referência ABNT e o artigo no acervo do IWE Polo Cascadura.`)}
 const BYID=Object.fromEntries(ARTIGOS.map(x=>[x.id,x]));
 const FEM=new Set(["Tatiana","Luciana","Ana","Joseane","Sabrina"]);
 const UP=s=>s.toLocaleUpperCase("pt-BR");
@@ -620,7 +634,7 @@ const lastName=n=>abntName(n).split(",")[0];
 const MESES=["jan.","fev.","mar.","abr.","maio","jun.","jul.","ago.","set.","out.","nov.","dez."];
 function hoje(){const d=new Date();return `${d.getDate()} ${MESES[d.getMonth()]} ${d.getFullYear()}`}
 function refParts(x){
-  const url=`https://drive.google.com/file/d/${x.id}/view`;
+  const url=artURL(x);
   const t=x.t||"[Título a confirmar]"; const i=t.indexOf(":");
   const main=i>0?t.slice(0,i):t, sub=i>0?t.slice(i):"";
   const or=x.o?` ${FEM.has(x.o.split(" ")[0])?"Orientadora":"Orientador"}: ${x.o}.`:"";
@@ -662,14 +676,25 @@ function openFicha(id){
   $("cpCite").onclick=e=>copyOut(e.currentTarget,null,citeText(x));
   $("drawer").classList.add("on");$("scrim").classList.add("on");$("drawer").setAttribute("aria-hidden","false");
   document.body.style.overflow="hidden";$("drClose").focus();
+  if(location.hash!=="#"+x.s){try{history.replaceState(null,"",location.pathname+location.search+"#"+x.s)}catch(e){}}
 }
-function closeFicha(){$("drawer").classList.remove("on");$("scrim").classList.remove("on");$("drawer").setAttribute("aria-hidden","true");document.body.style.overflow="";if(lastFocus)lastFocus.focus()}
+function closeFicha(){if(location.hash.startsWith("#a-")){try{history.replaceState(null,"",location.pathname+location.search)}catch(e){}}
+  $("drawer").classList.remove("on");$("scrim").classList.remove("on");$("drawer").setAttribute("aria-hidden","true");document.body.style.overflow="";if(lastFocus)lastFocus.focus()}
 document.addEventListener("click",e=>{const b=e.target.closest("[data-open]");if(b){e.preventDefault();openFicha(b.dataset.open)}});
 $("drClose").addEventListener("click",closeFicha);$("scrim").addEventListener("click",closeFicha);
 document.addEventListener("keydown",e=>{if(e.key==="Escape"&&$("drawer").classList.contains("on"))closeFicha()});
 $("drBody").addEventListener("click",e=>{const c=e.target.closest(".chip[data-t]");if(!c)return;closeFicha();$("tema").value=c.dataset.t;render();$("acervo").scrollIntoView({behavior:"smooth"})});
 
-setYear(location.hash.replace("#ano-",""),false);
+function route(){
+  const h=decodeURIComponent(location.hash.slice(1));
+  if(h.startsWith("a-")&&BYSLUG[h]){const x=BYSLUG[h];
+    setYear(x.y,false);
+    const el=document.querySelector(`[data-open="${x.id}"]`);
+    if(el)el.closest(".entry")?.scrollIntoView({block:"center"});
+    openFicha(x.id);return;}
+  setYear(h.replace("ano-",""),false);
+}
+route();
 </script>
 </body>
 </html>
