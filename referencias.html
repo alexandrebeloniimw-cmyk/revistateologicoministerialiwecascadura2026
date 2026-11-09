@@ -1,0 +1,549 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Como referenciar (ABNT) · Artigo Teológico Ministerial</title>
+<meta name="description" content="Guia interativo de referências ABNT para o Artigo Teológico Ministerial: livros, Bíblia, comentários, dicionários, artigos, sites, YouTube, Instagram e mais, com gerador de referências.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="icon" type="image/png" href="img/favicon.png">
+<meta name="theme-color" content="#161c4e">
+<meta property="og:title" content="Como referenciar (ABNT) · IWE Polo Cascadura">
+<meta property="og:description" content="Escolha o tipo de documento, preencha os campos e copie a referência pronta no padrão ABNT.">
+<meta property="og:image" content="https://alexandrebeloniimw-cmyk.github.io/revistateologicoministerialiwecascadura2026/img/og-image.jpg">
+<style>
+:root{
+  --bg:#FAF6EE; --paper:#FFFFFF; --ink:#1D1D1F; --muted:#5B5B63; --line:#E6DFD0;
+  --navy:#161C4E; --gold:#9A7A2F; --gold-soft:#F4EBD9; --ok:#1E7B34; --ok-soft:#E5F2E8; --no:#C42F35; --no-soft:#F9E6E6;
+  --display:"Cormorant Garamond", Georgia, "Times New Roman", serif;
+  --body:"Source Sans 3", "Segoe UI", Arial, sans-serif;
+  --mono:"IBM Plex Mono", ui-monospace, Consolas, monospace;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{background:var(--bg);color:var(--ink);font:400 17px/1.6 var(--body);margin:0}
+a{color:var(--navy)}
+a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+.top{color:#fff;background:radial-gradient(ellipse at 85% 10%,rgba(201,161,74,.22),transparent 55%),linear-gradient(135deg,#161c4e 0%,#262f78 60%,#7d1c22 100%)}
+.bar{background:rgba(22,28,78,.97);border-bottom:1px solid rgba(201,161,74,.35);position:sticky;top:0;z-index:20}
+.bar-in{max-width:1180px;margin:0 auto;height:64px;display:flex;align-items:center;justify-content:space-between;gap:16px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.bar a{color:#fff;text-decoration:none;display:flex;align-items:center;gap:12px;font:600 15px/1.2 var(--body)}
+.bar img{height:34px;width:auto}
+.bar .links{display:flex;gap:8px}
+.bar .back{border:1.5px solid #c9a14a;color:#e8d3a0;padding:7px 14px;border-radius:999px;white-space:nowrap}
+.bar .back:hover{background:#c9a14a;color:#161c4e}
+.top-in{max-width:1180px;margin:0 auto;padding-block:48px 40px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.eyebrow{font:600 13px/1.3 var(--body);letter-spacing:.14em;text-transform:uppercase;color:#E8D3A0}
+h1{font:700 clamp(34px,5.6vw,56px)/1.05 var(--display);margin:12px 0 14px;text-wrap:balance;max-width:20ch;color:#fff}
+.lead{max-width:64ch;color:#D5DCEA;margin:0}
+.steps3{display:flex;flex-wrap:wrap;gap:10px 28px;margin-top:26px;font-size:15px;color:#D5DCEA;list-style:none;padding:0}
+.steps3 b{color:#E8D3A0;font:500 13px/1 var(--mono);margin-right:6px}
+.wrap{max-width:1180px;margin:0 auto;padding-block:32px 80px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+
+/* Ferramentas de busca */
+.tools{position:sticky;top:64px;z-index:10;background:var(--bg);padding:14px 0 12px;border-bottom:1px solid var(--line);margin-bottom:22px}
+.search{display:flex;align-items:center;gap:10px;background:var(--paper);border:1.5px solid var(--line);border-radius:10px;padding:0 14px;max-width:560px}
+.search:focus-within{border-color:var(--gold)}
+.search svg{flex:none;color:var(--muted)}
+.search input{border:0;background:transparent;font:400 17px/1 var(--body);padding:12px 0;width:100%;color:var(--ink)}
+.search input:focus{outline:none}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.chip{font:600 14px/1 var(--body);border:1.5px solid var(--line);background:var(--paper);color:var(--ink);border-radius:999px;padding:8px 14px;cursor:pointer}
+.chip:hover{border-color:var(--gold)}
+.chip[aria-pressed="true"]{background:var(--navy);border-color:var(--navy);color:#fff}
+.count{font-size:14px;color:var(--muted);margin:10px 0 0}
+
+.layout{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:32px;align-items:start}
+
+/* Cartões de tipo */
+.types{display:grid;gap:10px}
+.type{background:var(--paper);border:1px solid var(--line);border-radius:10px;scroll-margin-top:200px}
+.type.open{border-color:var(--gold);box-shadow:0 2px 0 var(--gold-soft)}
+.type-h{all:unset;box-sizing:border-box;display:flex;align-items:center;gap:14px;width:100%;padding:14px 18px;cursor:pointer}
+.type-h:focus-visible{outline:2px solid var(--gold);outline-offset:-2px;border-radius:10px}
+.type-ic{flex:none;width:40px;height:40px;border-radius:8px;background:var(--gold-soft);color:var(--navy);display:grid;place-items:center;font:700 20px/1 var(--display)}
+.type-t{flex:1;min-width:0}
+.type-t b{display:block;font:700 17px/1.3 var(--body);color:var(--navy)}
+.type-t span{display:block;font-size:14.5px;color:var(--muted);line-height:1.4}
+.type-cat{font:500 11.5px/1 var(--mono);color:var(--gold);letter-spacing:.04em;white-space:nowrap}
+.chev{flex:none;transition:transform .2s;color:var(--muted)}
+.type.open .chev{transform:rotate(180deg)}
+.type-b{padding:0 18px 20px;border-top:1px solid var(--line)}
+.type-b[hidden]{display:none}
+.lbl{font:600 12px/1.3 var(--body);letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin:18px 0 8px;display:block}
+.ess{display:flex;flex-wrap:wrap;gap:6px}
+.ess span{font-size:14px;border:1px solid var(--line);border-radius:99px;padding:3px 11px;background:var(--bg)}
+.model{font:400 14.5px/1.6 var(--mono);background:var(--bg);border:1px dashed var(--line);border-radius:8px;padding:12px 14px;color:#33333a;overflow-wrap:anywhere}
+.model b{color:var(--navy)}
+.form{display:grid;grid-template-columns:1fr 1fr;gap:12px 14px}
+.f{display:flex;flex-direction:column;gap:4px;min-width:0}
+.f.w{grid-column:1/-1}
+.f label{font:600 14px/1.3 var(--body)}
+.f small{font-size:13px;color:var(--muted);line-height:1.35}
+.f input,.f select,.f textarea{font:400 15.5px/1.4 var(--body);padding:9px 11px;border:1.5px solid var(--line);border-radius:7px;background:#fff;color:var(--ink);width:100%}
+.f textarea{resize:vertical;min-height:62px}
+.f input:focus,.f select:focus,.f textarea:focus{border-color:var(--gold);outline:none}
+.out{margin-top:18px;background:var(--paper);border:1px solid var(--line);border-left:4px solid var(--navy);border-radius:4px;padding:16px 18px;font-family:"Times New Roman",Times,serif;font-size:17px;line-height:1.5;overflow-wrap:anywhere}
+.out .miss{background:var(--no-soft);color:var(--no);font-family:var(--body);font-size:.85em;padding:0 4px;border-radius:3px}
+.cite{margin-top:10px;font-size:15px;color:var(--muted)}
+.cite code{font-family:"Times New Roman",Times,serif;font-size:16px;color:var(--ink);background:var(--bg);padding:1px 6px;border-radius:4px}
+.acts{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.acts[hidden]{display:none}
+.btn{font:600 14.5px/1 var(--body);border-radius:999px;padding:10px 16px;cursor:pointer;border:1.5px solid var(--navy);background:var(--navy);color:#fff}
+.btn:hover{background:#262f78}
+.btn.ghost{background:transparent;color:var(--navy)}
+.btn.ghost:hover{background:var(--gold-soft)}
+.btn.sm{padding:7px 12px;font-size:13.5px}
+.tips{list-style:none;margin:6px 0 0;padding:0;display:grid;gap:6px;font-size:15px}
+.tips li{position:relative;padding-left:20px}
+.tips li::before{content:"";position:absolute;left:4px;top:.65em;width:6px;height:6px;border-radius:50%;background:var(--gold)}
+.tag{display:inline-block;font:600 11px/1 var(--body);letter-spacing:.08em;text-transform:uppercase;background:var(--gold-soft);color:var(--gold);padding:4px 8px;border-radius:4px;margin-left:6px;vertical-align:2px}
+.empty{background:var(--paper);border:1px dashed var(--line);border-radius:10px;padding:24px;text-align:center;color:var(--muted)}
+
+/* Lateral: minha lista e regras */
+aside{position:sticky;top:230px;display:grid;gap:16px;max-height:calc(100vh - 250px);overflow:auto}
+.panel{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:16px 18px}
+.panel h2{font:700 24px/1.15 var(--display);color:var(--navy);margin:0 0 4px}
+.panel p{font-size:14.5px;color:var(--muted);margin:0 0 10px}
+.mylist{list-style:none;margin:0;padding:0;display:grid;gap:8px;font-family:"Times New Roman",Times,serif;font-size:15px;line-height:1.4}
+.mylist li{display:flex;gap:8px;align-items:flex-start;border-bottom:1px solid var(--line);padding-bottom:8px}
+.mylist li span{flex:1;min-width:0;overflow-wrap:anywhere}
+.mylist button{all:unset;cursor:pointer;color:var(--muted);font:600 18px/1 var(--body);padding:2px 6px;border-radius:4px}
+.mylist button:hover{color:var(--no);background:var(--no-soft)}
+.rules{list-style:none;margin:0;padding:0;display:grid;gap:8px;font-size:14.5px}
+.rules li{position:relative;padding-left:18px}
+.rules li::before{content:"";position:absolute;left:3px;top:.62em;width:6px;height:6px;border-radius:50%;background:var(--gold)}
+.mono{font-family:var(--mono);font-size:.9em}
+
+.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%) translateY(20px);background:var(--navy);color:#fff;font:600 15px/1 var(--body);padding:12px 18px;border-radius:999px;opacity:0;pointer-events:none;transition:.2s;z-index:50}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+footer{border-top:1px solid var(--line);padding-top:20px;margin-top:40px;color:var(--muted);font-size:14.5px}
+
+@media (max-width:980px){
+  .layout{grid-template-columns:minmax(0,1fr)}
+  aside{position:static;max-height:none}
+  .tools{position:static}
+  .type{scroll-margin-top:80px}
+  aside .rulesp{display:none}
+}
+@media (max-width:620px){
+  .bar a span{display:none}
+  .form{grid-template-columns:1fr}
+  .type-cat{display:none}
+  body{font-size:16.5px}
+}
+</style>
+</head>
+<body>
+
+<div class="bar"><div class="bar-in">
+  <a href="./"><img src="img/logo-iwe-claro.png" alt="IWE – Instituto Wesleyano de Educação"><span>Artigo Teológico Ministerial 2026</span></a>
+  <div class="links"><a href="normas.html#referencias" class="back">Normas</a><a href="./" class="back">← Revista</a></div>
+</div></div>
+
+<header class="top"><div class="top-in">
+  <span class="eyebrow">Instituto Wesleyano de Educação · Polo Cascadura · ABNT NBR 6023 e 10520</span>
+  <h1>Como referenciar</h1>
+  <p class="lead">Escolha o tipo de documento, preencha os campos com os dados da obra que você leu e copie a referência pronta, já com o negrito no lugar. A chamada no texto aparece logo abaixo, no padrão do curso.</p>
+  <ol class="steps3">
+    <li><b>01</b>Escolha o tipo</li>
+    <li><b>02</b>Preencha os campos</li>
+    <li><b>03</b>Copie ou junte à sua lista</li>
+  </ol>
+</div></header>
+
+<div class="wrap">
+  <div class="tools">
+    <label class="search">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+      <input id="q" type="search" placeholder="Buscar: livro, Bíblia, Instagram, dicionário…" aria-label="Buscar tipo de documento" autocomplete="off">
+    </label>
+    <div class="chips" id="chips" role="group" aria-label="Filtrar por categoria"></div>
+    <p class="count" id="count" aria-live="polite"></p>
+  </div>
+
+  <div class="layout">
+    <main>
+      <div class="types" id="types"></div>
+      <div class="empty" id="empty" hidden>Nenhum tipo encontrado. Tente outra palavra, como <b>livro</b>, <b>site</b> ou <b>vídeo</b>.</div>
+    </main>
+
+    <aside>
+      <div class="panel" id="listPanel">
+        <h2>Minha lista</h2>
+        <p>As referências que você juntar ficam aqui em ordem alfabética, prontas para colar no fim do artigo.</p>
+        <ol class="mylist" id="mylist"></ol>
+        <div class="acts" id="listActs" hidden>
+          <button class="btn sm" id="copyAll">Copiar todas</button>
+          <button class="btn ghost sm" id="clearAll">Limpar</button>
+        </div>
+      </div>
+      <div class="panel rulesp">
+        <h2>Regras gerais</h2>
+        <ul class="rules">
+          <li>Espaçamento simples, alinhadas à esquerda, em ordem alfabética.</li>
+          <li>Título em <b>negrito</b>; subtítulo sem negrito.</li>
+          <li>No curso: páginas usadas no fim da referência, como <span class="mono">p. 18-22</span>.</li>
+          <li>Sem local: <span class="mono">[S. l.]</span>. Sem editora: <span class="mono">[s. n.]</span>. Sem data: <span class="mono">[s. d.]</span>.</li>
+          <li>Obra on-line: <span class="mono">Disponível em:</span> e <span class="mono">Acesso em:</span>.</li>
+          <li>Meses abreviados: jan. fev. mar. abr. maio jun. jul. ago. set. out. nov. dez.</li>
+          <li>Confira tudo na folha de rosto da obra que você usou.</li>
+        </ul>
+      </div>
+    </aside>
+  </div>
+
+  <footer>
+    <p>Instituto Wesleyano de Educação · Polo Cascadura · Artigo Teológico Ministerial 2026. Guia organizado pelo Prof. Alexandre Fonseca do Prado Beloni, com base na ABNT NBR 6023:2018 (referências) e na NBR 10520:2023 (citações), seguindo as <a href="normas.html">normas do curso</a>. A ideia de organizar por tipo de documento foi inspirada no guia <a href="https://www.ufrgs.br/bibliotecas/ferramentas/campos-basicos-abnt-zotero/" target="_blank" rel="noopener">Campos básicos da ABNT, das Bibliotecas da UFRGS ↗</a>.</p>
+    <p>Os exemplos marcados como <span class="tag" style="margin:0">ilustrativo</span> mostram apenas a forma: os nomes e dados são fictícios.</p>
+  </footer>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+(function(){
+"use strict";
+
+/* ---------- Utilidades ---------- */
+var MESES=["jan.","fev.","mar.","abr.","maio","jun.","jul.","ago.","set.","out.","nov.","dez."];
+function esc(s){return String(s==null?"":s).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c];});}
+function t(s){return String(s==null?"":s).trim();}
+function miss(label){return '<span class="miss">['+esc(label)+']</span>';}
+function req(v,label){return t(v)?esc(t(v)):miss(label);}
+function endDot(s){s=s.replace(/\s+$/,"");return /[.?!]$/.test(s.replace(/<[^>]+>/g,""))?s:s+".";}
+function upFirstWord(s){s=t(s);var i=s.indexOf(" ");return i<0?s.toUpperCase():s.slice(0,i).toUpperCase()+s.slice(i);}
+function dataBR(iso){ // 2026-11-09 -> 9 nov. 2026
+  if(!iso)return "";var p=iso.split("-");if(p.length!==3)return esc(iso);
+  return parseInt(p[2],10)+" "+MESES[parseInt(p[1],10)-1]+" "+p[0];
+}
+function today(){var d=new Date();return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0");}
+function yearOf(s){var m=String(s||"").match(/(1[5-9]|20)\d{2}/);return m?m[0]:"";}
+
+/* Autores: um por linha, "Sobrenome, Prenome". Sem vírgula = entidade. */
+function lines(v){return String(v||"").split(/\n|;/).map(t).filter(Boolean);}
+function fmtAuthor(a){var i=a.indexOf(",");if(i<0)return esc(a.toUpperCase());return esc(a.slice(0,i).trim().toUpperCase())+", "+esc(a.slice(i+1).trim());}
+function fmtAuthors(v,role){var L=lines(v);if(!L.length)return "";var s=L.map(fmtAuthor).join("; ");return role?s+" ("+role+")":s;}
+function citeName(a){var i=a.indexOf(",");return i<0?a:a.slice(0,i).trim();}
+function citeAuthors(v){
+  var L=lines(v).map(citeName);if(!L.length)return "";
+  if(L.length===1)return L[0];if(L.length===2)return L[0]+" e "+L[1];if(L.length===3)return L[0]+", "+L[1]+" e "+L[2];
+  return L[0]+" et al.";
+}
+function titleCase1(w){w=w.toLowerCase();return w.charAt(0).toUpperCase()+w.slice(1);}
+function citeTitle(title){var w=t(title).split(/\s+/)[0]||"";return titleCase1(w)+" [...]";}
+
+function tit(v,sub){var s=req(v,"Título");return "<b>"+s+"</b>"+(t(sub)?": "+esc(t(sub)):"");}
+function ed(v){v=t(v);if(!v)return "";return /ed\.?$/i.test(v)?esc(v)+" ":esc(v.replace(/[ªa.]+$/,""))+". ed. ";}
+function trad(v){return t(v)?"Tradução de "+esc(t(v))+". ":"";}
+function pub(local,editora,ano){
+  local=t(local);editora=t(editora);ano=t(ano);
+  var a=ano?esc(ano):"[s. d.]";
+  if(!local&&!editora)return "[S. l.: s. n.], "+a+". ";
+  return (local?esc(local):"[S. l.]")+": "+(editora?esc(editora):"[s. n.]")+", "+a+". ";
+}
+function pags(v){v=t(v);if(!v)return "";return /^p\./.test(v)?esc(v)+".":"p. "+esc(v)+".";}
+function online(url,acc){url=t(url);if(!url)return "";return " Disponível em: "+esc(url)+". Acesso em: "+(acc?dataBR(acc):miss("data de acesso"))+".";}
+function join(){return Array.prototype.join.call(arguments,"").replace(/\s+/g," ").replace(/\s+\./g,".").replace(/([^.])\.\.(?!\.)/g,"$1.").trim();}
+
+/* ---------- Tipos de documento ---------- */
+var CATS=[["livros","Livros e partes"],["biblia","Bíblia e dicionários"],["academicos","Periódicos e acadêmicos"],["internet","Internet e redes"],["documentos","Documentos"]];
+var ACERVO="https://alexandrebeloniimw-cmyk.github.io/revistateologicoministerialiwecascadura2026/acervo.html";
+
+var F={ // campos reutilizáveis
+  autores:{k:"autores",label:"Autor(es)",type:"authors",hint:"Um por linha: Sobrenome, Prenome. Instituição: escreva o nome sem vírgula.",w:1},
+  titulo:{k:"titulo",label:"Título",w:1},
+  subtitulo:{k:"subtitulo",label:"Subtítulo",hint:"Opcional. Sai sem negrito, depois de dois-pontos."},
+  tradutor:{k:"tradutor",label:"Tradutor(a)",hint:"Opcional"},
+  edicao:{k:"edicao",label:"Edição",hint:"Só a partir da 2ª. Ex.: 2"},
+  local:{k:"local",label:"Local (cidade)"},
+  editora:{k:"editora",label:"Editora"},
+  ano:{k:"ano",label:"Ano"},
+  paginas:{k:"paginas",label:"Páginas usadas",hint:"Ex.: 18-22, 60-61"},
+  url:{k:"url",label:"Endereço (link)",hint:"Só para obra on-line",w:1},
+  acesso:{k:"acesso",label:"Data de acesso",type:"date"}
+};
+function fx(base,over){var o={};for(var k in base)o[k]=base[k];for(var j in over)o[j]=over[j];return o;}
+
+var TYPES=[
+{id:"livro",cat:"livros",ic:"L",name:"Livro",desc:"Obra completa, impressa ou digital, com um ou mais autores, inclusive traduzida.",kw:"obra autor tradução ebook e-book",
+ ess:["Autor","Título","Edição","Local","Editora","Ano"],
+ model:"SOBRENOME, Prenome. <b>Título</b>: subtítulo. Tradução de Nome. 2. ed. Local: Editora, ano. p. x-y.",
+ fields:[F.autores,F.titulo,F.subtitulo,F.tradutor,F.edicao,F.local,F.editora,F.ano,F.paginas,F.url,F.acesso],
+ ex:{autores:"Lopes, Hernandes Dias",titulo:"De pastor a pastor",local:"São Paulo",editora:"Hagnos",ano:"2008",paginas:"18-22, 60-61"},
+ build:function(v){return {ref:join(endDot(fmtAuthors(v.autores)||miss("Autor"))," ",tit(v.titulo,v.subtitulo),". ",trad(v.tradutor),ed(v.edicao),pub(v.local,v.editora,v.ano),pags(v.paginas),online(v.url,v.acesso)),who:citeAuthors(v.autores),yr:t(v.ano)};},
+ tips:["Até três autores, todos aparecem, separados por ponto e vírgula. Com mais de três, pode-se usar o primeiro seguido de et al.","O ano é o da edição usada, e não o da reimpressão.","E-book: preencha o link, se houver, ou acrescente o formato depois do ano (ex.: E-book)."]},
+
+{id:"capitulo",cat:"livros",ic:"C",name:"Capítulo de livro",desc:"Parte escrita por um autor dentro de livro organizado por outra pessoa.",kw:"parte coletânea organizador org. in",
+ ess:["Autor do capítulo","Título do capítulo","In: Organizador","Título do livro","Local","Editora","Ano","Páginas"],
+ model:"SOBRENOME, Prenome. Título do capítulo. In: SOBRENOME, Prenome (org.). <b>Título do livro</b>: subtítulo. Local: Editora, ano. p. x-y.",
+ fields:[fx(F.autores,{label:"Autor(es) do capítulo"}),fx(F.titulo,{k:"cap",label:"Título do capítulo"}),fx(F.autores,{k:"org",label:"Organizador(es) do livro"}),{k:"papel",label:"Função",type:"select",opts:["org.","ed.","coord."]},fx(F.titulo,{label:"Título do livro"}),F.subtitulo,F.edicao,F.local,F.editora,F.ano,fx(F.paginas,{label:"Páginas do capítulo"}),F.url,F.acesso],
+ ex:{autores:"Silva, João",cap:"A pregação expositiva na igreja local",org:"Souza, Maria",papel:"org.",titulo:"Ministério pastoral hoje",subtitulo:"desafios e práticas",local:"Rio de Janeiro",editora:"Editora Exemplo",ano:"2020",paginas:"45-68"},demo:1,
+ build:function(v){return {ref:join(endDot(fmtAuthors(v.autores)||miss("Autor"))," ",req(v.cap,"Título do capítulo"),". <i>In</i>: ",fmtAuthors(v.org,v.papel)||miss("Organizador"),". ",tit(v.titulo,v.subtitulo),". ",ed(v.edicao),pub(v.local,v.editora,v.ano),pags(v.paginas),online(v.url,v.acesso)),who:citeAuthors(v.autores),yr:t(v.ano)};},
+ tips:["A chamada no texto é feita pelo autor do capítulo, e não pelo organizador.","Quando o autor do capítulo é o mesmo do livro, repita o nome depois do In:."]},
+
+{id:"comentario",cat:"livros",ic:"Cb",name:"Comentário bíblico (parte de volume)",desc:"Comentário de um livro bíblico escrito por um autor dentro de uma coleção, como o Beacon.",kw:"beacon cpad coleção volume exegese",
+ ess:["Autor da parte","Título da parte","In: Título da coleção","Tradutor","Local","Editora","Ano","Volume","Páginas"],
+ model:"SOBRENOME, Prenome. Título da parte. In: TÍTULO da coleção: subtítulo do volume. Tradução de Nome. Local: Editora, ano. v. n, p. x-y.",
+ fields:[fx(F.autores,{label:"Autor da parte"}),fx(F.titulo,{k:"parte",label:"Título da parte (livro bíblico comentado)"}),fx(F.titulo,{k:"obra",label:"Título da coleção",hint:"A primeira palavra sai em maiúsculas automaticamente."}),fx(F.subtitulo,{label:"Subtítulo do volume",hint:"Ex.: Romanos a 2 Coríntios"}),F.tradutor,F.local,F.editora,F.ano,{k:"vol",label:"Volume",hint:"Ex.: 8"},fx(F.paginas,{label:"Páginas"})],
+ ex:{autores:"Metz, Donald S.",parte:"A Primeira Epístola de Paulo aos Coríntios",obra:"Comentário bíblico Beacon",subtitulo:"Romanos a 2 Coríntios",tradutor:"Degmar Ribas Júnior",local:"Rio de Janeiro",editora:"CPAD",ano:"2006",vol:"8",paginas:"233-394"},
+ build:function(v){var vol=t(v.vol)?"v. "+esc(t(v.vol))+(t(v.paginas)?", ":"."):"";var p=t(v.paginas)?(vol?"p. "+esc(t(v.paginas).replace(/^p\.\s*/,""))+".":pags(v.paginas)):"";
+  return {ref:join(endDot(fmtAuthors(v.autores)||miss("Autor"))," ",req(v.parte,"Título da parte"),". <i>In</i>: ",t(v.obra)?esc(upFirstWord(v.obra)):miss("Coleção"),t(v.subtitulo)?": "+esc(t(v.subtitulo)):"",". ",trad(v.tradutor),pub(v.local,v.editora,v.ano),vol,p),who:citeAuthors(v.autores),yr:t(v.ano)};},
+ tips:["O título da coleção não leva negrito, porque a entrada é pelo título (primeira palavra em maiúsculas).","Dois autores com o mesmo sobrenome e o mesmo ano: acrescente a inicial na chamada, como Taylor, R. (2006) e Taylor, W. (2006).","Todo texto bíblico do artigo recebe análise com comentarista."]},
+
+{id:"biblia",cat:"biblia",ic:"B",name:"Bíblia",desc:"Bíblia impressa, de estudo ou on-line, indicando a tradução usada.",kw:"escrituras versão almeida ara arc nvi sagrada",
+ ess:["BÍBLIA","Idioma","Título","Tradução","Edição","Local","Editora","Ano"],
+ model:"BÍBLIA. Idioma. <b>Título</b>: versão. Tradução de Nome. 2. ed. Local: Editora, ano.",
+ fields:[{k:"idioma",label:"Idioma",hint:"Ex.: Português"},fx(F.titulo,{w:0}),fx(F.subtitulo,{label:"Versão",hint:"Ex.: Almeida Revista e Atualizada"}),F.tradutor,F.edicao,F.local,F.editora,F.ano,{k:"sigla",label:"Sigla da versão (para a citação)",hint:"Ex.: ARA, ARC, NVI"},F.url,F.acesso],
+ ex:{idioma:"Português",titulo:"Bíblia Sagrada",subtitulo:"Almeida Revista e Atualizada",tradutor:"João Ferreira de Almeida",edicao:"2",local:"Barueri",editora:"Sociedade Bíblica do Brasil",ano:"1993",sigla:"ARA"},
+ build:function(v){return {ref:join("BÍBLIA. ",t(v.idioma)?esc(t(v.idioma))+". ":"",tit(v.titulo,v.subtitulo),". ",trad(v.tradutor),ed(v.edicao),pub(v.local,v.editora,v.ano),online(v.url,v.acesso)),cite:"(Jo 3.16, "+esc(t(v.sigla)||"sigla")+")"};},
+ tips:["No texto, indique livro, capítulo e versículo com a sigla da versão: (1Tm 4.16, ARC).","Se usar mais de uma versão, faça uma referência para cada."]},
+
+{id:"dicionario",cat:"biblia",ic:"D",name:"Dicionário ou enciclopédia (obra completa)",desc:"Dicionário bíblico, teológico ou de língua portuguesa usado como um todo.",kw:"dicionários enciclopédia léxico houaiss aurélio teológico bíblico",
+ ess:["Autor ou organizador","Título","Edição","Local","Editora","Ano","Volumes"],
+ model:"SOBRENOME, Prenome (org.). <b>Título do dicionário</b>. 2. ed. Local: Editora, ano. 3 v.",
+ fields:[fx(F.autores,{label:"Autor(es) ou organizador(es)",hint:"Um por linha. Deixe vazio se a obra não tiver autor."}),{k:"papel",label:"Função",type:"select",opts:["","org.","ed.","coord."],optl:["autor","org.","ed.","coord."]},F.titulo,F.subtitulo,F.edicao,F.local,F.editora,F.ano,{k:"vols",label:"Nº de volumes",hint:"Opcional. Ex.: 3"},F.url,F.acesso],
+ ex:{autores:"Houaiss, Antônio\nVillar, Mauro de Salles",papel:"",titulo:"Dicionário Houaiss da língua portuguesa",local:"Rio de Janeiro",editora:"Objetiva",ano:"2001"},
+ build:function(v){var a=fmtAuthors(v.autores,v.papel);var head=a?endDot(a)+" "+tit(v.titulo,v.subtitulo)+". ":esc(upFirstWord(v.titulo||""))+(t(v.subtitulo)?": "+esc(t(v.subtitulo)):"")+". ";
+  return {ref:join(head,ed(v.edicao),pub(v.local,v.editora,v.ano),t(v.vols)?esc(t(v.vols))+" v.":"",online(v.url,v.acesso)),who:a?citeAuthors(v.autores):citeTitle(v.titulo),yr:t(v.ano)};},
+ tips:["Quando você consultou só um verbete, use o tipo “Verbete de dicionário”.","Dicionário sem autor na folha de rosto entra pelo título, com a primeira palavra em maiúsculas e sem negrito."]},
+
+{id:"verbete",cat:"biblia",ic:"V",name:"Verbete de dicionário",desc:"Uma entrada (palavra) consultada em dicionário impresso ou on-line.",kw:"dicionários verbete palavra entrada significado on-line dicio",
+ ess:["Autor do verbete (se houver)","Verbete","In: Dicionário","Local","Editora","Ano","Página ou link"],
+ model:"VERBETE. In: SOBRENOME, Prenome. <b>Título do dicionário</b>. Local: Editora, ano. p. x.",
+ fields:[fx(F.autores,{label:"Autor do verbete",hint:"Opcional: só em dicionários com verbetes assinados."}),{k:"verbete",label:"Verbete (palavra consultada)"},fx(F.autores,{k:"obraAut",label:"Autor(es) do dicionário",hint:"Deixe vazio se o dicionário não tiver autor."}),fx(F.titulo,{label:"Título do dicionário"}),F.local,F.editora,F.ano,{k:"vol",label:"Volume",hint:"Opcional"},fx(F.paginas,{label:"Página"}),F.url,F.acesso],
+ ex:{verbete:"Graça",obraAut:"Houaiss, Antônio\nVillar, Mauro de Salles",titulo:"Dicionário Houaiss da língua portuguesa",local:"Rio de Janeiro",editora:"Objetiva",ano:"2001"},
+ build:function(v){var aut=fmtAuthors(v.autores);var head=aut?endDot(aut)+" "+req(v.verbete,"Verbete")+". ":(t(v.verbete)?esc(t(v.verbete).toUpperCase()):miss("VERBETE"))+". ";
+  var oa=fmtAuthors(v.obraAut);var obra=oa?oa+". "+tit(v.titulo)+". ":esc(upFirstWord(v.titulo||""))+". ";
+  var vol=t(v.vol)?"v. "+esc(t(v.vol))+(t(v.paginas)?", ":"."):"";var p=t(v.paginas)?(vol?"p. "+esc(t(v.paginas))+".":pags(v.paginas)):"";
+  return {ref:join(head,"<i>In</i>: ",obra,pub(v.local,v.editora,v.ano),vol,p,online(v.url,v.acesso)),who:aut?citeAuthors(v.autores):titleCase1(t(v.verbete)||"Verbete"),yr:t(v.ano)};},
+ tips:["Sem autor do verbete, a entrada é a própria palavra em maiúsculas: GRAÇA. In: …","Dicionário on-line: preencha o link e a data de acesso; o ano é o da página consultada."]},
+
+{id:"periodico",cat:"academicos",ic:"A",name:"Artigo de revista científica",desc:"Artigo publicado em periódico, impresso ou on-line, com ou sem DOI.",kw:"periódico revista journal doi scielo",
+ ess:["Autor","Título do artigo","Nome da revista","Local","Volume","Número","Páginas","Data"],
+ model:"SOBRENOME, Prenome. Título do artigo: subtítulo. <b>Nome da Revista</b>, Local, v. n, n. n, p. x-y, ano. DOI ou Disponível em.",
+ fields:[F.autores,fx(F.titulo,{label:"Título do artigo"}),F.subtitulo,{k:"revista",label:"Nome da revista",w:1},F.local,{k:"vol",label:"Volume"},{k:"num",label:"Número"},fx(F.paginas,{label:"Páginas do artigo"}),{k:"data",label:"Data",hint:"Ano, ou mês e ano: jan./jun. 2018"},{k:"doi",label:"DOI",hint:"Opcional. Ex.: 10.1590/xxxx"},F.url,F.acesso],
+ ex:{autores:"Santos, Valdeci",titulo:"O pastor e a síndrome de burnout",subtitulo:"uma abordagem teológico-pastoral",revista:"Fides Reformata",local:"São Paulo",vol:"23",num:"2",paginas:"9-24",data:"2018",url:"https://cpaj.mackenzie.br",acesso:"__today"},
+ build:function(v){var parts=[];if(t(v.local))parts.push(esc(t(v.local)));if(t(v.vol))parts.push("v. "+esc(t(v.vol)));if(t(v.num))parts.push("n. "+esc(t(v.num)));if(t(v.paginas))parts.push("p. "+esc(t(v.paginas)));parts.push(req(v.data,"ano"));
+  return {ref:join(endDot(fmtAuthors(v.autores)||miss("Autor"))," ",req(v.titulo,"Título do artigo"),t(v.subtitulo)?": "+esc(t(v.subtitulo)):"",". <b>",req(v.revista,"Revista"),"</b>, ",parts.join(", "),".",t(v.doi)?" DOI: "+esc(t(v.doi))+".":"",online(v.url,v.acesso)),who:citeAuthors(v.autores),yr:yearOf(v.data)};},
+ tips:["No artigo de revista, o negrito vai no nome da revista, e não no título do artigo.","Se houver DOI, ele já basta para localizar o artigo; o link é opcional."]},
+
+{id:"tese",cat:"academicos",ic:"T",name:"Tese, dissertação ou monografia",desc:"Trabalho de doutorado, mestrado ou especialização defendido em instituição.",kw:"mestrado doutorado especialização pós-graduação monografia repositório",
+ ess:["Autor","Título","Ano","Tipo e grau","Instituição","Local","Ano da defesa"],
+ model:"SOBRENOME, Prenome. <b>Título</b>: subtítulo. Ano. Dissertação (Mestrado em Curso) – Instituição, Local, ano.",
+ fields:[F.autores,F.titulo,F.subtitulo,F.ano,{k:"tipo",label:"Tipo",type:"select",opts:["Tese (Doutorado","Dissertação (Mestrado","Monografia (Especialização","Trabalho de Conclusão de Curso (Graduação"],optl:["Tese (doutorado)","Dissertação (mestrado)","Monografia (especialização)","TCC (graduação)"]},{k:"curso",label:"Área ou curso",hint:"Ex.: Teologia"},{k:"inst",label:"Instituição",w:1},F.local,{k:"folhas",label:"Nº de folhas",hint:"Opcional"},F.url,F.acesso],
+ ex:{autores:"Oliveira, Ana Paula",titulo:"Cuidado pastoral e saúde emocional",subtitulo:"um estudo com líderes evangélicos",ano:"2021",tipo:"Dissertação (Mestrado",curso:"Teologia",inst:"Faculdade Exemplo de Teologia",local:"São Paulo"},demo:1,
+ build:function(v){var tp=t(v.tipo).indexOf("Graduação")>-1?"Trabalho de Conclusão de Curso (Graduação":t(v.tipo);
+  var grau=tp+(t(v.curso)?" em "+esc(t(v.curso)):"")+")";
+  return {ref:join(endDot(fmtAuthors(v.autores)||miss("Autor"))," ",tit(v.titulo,v.subtitulo),". ",req(v.ano,"ano"),". ",t(v.folhas)?esc(t(v.folhas))+" f. ":"",grau," – ",req(v.inst,"Instituição"),", ",req(v.local,"Local"),", ",req(v.ano,"ano"),".",online(v.url,v.acesso)),who:citeAuthors(v.autores),yr:t(v.ano)};},
+ tips:["O ano aparece duas vezes: o do depósito, depois do título, e o da defesa, no fim.","Trabalhos em repositório institucional levam o link e a data de acesso."]},
+
+{id:"acervo",cat:"academicos",ic:"IWE",name:"Artigo do acervo IWE (TCC)",desc:"Artigo Teológico Ministerial aprovado, disponível no acervo do Polo Cascadura.",kw:"tcc artigo teológico ministerial instituto wesleyano cascadura acervo colega",
+ ess:["Autor","Título","Ano","Tipo e curso","Instituto e polo","Local","Link do acervo"],
+ model:"SOBRENOME, Prenome. <b>Título</b>: subtítulo. Ano. Artigo (Curso Ministerial Teológico) – Instituto Wesleyano de Educação, Polo Cascadura, Rio de Janeiro, ano.",
+ fields:[F.autores,F.titulo,F.subtitulo,F.ano,{k:"curso",label:"Curso"},{k:"polo",label:"Polo"},F.local,fx(F.paginas,{label:"Páginas usadas"}),fx(F.url,{hint:"Já preenchido com o endereço do acervo"}),F.acesso],
+ ex:{autores:"Silva, João",titulo:"O discipulado na igreja local",subtitulo:"uma leitura wesleyana",ano:"2024",curso:"Curso Ministerial Teológico",polo:"Polo Cascadura",local:"Rio de Janeiro",url:ACERVO,acesso:"__today"},demo:1,
+ build:function(v){return {ref:join(endDot(fmtAuthors(v.autores)||miss("Autor"))," ",tit(v.titulo,v.subtitulo),". ",req(v.ano,"ano"),". Artigo (",esc(t(v.curso)||"Curso Ministerial Teológico"),") – Instituto Wesleyano de Educação",t(v.polo)?", "+esc(t(v.polo)):"",", ",req(v.local,"Local"),", ",req(v.ano,"ano"),". ",pags(v.paginas),online(v.url,v.acesso)),who:citeAuthors(v.autores),yr:t(v.ano)};},
+ tips:["Os artigos aprovados de 2019 a 2025 estão no <a href=\"acervo.html\">acervo</a>: confira lá o título e o ano exatos.","Citar trabalhos de turmas anteriores mostra diálogo com a pesquisa do próprio instituto."]},
+
+{id:"evento",cat:"academicos",ic:"E",name:"Trabalho em evento (anais)",desc:"Trabalho apresentado em congresso, simpósio ou seminário e publicado nos anais.",kw:"congresso simpósio seminário anais resumo jornada",
+ ess:["Autor","Título do trabalho","In: NOME DO EVENTO","Número, ano e local do evento","Anais","Local","Editora","Ano","Páginas"],
+ model:"SOBRENOME, Prenome. Título do trabalho. In: NOME DO EVENTO, n., ano, Local. <b>Anais</b> [...]. Local: Editora, ano. p. x-y.",
+ fields:[F.autores,fx(F.titulo,{label:"Título do trabalho"}),{k:"evento",label:"Nome do evento",w:1},{k:"num",label:"Número do evento",hint:"Ex.: 5"},{k:"anoEv",label:"Ano do evento"},{k:"localEv",label:"Cidade do evento"},{k:"pubt",label:"Publicação",type:"select",opts:["Anais","Resumos","Caderno de resumos"]},fx(F.local,{label:"Local da publicação"}),F.editora,fx(F.ano,{label:"Ano da publicação"}),F.paginas,F.url,F.acesso],
+ ex:{autores:"Pereira, Lucas",titulo:"A espiritualidade wesleyana e o cuidado com os pobres",evento:"Congresso de Teologia Wesleyana",num:"5",anoEv:"2023",localEv:"Rio de Janeiro",pubt:"Anais",local:"Rio de Janeiro",editora:"Editora Exemplo",ano:"2023",paginas:"112-120"},demo:1,
+ build:function(v){return {ref:join(endDot(fmtAuthors(v.autores)||miss("Autor"))," ",req(v.titulo,"Título do trabalho"),". <i>In</i>: ",t(v.evento)?esc(t(v.evento).toUpperCase()):miss("EVENTO"),t(v.num)?", "+esc(t(v.num).replace(/\.$/,""))+".":"",", ",req(v.anoEv,"ano"),", ",req(v.localEv,"cidade"),". <b>",esc(t(v.pubt)||"Anais"),"</b> [...]. ",pub(v.local,v.editora,v.ano),pags(v.paginas),online(v.url,v.acesso)),who:citeAuthors(v.autores),yr:t(v.ano)||t(v.anoEv)};},
+ tips:["O nome do evento vai todo em maiúsculas; o negrito fica na palavra Anais.","O [...] substitui o restante do título dos anais."]},
+
+{id:"site",cat:"internet",ic:"W",name:"Página de site",desc:"Texto ou página publicada em site institucional, de igreja, de ministério ou blog.",kw:"internet web blog portal página on-line link",
+ ess:["Autor","Título da página","Local","Data","Link","Data de acesso"],
+ model:"SOBRENOME, Prenome (ou INSTITUIÇÃO). <b>Título da página</b>. Local, data. Disponível em: link. Acesso em: dia mês ano.",
+ fields:[fx(F.autores,{hint:"Pessoa (Sobrenome, Prenome) ou instituição. Deixe vazio se não houver."}),fx(F.titulo,{label:"Título da página"}),F.local,{k:"data",label:"Data de publicação",hint:"Ano ou data por extenso. Vazio = [s. d.]"},fx(F.url,{hint:""}),F.acesso],
+ ex:{autores:"Instituto Wesleyano de Educação",titulo:"Normas do Artigo Teológico Ministerial",local:"Rio de Janeiro",data:"2026",url:"https://alexandrebeloniimw-cmyk.github.io/revistateologicoministerialiwecascadura2026/normas.html",acesso:"__today"},
+ build:function(v){var a=fmtAuthors(v.autores);var head=a?endDot(a)+" "+tit(v.titulo)+". ":(t(v.titulo)?esc(upFirstWord(v.titulo)):miss("TÍTULO"))+". ";
+  return {ref:join(head,t(v.local)?esc(t(v.local)):"[S. l.]",", ",t(v.data)?esc(t(v.data)):"[s. d.]",".",online(v.url,v.acesso)||" "+miss("link")),who:a?citeAuthors(v.autores):citeTitle(v.titulo),yr:yearOf(v.data)||"[s. d.]"};},
+ tips:["Sem autor pessoal, a autoria é da instituição responsável pelo site.","Prefira sites de instituições reconhecidas. Wikipédia e sites sem autoria não são fonte para o artigo."]},
+
+{id:"youtube",cat:"internet",ic:"▶",name:"Vídeo do YouTube (pregação, aula, palestra)",desc:"Vídeo publicado em canal: sermão, palestra, aula, entrevista ou documentário.",kw:"vídeo youtube sermão pregação palestra aula live culto",
+ ess:["Autor ou canal","Título do vídeo","Local","Ano","Duração","Canal","Link","Data de acesso"],
+ model:"SOBRENOME, Prenome. <b>Título do vídeo</b>. Local: Canal, ano. 1 vídeo (n min). Publicado pelo canal Nome. Disponível em: link. Acesso em: data.",
+ fields:[fx(F.autores,{label:"Autor (pregador, palestrante) ou canal"}),fx(F.titulo,{label:"Título do vídeo"}),F.local,{k:"canal",label:"Canal"},F.ano,{k:"min",label:"Duração (minutos)",hint:"Ex.: 42"},fx(F.url,{hint:""}),F.acesso],
+ ex:{autores:"Silva, João",titulo:"A graça preveniente em John Wesley",local:"Rio de Janeiro",canal:"Estudos Wesleyanos",ano:"2024",min:"42",url:"https://www.youtube.com/watch?v=exemplo",acesso:"__today"},demo:1,
+ build:function(v){return {ref:join(endDot(fmtAuthors(v.autores)||miss("Autor ou canal"))," ",tit(v.titulo),". ",pub(v.local,v.canal,v.ano),"1 vídeo",t(v.min)?" ("+esc(t(v.min))+" min)":"",". ",t(v.canal)?"Publicado pelo canal "+esc(t(v.canal))+".":"",online(v.url,v.acesso)||" "+miss("link")),who:citeAuthors(v.autores),yr:t(v.ano)};},
+ tips:["Na citação direta de vídeo, indique o minuto no lugar da página: Silva (2024, 12 min).","Sermão de culto transmitido ao vivo segue o mesmo modelo."]},
+
+{id:"instagram",cat:"internet",ic:"◎",name:"Publicação no Instagram",desc:"Post, carrossel ou reels publicado em perfil do Instagram.",kw:"instagram rede social post reels publicação perfil @ facebook twitter x",
+ ess:["Autor ou perfil","Texto inicial ou título","Local","Data do post","@perfil","Link","Data de acesso"],
+ model:"SOBRENOME, Prenome (ou INSTITUIÇÃO). <b>Primeiras palavras da legenda</b>. Local, dia mês ano. Instagram: @perfil. Disponível em: link. Acesso em: data.",
+ fields:[fx(F.autores,{label:"Autor (pessoa ou instituição)"}),fx(F.titulo,{label:"Título ou primeiras palavras da legenda"}),F.local,{k:"data",label:"Data do post",type:"date"},{k:"perfil",label:"Perfil",hint:"Ex.: @iwecascadura"},{k:"rede",label:"Rede social",type:"select",opts:["Instagram","Facebook","X (Twitter)","TikTok"]},fx(F.url,{hint:""}),F.acesso],
+ ex:{autores:"Silva, João",titulo:"Três marcas de uma igreja que ora",local:"Rio de Janeiro",data:"2025-08-12",perfil:"@joaosilva.exemplo",rede:"Instagram",url:"https://www.instagram.com/p/exemplo/",acesso:"__today"},demo:1,
+ build:function(v){var pf=t(v.perfil);if(pf&&pf.charAt(0)!=="@")pf="@"+pf;
+  return {ref:join(endDot(fmtAuthors(v.autores)||miss("Autor"))," ",tit(v.titulo),". ",t(v.local)?esc(t(v.local)):"[S. l.]",", ",v.data?dataBR(v.data):miss("data do post"),". ",esc(t(v.rede)||"Instagram"),": ",pf?esc(pf):miss("@perfil"),".",online(v.url,v.acesso)||" "+miss("link")),who:citeAuthors(v.autores),yr:v.data?v.data.slice(0,4):""};},
+ tips:["Sem título, use as primeiras palavras da legenda.","Serve também para Facebook, X (Twitter) e TikTok: troque a rede no campo acima.","Use redes sociais com moderação: como dado da pesquisa, e não como fundamentação teórica."]},
+
+{id:"jornal",cat:"internet",ic:"J",name:"Notícia de jornal ou portal",desc:"Matéria de jornal impresso ou portal de notícias on-line.",kw:"notícia jornal reportagem portal g1 folha matéria",
+ ess:["Autor","Título da matéria","Nome do jornal","Local","Data","Caderno ou seção","Link"],
+ model:"SOBRENOME, Prenome. Título da matéria. <b>Nome do Jornal</b>, Local, dia mês ano. Caderno, p. x. Disponível em: link. Acesso em: data.",
+ fields:[fx(F.autores,{hint:"Deixe vazio se a matéria não for assinada."}),fx(F.titulo,{label:"Título da matéria"}),{k:"jornal",label:"Nome do jornal ou portal",w:1},F.local,{k:"data",label:"Data",type:"date"},{k:"caderno",label:"Caderno ou seção",hint:"Opcional"},fx(F.paginas,{label:"Página",hint:"Só no impresso"}),F.url,F.acesso],
+ ex:{autores:"Costa, Marina",titulo:"Igrejas ampliam ações sociais nas comunidades",jornal:"Jornal Exemplo",local:"Rio de Janeiro",data:"2025-03-15",caderno:"Cidade",url:"https://www.jornalexemplo.com.br/noticia",acesso:"__today"},demo:1,
+ build:function(v){var a=fmtAuthors(v.autores);var head=a?endDot(a)+" "+req(v.titulo,"Título")+". ":(t(v.titulo)?esc(upFirstWord(v.titulo)):miss("TÍTULO"))+". ";
+  return {ref:join(head,"<b>",req(v.jornal,"Jornal"),"</b>, ",req(v.local,"Local"),", ",v.data?dataBR(v.data):miss("data"),". ",t(v.caderno)?esc(t(v.caderno))+(t(v.paginas)?", ":". "):"",t(v.paginas)?pags(v.paginas):"",online(v.url,v.acesso)),who:a?citeAuthors(v.autores):citeTitle(v.titulo),yr:v.data?v.data.slice(0,4):""};},
+ tips:["Matéria sem autor entra pelo título, com a primeira palavra em maiúsculas.","O negrito vai no nome do jornal."]},
+
+{id:"legislacao",cat:"documentos",ic:"§",name:"Legislação",desc:"Lei, decreto, resolução ou Constituição.",kw:"lei decreto resolução constituição planalto diário oficial",
+ ess:["Jurisdição","Tipo e número","Data","Ementa","Dados da publicação","Link"],
+ model:"BRASIL. Lei nº x, de dia de mês de ano. Ementa. Local: Órgão, ano. Disponível em: link. Acesso em: data.",
+ fields:[{k:"jur",label:"Jurisdição",hint:"Ex.: BRASIL; RIO DE JANEIRO (Estado)"},{k:"lei",label:"Tipo e número",hint:"Ex.: Lei nº 9.610"},{k:"dataExt",label:"Data por extenso",hint:"Ex.: 19 de fevereiro de 1998"},{k:"ementa",label:"Ementa",type:"textarea",w:1},F.local,{k:"orgao",label:"Órgão publicador"},F.ano,F.url,F.acesso],
+ ex:{jur:"Brasil",lei:"Lei nº 9.610",dataExt:"19 de fevereiro de 1998",ementa:"Altera, atualiza e consolida a legislação sobre direitos autorais e dá outras providências",local:"Brasília, DF",orgao:"Presidência da República",ano:"1998",url:"https://www.planalto.gov.br/ccivil_03/leis/l9610.htm",acesso:"__today"},
+ build:function(v){var j=t(v.jur);return {ref:join(j?esc(j.toUpperCase()):miss("JURISDIÇÃO"),". ",req(v.lei,"Tipo e número"),", de ",req(v.dataExt,"data"),". ",t(v.ementa)?endDot(esc(t(v.ementa)))+" ":"",pub(v.local,v.orgao,v.ano),online(v.url,v.acesso)),who:j?j.split(/\s|\(/)[0].charAt(0).toUpperCase()+j.split(/\s|\(/)[0].slice(1).toLowerCase():"Brasil",yr:t(v.ano)};},
+ tips:["Útil, por exemplo, para a Resolução CNS nº 510/2016 na pesquisa de campo.","A ementa é o resumo oficial que vem logo abaixo do número da lei."]},
+
+{id:"eclesiastico",cat:"documentos",ic:"✝",name:"Documento eclesiástico",desc:"Cânones, regimentos, credos, atas, cartas pastorais e documentos de igreja.",kw:"cânones igreja metodista wesleyana regimento credo ata carta pastoral documento oficial",
+ ess:["Instituição","Título","Edição","Local","Editora","Ano"],
+ model:"NOME DA IGREJA. <b>Título do documento</b>: subtítulo. 2. ed. Local: Editora, ano. p. x-y.",
+ fields:[fx(F.autores,{label:"Instituição autora",hint:"Escreva o nome sem vírgula."}),F.titulo,F.subtitulo,F.edicao,F.local,F.editora,F.ano,F.paginas,F.url,F.acesso],
+ ex:{autores:"Igreja Metodista Wesleyana",titulo:"Cânones da Igreja Metodista Wesleyana"},
+ build:function(v){return {ref:join(endDot(fmtAuthors(v.autores)||miss("INSTITUIÇÃO"))," ",tit(v.titulo,v.subtitulo),". ",ed(v.edicao),pub(v.local,v.editora,v.ano),pags(v.paginas),online(v.url,v.acesso)),who:citeAuthors(v.autores),yr:t(v.ano)||"[s. d.]"};},
+ tips:["Preencha local, editora e ano com os dados da edição que você usou. Quando faltam, a referência mostra [S. l.], [s. n.] e [s. d.], como no exemplo.","Na chamada, o nome da instituição vai por extenso na primeira vez; a sigla pode vir depois."]}
+];
+
+/* ---------- Estado ---------- */
+var state={q:"",cat:"todos",open:null,vals:{}};
+var LS="iwe-refs-lista";
+var myList=[];
+try{myList=JSON.parse(localStorage.getItem(LS)||"[]")||[];}catch(e){myList=[];}
+function saveList(){try{localStorage.setItem(LS,JSON.stringify(myList));}catch(e){}}
+
+function exVals(T){var o={};for(var k in T.ex)o[k]=T.ex[k]==="__today"?today():T.ex[k];T.fields.forEach(function(f){if(f.type==="select"&&o[f.k]==null)o[f.k]=f.opts[0];});return o;}
+function getVals(T){if(!state.vals[T.id])state.vals[T.id]=exVals(T);return state.vals[T.id];}
+
+/* ---------- Render ---------- */
+var $types=document.getElementById("types"),$chips=document.getElementById("chips"),$count=document.getElementById("count"),$empty=document.getElementById("empty");
+
+function chipsHTML(){
+  var all=[["todos","Todos"]].concat(CATS);
+  $chips.innerHTML=all.map(function(c){return '<button class="chip" data-cat="'+c[0]+'" aria-pressed="'+(state.cat===c[0])+'">'+c[1]+'</button>';}).join("");
+}
+function norm(s){return String(s).toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g,"");}
+function matches(T){
+  if(state.cat!=="todos"&&T.cat!==state.cat)return false;
+  if(!state.q)return true;
+  var hay=norm(T.name+" "+T.desc+" "+T.kw+" "+T.ess.join(" "));
+  return norm(state.q).split(/\s+/).every(function(w){return hay.indexOf(w)>-1;});
+}
+function catName(id){for(var i=0;i<CATS.length;i++)if(CATS[i][0]===id)return CATS[i][1];return "";}
+
+function cardHTML(T){
+  var open=state.open===T.id;
+  return '<article class="type'+(open?" open":"")+'" id="'+T.id+'">'+
+    '<button class="type-h" aria-expanded="'+open+'" aria-controls="b-'+T.id+'" data-id="'+T.id+'">'+
+      '<span class="type-ic" aria-hidden="true">'+T.ic+'</span>'+
+      '<span class="type-t"><b>'+T.name+'</b><span>'+T.desc+'</span></span>'+
+      '<span class="type-cat">'+catName(T.cat)+'</span>'+
+      '<svg class="chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>'+
+    '</button>'+
+    '<div class="type-b" id="b-'+T.id+'"'+(open?"":" hidden")+'>'+(open?bodyHTML(T):"")+'</div>'+
+  '</article>';
+}
+function fieldHTML(T,f,v){
+  var id="f-"+T.id+"-"+f.k,val=v[f.k]==null?"":v[f.k],input;
+  if(f.type==="authors"||f.type==="textarea")input='<textarea id="'+id+'" data-k="'+f.k+'" rows="2">'+esc(val)+'</textarea>';
+  else if(f.type==="select")input='<select id="'+id+'" data-k="'+f.k+'">'+f.opts.map(function(o,i){return '<option value="'+esc(o)+'"'+(o===val?" selected":"")+'>'+esc(f.optl?f.optl[i]:o)+'</option>';}).join("")+'</select>';
+  else input='<input id="'+id+'" data-k="'+f.k+'" type="'+(f.type==="date"?"date":"text")+'" value="'+esc(val)+'" autocomplete="off">';
+  return '<div class="f'+((f.w||f.type==="authors"||f.type==="textarea")&&f.w!==0?" w":"")+'"><label for="'+id+'">'+f.label+'</label>'+input+(f.hint?'<small>'+f.hint+'</small>':"")+'</div>';
+}
+function bodyHTML(T){
+  var v=getVals(T);
+  return '<span class="lbl">Campos essenciais</span><div class="ess">'+T.ess.map(function(e){return "<span>"+e+"</span>";}).join("")+'</div>'+
+    '<span class="lbl">Modelo</span><div class="model">'+T.model+'</div>'+
+    '<span class="lbl">Preencha'+(T.demo?' <span class="tag">exemplo ilustrativo</span>':' <span class="tag">exemplo real</span>')+'</span>'+
+    '<div class="form" data-id="'+T.id+'">'+T.fields.map(function(f){return fieldHTML(T,f,v);}).join("")+'</div>'+
+    '<div class="out" id="out-'+T.id+'" aria-live="polite"></div>'+
+    '<div class="cite" id="cite-'+T.id+'"></div>'+
+    '<div class="acts">'+
+      '<button class="btn" data-act="copy" data-id="'+T.id+'">Copiar referência</button>'+
+      '<button class="btn ghost" data-act="add" data-id="'+T.id+'">+ Juntar à minha lista</button>'+
+      '<button class="btn ghost" data-act="clear" data-id="'+T.id+'">Limpar campos</button>'+
+      '<button class="btn ghost" data-act="reset" data-id="'+T.id+'">Ver exemplo</button>'+
+    '</div>'+
+    (T.tips&&T.tips.length?'<span class="lbl">Atenção</span><ul class="tips">'+T.tips.map(function(x){return "<li>"+x+"</li>";}).join("")+'</ul>':"");
+}
+function findT(id){for(var i=0;i<TYPES.length;i++)if(TYPES[i].id===id)return TYPES[i];return null;}
+function update(T){
+  var r=T.build(getVals(T)),out=document.getElementById("out-"+T.id),ci=document.getElementById("cite-"+T.id);
+  if(!out)return;out.innerHTML=r.ref;
+  if(r.cite)ci.innerHTML='No texto: <code>'+r.cite+'</code>';
+  else{var who=esc(r.who||"Autor"),yr=esc(r.yr||"[s. d.]");ci.innerHTML='No texto: <code>'+who+' ('+yr+')</code> na indireta · <code>'+who+' ('+yr+', p. 00)</code> na direta';}
+}
+function render(){
+  var list=TYPES.filter(matches);
+  $types.innerHTML=list.map(cardHTML).join("");
+  $empty.hidden=list.length>0;
+  $count.textContent=list.length===TYPES.length?TYPES.length+" tipos de documento":list.length+" de "+TYPES.length+" tipos";
+  if(state.open&&findT(state.open)&&document.getElementById("out-"+state.open))update(findT(state.open));
+}
+function renderList(){
+  var $l=document.getElementById("mylist");
+  myList.sort(function(a,b){return a.txt.localeCompare(b.txt,"pt-BR",{sensitivity:"base"});});
+  $l.innerHTML=myList.length?myList.map(function(it,i){return '<li><span>'+it.html+'</span><button aria-label="Remover" data-rm="'+i+'">×</button></li>';}).join(""):'<li style="border:0;font-family:var(--body);color:var(--muted);font-size:14px">Nenhuma referência ainda.</li>';
+  document.getElementById("listActs").hidden=!myList.length;
+}
+
+/* ---------- Copiar ---------- */
+var $toast=document.getElementById("toast"),tt;
+function toast(m){$toast.textContent=m;$toast.classList.add("show");clearTimeout(tt);tt=setTimeout(function(){$toast.classList.remove("show");},1800);}
+function plain(html){var d=document.createElement("div");d.innerHTML=html;return d.textContent.replace(/\s+/g," ").trim();}
+function copyRich(html,txt){
+  var wrapped='<div style="font-family:\'Times New Roman\',serif;font-size:12pt">'+html+'</div>';
+  if(navigator.clipboard&&window.ClipboardItem){
+    try{return navigator.clipboard.write([new ClipboardItem({"text/html":new Blob([wrapped],{type:"text/html"}),"text/plain":new Blob([txt],{type:"text/plain"})})]).then(function(){toast("Copiado com o negrito ✓");},function(){fallback(wrapped);});}catch(e){}
+  }
+  fallback(wrapped);
+}
+function fallback(html){
+  var d=document.createElement("div");d.innerHTML=html;d.style.cssText="position:fixed;left:-9999px;top:0";document.body.appendChild(d);
+  var r=document.createRange();r.selectNodeContents(d);var s=window.getSelection();s.removeAllRanges();s.addRange(r);
+  var ok=false;try{ok=document.execCommand("copy");}catch(e){}
+  s.removeAllRanges();d.remove();toast(ok?"Copiado ✓":"Selecione o texto e copie manualmente");
+}
+
+/* ---------- Eventos ---------- */
+document.getElementById("q").addEventListener("input",function(e){state.q=e.target.value.trim();render();});
+$chips.addEventListener("click",function(e){var b=e.target.closest(".chip");if(!b)return;state.cat=b.dataset.cat;chipsHTML();render();});
+$types.addEventListener("click",function(e){
+  var h=e.target.closest(".type-h");
+  if(h){var id=h.dataset.id;state.open=state.open===id?null:id;render();
+    if(state.open){history.replaceState(null,"","#"+id);var el=document.getElementById(id);if(el)el.scrollIntoView({block:"start",behavior:"smooth"});}
+    else history.replaceState(null,"",location.pathname);
+    return;}
+  var a=e.target.closest("[data-act]");if(!a)return;
+  var T=findT(a.dataset.id),r=T.build(getVals(T));
+  if(a.dataset.act==="copy")copyRich(r.ref,plain(r.ref));
+  else if(a.dataset.act==="add"){
+    if(/class="miss"/.test(r.ref)){toast("Preencha os campos marcados em vermelho");return;}
+    var txt=plain(r.ref);if(myList.some(function(x){return x.txt===txt;})){toast("Essa referência já está na lista");return;}
+    myList.push({html:r.ref,txt:txt});saveList();renderList();toast("Juntada à sua lista ✓");}
+  else if(a.dataset.act==="clear"){var o={};T.fields.forEach(function(f){o[f.k]=f.type==="select"?f.opts[0]:(f.k==="acesso"?today():"");});if(T.id==="acervo"){o.curso="Curso Ministerial Teológico";o.polo="Polo Cascadura";o.local="Rio de Janeiro";o.url=ACERVO;}state.vals[T.id]=o;render();}
+  else if(a.dataset.act==="reset"){state.vals[T.id]=exVals(T);render();}
+});
+$types.addEventListener("input",function(e){
+  var el=e.target;if(!el.dataset||!el.dataset.k)return;
+  var form=el.closest(".form");var T=findT(form.dataset.id);getVals(T)[el.dataset.k]=el.value;update(T);
+});
+document.getElementById("mylist").addEventListener("click",function(e){var b=e.target.closest("[data-rm]");if(!b)return;myList.splice(+b.dataset.rm,1);saveList();renderList();});
+document.getElementById("copyAll").addEventListener("click",function(){
+  var html=myList.map(function(x){return '<p style="margin:0 0 12pt">'+x.html+"</p>";}).join("");
+  copyRich(html,myList.map(function(x){return x.txt;}).join("\n\n"));
+});
+document.getElementById("clearAll").addEventListener("click",function(){if(!myList.length)return;myList=[];saveList();renderList();toast("Lista limpa");});
+
+/* ---------- Início ---------- */
+var h=location.hash.slice(1);if(findT(h))state.open=h;
+chipsHTML();render();renderList();
+if(state.open){setTimeout(function(){var el=document.getElementById(state.open);if(el)el.scrollIntoView({block:"start"});},50);}
+})();
+</script>
+</body>
+</html>
