@@ -749,7 +749,7 @@ const maxOr=Math.max(...FACULTY.map(f=>orCount(f[1])));
 $("faculty").innerHTML=FACULTY.map(([shown,full],i)=>{const c=orCount(full);
   return `<li><button class="prof" ${c?`data-or="${esc(full)}"`:"disabled"} aria-label="${esc(shown)}${c?" – ver artigos orientados":""}">
     <span class="mono" style="background:${TONES[i%3]}">${initials(shown)}</span>
-    <span><b>${esc(shown)}</b><small>${c?"Ver artigos orientados →":"Professor"}</small></span></button></li>`}).join("");
+    <span><b>${esc(shown)}</b></span></button></li>`}).join("");
 $("facCount").textContent=FACULTY.length+" professores";
 $("faculty").addEventListener("click",e=>{const b=e.target.closest(".prof[data-or]");if(!b)return;
   $("orient").value=b.dataset.or;$("tema").value="";$("q").value="";setYear("todos",true);$("acervo").scrollIntoView({behavior:"smooth"})});
