@@ -348,7 +348,7 @@ var TYPES=[
  fields:[F.autores,F.titulo,F.subtitulo,F.ano,{k:"curso",label:"Curso"},{k:"polo",label:"Polo"},F.local,fx(F.paginas,{label:"Páginas usadas"}),fx(F.url,{hint:"Já preenchido com o endereço do acervo"}),F.acesso],
  ex:{autores:"Silva, João",titulo:"O discipulado na igreja local",subtitulo:"uma leitura wesleyana",ano:"2024",curso:"Curso Ministerial Teológico",polo:"Polo Cascadura",local:"Rio de Janeiro",url:ACERVO,acesso:"__today"},demo:1,
  build:function(v){return {ref:join(endDot(fmtAuthors(v.autores)||miss("Autor"))," ",tit(v.titulo,v.subtitulo),". ",req(v.ano,"ano"),". Artigo (",esc(t(v.curso)||"Curso Ministerial Teológico"),") – Instituto Wesleyano de Educação",t(v.polo)?", "+esc(t(v.polo)):"",", ",req(v.local,"Local"),", ",req(v.ano,"ano"),". ",pags(v.paginas),online(v.url,v.acesso)),who:citeAuthors(v.autores),yr:t(v.ano)};},
- tips:["Os artigos aprovados de 2019 a 2025 estão no <a href=\"acervo.html\">acervo</a>: confira lá o título e o ano exatos.","Citar trabalhos de turmas anteriores mostra diálogo com a pesquisa do próprio instituto."]},
+ tips:["Os artigos aprovados de 2019 a 2026 estão no <a href=\"acervo.html\">acervo</a>: confira lá o título e o ano exatos.","Citar trabalhos de turmas anteriores mostra diálogo com a pesquisa do próprio instituto."]},
 
 {id:"evento",cat:"academicos",ic:"E",name:"Trabalho em evento (anais)",desc:"Trabalho apresentado em congresso, simpósio ou seminário e publicado nos anais.",kw:"congresso simpósio seminário anais resumo jornada",
  ess:["Autor","Título do trabalho","In: NOME DO EVENTO","Número, ano e local do evento","Anais","Local","Editora","Ano","Páginas"],
