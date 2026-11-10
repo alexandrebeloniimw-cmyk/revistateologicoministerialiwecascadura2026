@@ -284,6 +284,8 @@
   .mono{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;color:#fff;font-weight:700;font-size:15px}
   .prof b{display:block;font-weight:600;font-size:15.5px;line-height:1.25}
   .prof small{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--muted);margin-top:3px}
+  .prof[data-or] small{color:var(--blue);font-weight:600}
+  .prof[data-or]:hover small{color:var(--red)}
   .prof small i{display:block;height:5px;border-radius:3px;background:var(--red);opacity:.75}
   @media (max-width:1000px){.board{grid-template-columns:repeat(2,minmax(0,1fr))}}
   @media (max-width:600px){.team{padding:64px 0}.board{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.person.lead{grid-column:span 2;flex-direction:row;align-items:center}.faculty{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.prof{grid-template-columns:1fr;gap:8px;padding:12px}.mono{width:36px;height:36px;font-size:13px}.prof b{font-size:14.5px}.prof small{white-space:nowrap}.prof small i{max-width:24px}.person{padding:16px 14px}.person .ph{width:60px;height:60px;font-size:21px}.person .nm{font-size:15px}}
@@ -745,9 +747,9 @@ $("board").innerHTML=BOARD.map((p,i)=>`<article class="person${p.lead?" lead":""
 const orCount=n=>n?ARTIGOS.filter(x=>x.o===n||x.co===n).length:0;
 const maxOr=Math.max(...FACULTY.map(f=>orCount(f[1])));
 $("faculty").innerHTML=FACULTY.map(([shown,full],i)=>{const c=orCount(full);
-  return `<li><button class="prof" ${c?`data-or="${esc(full)}"`:"disabled"} aria-label="${esc(shown)}${c?`: ${c} orientações – ver artigos`:""}">
+  return `<li><button class="prof" ${c?`data-or="${esc(full)}"`:"disabled"} aria-label="${esc(shown)}${c?" – ver artigos orientados":""}">
     <span class="mono" style="background:${TONES[i%3]}">${initials(shown)}</span>
-    <span><b>${esc(shown)}</b><small>${c?`<i style="width:${Math.max(6,Math.round(c/maxOr*60))}px"></i>${c} ${c>1?"orientações":"orientação"}`:"Professor"}</small></span></button></li>`}).join("");
+    <span><b>${esc(shown)}</b><small>${c?"Ver artigos orientados →":"Professor"}</small></span></button></li>`}).join("");
 $("facCount").textContent=FACULTY.length+" professores";
 $("faculty").addEventListener("click",e=>{const b=e.target.closest(".prof[data-or]");if(!b)return;
   $("orient").value=b.dataset.or;$("tema").value="";$("q").value="";setYear("todos",true);$("acervo").scrollIntoView({behavior:"smooth"})});
