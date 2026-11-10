@@ -160,7 +160,7 @@ footer{border-top:1px solid var(--line);padding-top:20px;margin-top:40px;color:v
   <div class="tools">
     <label class="search">
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
-      <input id="q" type="search" placeholder="Buscar: livro, Bíblia, Instagram, dicionário…" aria-label="Buscar tipo de documento" autocomplete="off">
+      <input id="q" type="search" placeholder="Buscar: livro, Bíblia, filme, podcast, TCC…" aria-label="Buscar tipo de documento" autocomplete="off">
     </label>
     <div class="chips" id="chips" role="group" aria-label="Filtrar por categoria"></div>
     <p class="count" id="count" aria-live="polite"></p>
@@ -216,7 +216,10 @@ function t(s){return String(s==null?"":s).trim();}
 function miss(label){return '<span class="miss">['+esc(label)+']</span>';}
 function req(v,label){return t(v)?esc(t(v)):miss(label);}
 function endDot(s){s=s.replace(/\s+$/,"");return /[.?!]$/.test(s.replace(/<[^>]+>/g,""))?s:s+".";}
-function upFirstWord(s){s=t(s);var i=s.indexOf(" ");return i<0?s.toUpperCase():s.slice(0,i).toUpperCase()+s.slice(i);}
+function shortW(w){return w.replace(/[^\wÀ-ÿ]/g,"").length<=2||/^(uma|uns|umas)$/i.test(w);}
+function upFirstWord(s){ // 1ª palavra em maiúsculas; artigo ou monossílabo leva junto a palavra seguinte
+  var ws=t(s).split(/\s+/),n=1;if(!ws[0])return "";while(n<ws.length&&n<3&&shortW(ws[n-1]))n++;
+  return ws.slice(0,n).join(" ").toUpperCase()+(ws.length>n?" "+ws.slice(n).join(" "):"");}
 function dataBR(iso){ // 2026-11-09 -> 9 nov. 2026
   if(!iso)return "";var p=iso.split("-");if(p.length!==3)return esc(iso);
   return parseInt(p[2],10)+" "+MESES[parseInt(p[1],10)-1]+" "+p[0];
@@ -227,15 +230,19 @@ function yearOf(s){var m=String(s||"").match(/(1[5-9]|20)\d{2}/);return m?m[0]:"
 /* Autores: um por linha, "Sobrenome, Prenome". Sem vírgula = entidade. */
 function lines(v){return String(v||"").split(/\n|;/).map(t).filter(Boolean);}
 function fmtAuthor(a){var i=a.indexOf(",");if(i<0)return esc(a.toUpperCase());return esc(a.slice(0,i).trim().toUpperCase())+", "+esc(a.slice(i+1).trim());}
-function fmtAuthors(v,role){var L=lines(v);if(!L.length)return "";var s=L.map(fmtAuthor).join("; ");return role?s+" ("+role+")":s;}
+function isEtAl(a){return /^et\.? al\.?$/i.test(a);}
+function fmtAuthors(v,role){var L=lines(v);if(!L.length)return "";var ea=L.some(isEtAl);L=L.filter(function(a){return !isEtAl(a);});var s=L.map(fmtAuthor).join("; ")+(ea?" <i>et al.</i>":"");return role?s+" ("+role+")":s;}
+function citeEnt(v){var a=lines(v).filter(function(x){return !isEtAl(x);})[0]||"";if(a.indexOf(",")>-1)return citeAuthors(v);return a.split(/\.\s/)[0].replace(/\.$/,"").trim();}
+function natName(a){var i=a.indexOf(",");return i<0?a:a.slice(i+1).trim()+" "+a.slice(0,i).trim();}
+function natList(v){var L=lines(v).filter(function(a){return !isEtAl(a);}).map(natName).map(esc);if(L.length<2)return L.join("");return L.slice(0,-1).join(", ")+" e "+L[L.length-1];}
 function citeName(a){var i=a.indexOf(",");return i<0?a:a.slice(0,i).trim();}
 function citeAuthors(v){
-  var L=lines(v).map(citeName);if(!L.length)return "";
+  var all=lines(v),ea=all.some(isEtAl),L=all.filter(function(a){return !isEtAl(a);}).map(citeName);if(!L.length)return "";if(ea)return L[0]+" et al.";
   if(L.length===1)return L[0];if(L.length===2)return L[0]+" e "+L[1];if(L.length===3)return L[0]+", "+L[1]+" e "+L[2];
   return L[0]+" et al.";
 }
 function titleCase1(w){w=w.toLowerCase();return w.charAt(0).toUpperCase()+w.slice(1);}
-function citeTitle(title){var w=t(title).split(/\s+/)[0]||"";return titleCase1(w)+" [...]";}
+function citeTitle(title){var ws=t(title).split(/\s+/),n=1;if(!ws[0])return "Título [...]";while(n<ws.length&&n<3&&shortW(ws[n-1]))n++;return titleCase1(ws[0])+(n>1?" "+ws.slice(1,n).join(" ").toLowerCase():"")+" [...]";}
 
 function tit(v,sub){var s=req(v,"Título");return "<b>"+s+"</b>"+(t(sub)?": "+esc(t(sub)):"");}
 function ed(v){v=t(v);if(!v)return "";return /ed\.?$/i.test(v)?esc(v)+" ":esc(v.replace(/[ªa.]+$/,""))+". ed. ";}
@@ -248,14 +255,16 @@ function pub(local,editora,ano){
 }
 function pags(v){v=t(v);if(!v)return "";return /^p\./.test(v)?esc(v)+".":"p. "+esc(v)+".";}
 function online(url,acc){url=t(url);if(!url)return "";return " Disponível em: "+esc(url)+". Acesso em: "+(acc?dataBR(acc):miss("data de acesso"))+".";}
-function join(){return Array.prototype.join.call(arguments,"").replace(/\s+/g," ").replace(/\s+\./g,".").replace(/([^.])\.\.(?!\.)/g,"$1.").trim();}
+function dur(sup,d){sup=t(sup);d=t(d);if(!sup&&!d)return "";return esc(sup||"1 vídeo")+(d?" ("+esc(d)+")":"")+". ";}
+function upT(v,label){return t(v)?esc(upFirstWord(v)):miss(label||"TÍTULO");}
+function join(){return Array.prototype.join.call(arguments,"").replace(/\s+/g," ").replace(/\s+\./g,".").replace(/([^.])\.\.(?!\.)/g,"$1.").replace(/([?!])((?:<\/[bi]>)?)\./g,"$1$2").trim();}
 
 /* ---------- Tipos de documento ---------- */
-var CATS=[["livros","Livros e partes"],["biblia","Bíblia e dicionários"],["academicos","Periódicos e acadêmicos"],["internet","Internet e redes"],["documentos","Documentos"]];
+var CATS=[["livros","Livros e partes"],["biblia","Bíblia e dicionários"],["academicos","Periódicos e acadêmicos"],["internet","Internet e redes"],["midia","Áudio, vídeo e arte"],["documentos","Documentos"]];
 var ACERVO="https://alexandrebeloniimw-cmyk.github.io/revistateologicoministerialiwecascadura2026/acervo.html";
 
 var F={ // campos reutilizáveis
-  autores:{k:"autores",label:"Autor(es)",type:"authors",hint:"Um por linha: Sobrenome, Prenome. Instituição: escreva o nome sem vírgula.",w:1},
+  autores:{k:"autores",label:"Autor(es)",type:"authors",hint:"Um por linha: Sobrenome, Prenome. Instituição: escreva o nome sem vírgula. Mais de três: o primeiro e, na linha de baixo, et al.",w:1},
   titulo:{k:"titulo",label:"Título",w:1},
   subtitulo:{k:"subtitulo",label:"Subtítulo",hint:"Opcional. Sai sem negrito, depois de dois-pontos."},
   tradutor:{k:"tradutor",label:"Tradutor(a)",hint:"Opcional"},
@@ -342,6 +351,14 @@ var TYPES=[
   return {ref:join(endDot(fmtAuthors(v.autores)||miss("Autor"))," ",tit(v.titulo,v.subtitulo),". ",req(v.ano,"ano"),". ",t(v.folhas)?esc(t(v.folhas))+" f. ":"",grau," – ",req(v.inst,"Instituição"),", ",req(v.local,"Local"),", ",req(v.ano,"ano"),".",online(v.url,v.acesso)),who:citeAuthors(v.autores),yr:t(v.ano)};},
  tips:["O ano aparece duas vezes: o do depósito, depois do título, e o da defesa, no fim.","Trabalhos em repositório institucional levam o link e a data de acesso."]},
 
+{id:"tcc",cat:"academicos",ic:"TCC",name:"Trabalho de Conclusão de Curso",desc:"TCC de graduação (bacharelado ou licenciatura) defendido em faculdade ou universidade.",kw:"tcc monografia graduação bacharelado licenciatura conclusão de curso repositório lume",
+ ess:["Autor","Título","Ano","Tipo e grau","Vinculação acadêmica","Local","Ano da defesa"],
+ model:"SOBRENOME, Prenome. <b>Título</b>: subtítulo. Ano. Trabalho de Conclusão de Curso (Bacharelado em Curso) – Faculdade, Universidade, Local, ano.",
+ fields:[F.autores,F.titulo,F.subtitulo,F.ano,{k:"grau",label:"Grau",type:"select",opts:["Bacharelado","Licenciatura","Graduação","Tecnólogo"]},{k:"curso",label:"Curso",hint:"Ex.: Teologia"},{k:"inst",label:"Vinculação acadêmica",hint:"Unidade, Universidade. Ex.: Faculdade de Teologia, Universidade X",w:1},F.local,{k:"folhas",label:"Nº de folhas",hint:"Opcional"},F.url,F.acesso],
+ ex:{autores:"Barbosa, Agnes Borchardt",titulo:"Da roça à mesa",subtitulo:"produção de alimentos saudáveis a partir de uma alternativa sustentável de comercialização: o caso da Feira agroecológica ARPA-SUL no município de Canguçu, RS",ano:"2017",grau:"Bacharelado",curso:"Desenvolvimento Rural",inst:"Faculdade de Ciências Econômicas, Universidade Federal do Rio Grande do Sul",local:"Porto Alegre",url:"https://lume.ufrgs.br/handle/10183/179951",acesso:"__today"},
+ build:function(v){return {ref:join(endDot(fmtAuthors(v.autores)||miss("Autor"))," ",tit(v.titulo,v.subtitulo),". ",req(v.ano,"ano"),". ",t(v.folhas)?esc(t(v.folhas))+" f. ":"","Trabalho de Conclusão de Curso (",esc(t(v.grau)||"Bacharelado"),t(v.curso)?" em "+esc(t(v.curso)):"",") – ",req(v.inst,"Vinculação acadêmica"),", ",req(v.local,"Local"),", ",req(v.ano,"ano"),".",online(v.url,v.acesso)),who:citeAuthors(v.autores),yr:t(v.ano)};},
+ tips:["O ano aparece duas vezes: depois do título e no fim, depois do local.","Para os artigos aprovados no IWE, use o tipo <a href=\"#acervo\">Artigo do acervo IWE</a>.","Mestrado, doutorado e especialização ficam no tipo <a href=\"#tese\">Tese, dissertação ou monografia</a>."]},
+
 {id:"acervo",cat:"academicos",ic:"IWE",name:"Artigo do acervo IWE (TCC)",desc:"Artigo Teológico Ministerial aprovado, disponível no acervo do Polo Cascadura.",kw:"tcc artigo teológico ministerial instituto wesleyano cascadura acervo colega",
  ess:["Autor","Título","Ano","Tipo e curso","Instituto e polo","Local","Link do acervo"],
  model:"SOBRENOME, Prenome. <b>Título</b>: subtítulo. Ano. Artigo (Curso Ministerial Teológico) – Instituto Wesleyano de Educação, Polo Cascadura, Rio de Janeiro, ano.",
@@ -350,13 +367,14 @@ var TYPES=[
  build:function(v){return {ref:join(endDot(fmtAuthors(v.autores)||miss("Autor"))," ",tit(v.titulo,v.subtitulo),". ",req(v.ano,"ano"),". Artigo (",esc(t(v.curso)||"Curso Ministerial Teológico"),") – Instituto Wesleyano de Educação",t(v.polo)?", "+esc(t(v.polo)):"",", ",req(v.local,"Local"),", ",req(v.ano,"ano"),". ",pags(v.paginas),online(v.url,v.acesso)),who:citeAuthors(v.autores),yr:t(v.ano)};},
  tips:["Os artigos aprovados de 2019 a 2026 estão no <a href=\"acervo.html\">acervo</a>: confira lá o título e o ano exatos.","Citar trabalhos de turmas anteriores mostra diálogo com a pesquisa do próprio instituto."]},
 
-{id:"evento",cat:"academicos",ic:"E",name:"Trabalho em evento (anais)",desc:"Trabalho apresentado em congresso, simpósio ou seminário e publicado nos anais.",kw:"congresso simpósio seminário anais resumo jornada",
- ess:["Autor","Título do trabalho","In: NOME DO EVENTO","Número, ano e local do evento","Anais","Local","Editora","Ano","Páginas"],
+{id:"evento",cat:"academicos",ic:"E",name:"Trabalho publicado em evento (anais)",desc:"Trabalho apresentado em congresso, simpósio, seminário ou jornada e publicado nos anais.",kw:"congresso simpósio seminário anais resumo jornada conferência evento workshop",
+ ess:["Autor","Título do trabalho","In: NOME DO EVENTO","Número, ano e local do evento","Título dos anais","Local","Editora","Ano","Páginas"],
  model:"SOBRENOME, Prenome. Título do trabalho. In: NOME DO EVENTO, n., ano, Local. <b>Anais</b> [...]. Local: Editora, ano. p. x-y.",
- fields:[F.autores,fx(F.titulo,{label:"Título do trabalho"}),{k:"evento",label:"Nome do evento",w:1},{k:"num",label:"Número do evento",hint:"Ex.: 5"},{k:"anoEv",label:"Ano do evento"},{k:"localEv",label:"Cidade do evento"},{k:"pubt",label:"Publicação",type:"select",opts:["Anais","Resumos","Caderno de resumos"]},fx(F.local,{label:"Local da publicação"}),F.editora,fx(F.ano,{label:"Ano da publicação"}),F.paginas,F.url,F.acesso],
- ex:{autores:"Pereira, Lucas",titulo:"A espiritualidade wesleyana e o cuidado com os pobres",evento:"Congresso de Teologia Wesleyana",num:"5",anoEv:"2023",localEv:"Rio de Janeiro",pubt:"Anais",local:"Rio de Janeiro",editora:"Editora Exemplo",ano:"2023",paginas:"112-120"},demo:1,
- build:function(v){return {ref:join(endDot(fmtAuthors(v.autores)||miss("Autor"))," ",req(v.titulo,"Título do trabalho"),". <i>In</i>: ",t(v.evento)?esc(t(v.evento).toUpperCase()):miss("EVENTO"),t(v.num)?", "+esc(t(v.num).replace(/\.$/,""))+".":"",", ",req(v.anoEv,"ano"),", ",req(v.localEv,"cidade"),". <b>",esc(t(v.pubt)||"Anais"),"</b> [...]. ",pub(v.local,v.editora,v.ano),pags(v.paginas),online(v.url,v.acesso)),who:citeAuthors(v.autores),yr:t(v.ano)||t(v.anoEv)};},
- tips:["O nome do evento vai todo em maiúsculas; o negrito fica na palavra Anais.","O [...] substitui o restante do título dos anais."]},
+ fields:[F.autores,fx(F.titulo,{label:"Título do trabalho"}),{k:"evento",label:"Nome do evento",w:1},{k:"num",label:"Número do evento",hint:"Ex.: 7"},{k:"anoEv",label:"Ano do evento"},{k:"localEv",label:"Cidade do evento"},{k:"pubt",label:"Publicação",type:"select",opts:["Anais","Resumos","Caderno de resumos"]},{k:"anaisT",label:"Título completo dos anais",hint:"Opcional. Vazio = Anais [...]",w:1},fx(F.local,{label:"Local da publicação"}),F.editora,fx(F.ano,{label:"Ano da publicação"}),F.paginas,F.url,F.acesso],
+ ex:{autores:"Damasceno, André Luiz de B.\net al.",titulo:"Cacuriá: uma ferramenta de autoria para criação de objetos de aprendizagem",evento:"Congresso Brasileiro de Informática na Educação",num:"7",anoEv:"2014",localEv:"Dourados",pubt:"Anais",anaisT:"Anais dos Workshops do CBIE",local:"Dourados",editora:"Sociedade Brasileira de Computação",ano:"2014",paginas:"76-83",url:"http://www.br-ie.org/pub/index.php/wcbie/article/view/3174",acesso:"__today"},
+ build:function(v){var an=t(v.anaisT)?"<b>"+esc(t(v.anaisT))+"</b>. ":"<b>"+esc(t(v.pubt)||"Anais")+"</b> [...]. ";
+  return {ref:join(endDot(fmtAuthors(v.autores)||miss("Autor"))," ",req(v.titulo,"Título do trabalho"),". <i>In</i>: ",t(v.evento)?esc(t(v.evento).toUpperCase()):miss("EVENTO"),t(v.num)?", "+esc(t(v.num).replace(/\.$/,""))+".":"",", ",req(v.anoEv,"ano"),", ",req(v.localEv,"cidade"),". ",an,pub(v.local,v.editora,v.ano),pags(v.paginas),online(v.url,v.acesso)),who:citeAuthors(v.autores),yr:t(v.ano)||t(v.anoEv)};},
+ tips:["O nome do evento vai todo em maiúsculas; o negrito fica no título dos anais (ou na palavra Anais, seguida de [...]).","Se o ano e a cidade do evento forem diferentes dos da publicação, preencha cada campo com o seu dado.","Com mais de três autores, escreva o primeiro e, na linha de baixo, et al."]},
 
 {id:"site",cat:"internet",ic:"W",name:"Página de site",desc:"Texto ou página publicada em site institucional, de igreja, de ministério ou blog.",kw:"internet web blog portal página on-line link",
  ess:["Autor","Título da página","Local","Data","Link","Data de acesso"],
@@ -384,6 +402,23 @@ var TYPES=[
   return {ref:join(endDot(fmtAuthors(v.autores)||miss("Autor"))," ",tit(v.titulo),". ",t(v.local)?esc(t(v.local)):"[S. l.]",", ",v.data?dataBR(v.data):miss("data do post"),". ",esc(t(v.rede)||"Instagram"),": ",pf?esc(pf):miss("@perfil"),".",online(v.url,v.acesso)||" "+miss("link")),who:citeAuthors(v.autores),yr:v.data?v.data.slice(0,4):""};},
  tips:["Sem título, use as primeiras palavras da legenda.","Serve também para Facebook, X (Twitter) e TikTok: troque a rede no campo acima.","Use redes sociais com moderação: como dado da pesquisa, e não como fundamentação teórica."]},
 
+{id:"twitter",cat:"internet",ic:"𝕏",name:"Publicação no X (Twitter)",desc:"Post (tuíte) publicado em perfil do X, antigo Twitter.",kw:"twitter x tuíte tweet post rede social perfil @",
+ ess:["Autor ou perfil","Texto inicial do post","Local","Data","@perfil","Link","Data de acesso"],
+ model:"SOBRENOME, Prenome (ou INSTITUIÇÃO). <b>Texto inicial do post</b>. Local, dia mês ano. Twitter: @perfil. Disponível em: link. Acesso em: data.",
+ fields:[fx(F.autores,{label:"Autor (pessoa ou instituição)"}),fx(F.titulo,{label:"Texto inicial do post"}),F.local,{k:"data",label:"Data do post",type:"date"},{k:"perfil",label:"Perfil",hint:"Ex.: @iwecascadura"},{k:"rede",label:"Nome da rede",type:"select",opts:["Twitter","X"],optl:["Twitter (posts até jul. 2023)","X (posts a partir de jul. 2023)"]},fx(F.url,{hint:""}),F.acesso],
+ ex:{autores:"Silva, João",titulo:"A oração sustenta a missão da igreja",local:"Rio de Janeiro",data:"2023-03-10",perfil:"@joaosilva.exemplo",rede:"Twitter",url:"https://twitter.com/joaosilva.exemplo/status/0000",acesso:"__today"},demo:1,
+ build:function(v){var pf=t(v.perfil);if(pf&&pf.charAt(0)!=="@")pf="@"+pf;
+  return {ref:join(endDot(fmtAuthors(v.autores)||miss("Autor"))," ",tit(v.titulo),". ",t(v.local)?esc(t(v.local)):"[S. l.]",", ",v.data?dataBR(v.data):miss("data do post"),". ",esc(t(v.rede)||"Twitter"),": ",pf?esc(pf):miss("@perfil"),".",online(v.url,v.acesso)||" "+miss("link")),who:citeAuthors(v.autores),yr:v.data?v.data.slice(0,4):""};},
+ tips:["Post sem título: use as primeiras palavras do texto.","O nome da rede segue a data do post: Twitter até julho de 2023, X depois disso.","Como dado da pesquisa, e não como fundamentação teórica."]},
+
+{id:"forum",cat:"internet",ic:"Fo",name:"Mensagem em fórum on-line",desc:"Pergunta, resposta ou comentário publicado em fórum ou comunidade de discussão.",kw:"fórum forum comunidade discussão dúvida resposta comentário reddit techtudo",
+ ess:["Autor (nome ou apelido)","Título da mensagem","Local","Ano","Tipo de envio","Link","Data de acesso"],
+ model:"AUTOR. <b>Título da mensagem</b>. Local, ano. Tipo de envio. Disponível em: link. Acesso em: data.",
+ fields:[fx(F.autores,{label:"Autor",hint:"Nome (Sobrenome, Prenome) ou apelido do usuário, sem vírgula."}),fx(F.titulo,{label:"Título da mensagem"}),F.local,{k:"data",label:"Ano ou data",hint:"Ex.: 2019"},{k:"tipo",label:"Tipo de envio",hint:"Ex.: Dúvida, Resposta, Comentário"},fx(F.url,{hint:""}),F.acesso],
+ ex:{autores:"Thaaai",titulo:"Tem como juntar duas conversas do whats?",local:"São Paulo",data:"2019",tipo:"Dúvida",url:"https://forum.techtudo.com.br/perguntas/303005/tem-como-juntar-duas-conversas-do-whats",acesso:"__today"},
+ build:function(v){return {ref:join(endDot(fmtAuthors(v.autores)||miss("Autor"))," ",tit(v.titulo),". ",t(v.local)?esc(t(v.local)):"[S. l.]",", ",t(v.data)?esc(t(v.data)):"[s. d.]",". ",t(v.tipo)?esc(t(v.tipo))+".":"",online(v.url,v.acesso)||" "+miss("link")),who:citeAuthors(v.autores),yr:yearOf(v.data)||"[s. d.]"};},
+ tips:["Apelido de usuário entra como está, todo em maiúsculas: THAAAI.","Fórum não é fonte teórica: use só como dado da pesquisa, por exemplo para mostrar o que as pessoas perguntam sobre um tema."]},
+
 {id:"jornal",cat:"internet",ic:"J",name:"Notícia de jornal ou portal",desc:"Matéria de jornal impresso ou portal de notícias on-line.",kw:"notícia jornal reportagem portal g1 folha matéria",
  ess:["Autor","Título da matéria","Nome do jornal","Local","Data","Caderno ou seção","Link"],
  model:"SOBRENOME, Prenome. Título da matéria. <b>Nome do Jornal</b>, Local, dia mês ano. Caderno, p. x. Disponível em: link. Acesso em: data.",
@@ -393,6 +428,59 @@ var TYPES=[
   return {ref:join(head,"<b>",req(v.jornal,"Jornal"),"</b>, ",req(v.local,"Local"),", ",v.data?dataBR(v.data):miss("data"),". ",t(v.caderno)?esc(t(v.caderno))+(t(v.paginas)?", ":". "):"",t(v.paginas)?pags(v.paginas):"",online(v.url,v.acesso)),who:a?citeAuthors(v.autores):citeTitle(v.titulo),yr:v.data?v.data.slice(0,4):""};},
  tips:["Matéria sem autor entra pelo título, com a primeira palavra em maiúsculas.","O negrito vai no nome do jornal."]},
 
+{id:"filme",cat:"midia",ic:"F",name:"Filme",desc:"Filme ou documentário em cinema, DVD ou plataforma de streaming.",kw:"filme cinema documentário dvd streaming netflix direção longa",
+ ess:["Título","Direção","Local ou país","Produtora ou distribuidora","Ano","Suporte","Duração"],
+ model:"TÍTULO do filme. Direção: Nome. País: Produtora, ano. 1 vídeo (duração).",
+ fields:[F.titulo,F.subtitulo,{k:"dir",label:"Direção",hint:"Nome na ordem direta. Ex.: Victor Fleming"},fx(F.local,{label:"Local ou país"}),fx(F.editora,{label:"Produtora ou distribuidora"}),F.ano,{k:"sup",label:"Suporte",hint:"Ex.: 1 vídeo; 1 DVD"},{k:"dur",label:"Duração",hint:"Ex.: 3h12min"},F.url,F.acesso],
+ ex:{titulo:"E o vento levou",dir:"Victor Fleming",local:"Estados Unidos",editora:"Selznick International Pictures",ano:"1940",sup:"1 vídeo",dur:"3h12min"},
+ build:function(v){return {ref:join(upT(v.titulo),t(v.subtitulo)?": "+esc(t(v.subtitulo)):"",". ",t(v.dir)?"Direção: "+esc(t(v.dir))+". ":miss("Direção")+" ",pub(v.local,v.editora,v.ano),dur(v.sup,v.dur),online(v.url,v.acesso)),who:citeTitle(v.titulo),yr:t(v.ano)};},
+ tips:["O filme entra pelo título: a primeira palavra em maiúsculas (se for artigo ou monossílabo, junto com a seguinte).","Na chamada, use as primeiras palavras do título com [...]: (E o vento [...], 1940).","Visto em plataforma de streaming? Preencha o link e a data de acesso."]},
+
+{id:"tv",cat:"midia",ic:"TV",name:"Transmissão de televisão",desc:"Programa, reportagem ou episódio exibido na TV, ao vivo ou gravado.",kw:"televisão tv programa reportagem episódio emissora telejornal globoplay",
+ ess:["Título do programa","Episódio (se houver)","Apresentador ou direção","Local","Emissora","Data","Duração"],
+ model:"TÍTULO do programa. Apresentado por Nome. Local: Emissora, dia mês ano. Programa de TV (duração).",
+ fields:[fx(F.titulo,{k:"prog",label:"Título do programa"}),{k:"epis",label:"Episódio ou reportagem",hint:"Opcional. Vira a entrada da referência.",w:1},{k:"apres",label:"Apresentado por",hint:"Nome na ordem direta"},F.local,fx(F.editora,{label:"Emissora"}),{k:"data",label:"Data de exibição",type:"date"},{k:"sup",label:"Descrição",hint:"Ex.: Programa de TV"},{k:"dur",label:"Duração",hint:"Ex.: 28 min"},F.url,F.acesso],
+ ex:{prog:"Caminhos da fé",apres:"Maria Souza",local:"Rio de Janeiro",editora:"TV Exemplo",data:"2025-04-20",sup:"Programa de TV",dur:"28 min"},demo:1,
+ build:function(v){var head=t(v.epis)?upT(v.epis)+". <i>In</i>: "+upT(v.prog,"PROGRAMA")+". ":upT(v.prog,"PROGRAMA")+". ";
+  return {ref:join(head,t(v.apres)?"Apresentado por "+esc(t(v.apres))+". ":"",pub(v.local,v.editora,v.data?dataBR(v.data):""),dur(t(v.sup)||"Programa de TV",v.dur),online(v.url,v.acesso)),who:citeTitle(t(v.epis)||v.prog),yr:v.data?v.data.slice(0,4):""};},
+ tips:["Culto ou pregação transmitida na TV segue este modelo; se foi no YouTube, use o tipo <a href=\"#youtube\">Vídeo do YouTube</a>.","Assistiu pelo site da emissora? Acrescente o link e a data de acesso."]},
+
+{id:"podcast",cat:"midia",ic:"P",name:"Podcast",desc:"Episódio de podcast em plataforma de áudio ou site.",kw:"podcast episódio áudio spotify deezer apresentado programa",
+ ess:["Título do episódio","Apresentador","Local","Produtora","Ano","Tipo (Podcast)","Duração","Link"],
+ model:"TÍTULO do episódio. Apresentado por Nome. Local: Produtora, ano. Podcast. 1 áudio (duração). Disponível em: link. Acesso em: data.",
+ fields:[fx(F.titulo,{label:"Título do episódio"}),{k:"apres",label:"Apresentado por",hint:"Nome na ordem direta"},F.local,fx(F.editora,{label:"Produtora ou rádio"}),F.ano,{k:"dur",label:"Duração",hint:"Ex.: 5 min"},F.url,F.acesso],
+ ex:{titulo:"É comum errar o futuro do subjuntivo do verbo “ver”",apres:"Pasquale Cipro Neto",local:"São Paulo",editora:"CBN",ano:"2019",dur:"5 min",url:"https://cbn.globoradio.globo.com/servicos/podcast/PODCAST.htm?podcast=331/nossa-lingua-de-todo-dia",acesso:"__today"},
+ build:function(v){return {ref:join(upT(v.titulo),". ",t(v.apres)?"Apresentado por "+esc(t(v.apres))+". ":"",pub(v.local,v.editora,v.ano),"Podcast. ",dur("1 áudio",v.dur),online(v.url,v.acesso)||" "+miss("link")),who:citeTitle(v.titulo),yr:t(v.ano)};},
+ tips:["A palavra Podcast sempre aparece antes da descrição (1 áudio).","Na citação direta, indique o minuto no lugar da página: (É comum [...], 2019, 3 min)."]},
+
+{id:"musica",cat:"midia",ic:"♪",name:"Música (áudio ou partitura)",desc:"Canção, hino ou louvor gravado (CD, MP3, streaming) ou publicado em partitura.",kw:"música canção hino louvor cd mp3 spotify gravação áudio partitura compositor intérprete hinário",
+ ess:["Título","Intérprete","Compositor","Local","Gravadora ou editora","Ano","Suporte"],
+ model:"Áudio: TÍTULO da música. Intérprete: Nome. Compositor: Nome. Local: Gravadora, ano. 1 CD (duração).<br>Partitura: SOBRENOME, Prenome. <b>Título</b>. Instrumento. Local: Editora, ano. 1 partitura.",
+ fields:[{k:"modo",label:"Formato",type:"select",opts:["audio","partitura"],optl:["Gravação (áudio)","Partitura"]},F.titulo,{k:"interp",label:"Intérprete",hint:"Só na gravação. Nome na ordem direta."},fx(F.autores,{label:"Compositor(es)",hint:"Um por linha: Sobrenome, Prenome."}),{k:"instr",label:"Instrumento ou formação",hint:"Só na partitura. Ex.: Para coro a quatro vozes"},F.local,fx(F.editora,{label:"Gravadora ou editora"}),F.ano,{k:"sup",label:"Suporte",hint:"Ex.: 1 CD, faixa 7; 1 arquivo MP3; 1 partitura"},{k:"dur",label:"Duração",hint:"Só na gravação. Ex.: 5 min"},F.url,F.acesso],
+ ex:{modo:"audio",titulo:"As rosas não falam",interp:"Beth Carvalho",autores:"Oliveira, Agenor de",local:"São Paulo",editora:"Philips",ano:"1976",sup:"1 arquivo",dur:"5 min"},
+ build:function(v){
+  if(t(v.modo)==="partitura")return {ref:join(endDot(fmtAuthors(v.autores)||miss("Compositor"))," ",tit(v.titulo),". ",t(v.instr)?endDot(esc(t(v.instr)))+" ":"",pub(v.local,v.editora,v.ano),esc(t(v.sup)||"1 partitura"),".",online(v.url,v.acesso)),who:citeAuthors(v.autores),yr:t(v.ano)};
+  var c=natList(v.autores);
+  return {ref:join(upT(v.titulo),". ",t(v.interp)?"Intérprete: "+esc(t(v.interp))+". ":"",c?"Compositor: "+c+". ":"",pub(v.local,v.editora,v.ano),dur(t(v.sup)||"1 CD",v.dur),online(v.url,v.acesso)),who:citeTitle(v.titulo),yr:t(v.ano)};},
+ tips:["A gravação entra pelo título; a partitura entra pelo compositor.","Letra de hino tirada de hinário impresso: use o tipo <a href=\"#livro\">Livro</a> (o hinário) com a página.","Música ouvida no streaming: preencha o link e a data de acesso."]},
+
+{id:"obraarte",cat:"midia",ic:"◫",name:"Obra de arte",desc:"Pintura, escultura, gravura ou fotografia artística, original ou reproduzida.",kw:"obra de arte pintura quadro escultura gravura vitral museu artista iconografia",
+ ess:["Artista","Título da obra","Data","Técnica e suporte","Dimensões","Acervo ou local"],
+ model:"SOBRENOME, Prenome. <b>Título da obra</b>. Ano. Técnica, dimensões. Acervo, local.",
+ fields:[fx(F.autores,{label:"Artista",hint:"Sobrenome, Prenome. Artista conhecido por um só nome: escreva sem vírgula."}),F.titulo,fx(F.ano,{label:"Data",hint:"Ex.: 1668 ou [ca. 1668]"}),{k:"tec",label:"Técnica e suporte",hint:"Ex.: Pintura, óleo sobre tela"},{k:"dim",label:"Dimensões",hint:"Ex.: 262 x 205 cm"},{k:"acervo",label:"Acervo ou local",hint:"Ex.: Museu Hermitage, São Petersburgo",w:1},F.url,F.acesso],
+ ex:{autores:"Rembrandt",titulo:"O retorno do filho pródigo",ano:"[ca. 1668]",tec:"Pintura, óleo sobre tela",dim:"262 x 205 cm",acervo:"Museu Hermitage, São Petersburgo"},
+ build:function(v){return {ref:join(endDot(fmtAuthors(v.autores)||miss("Artista"))," ",tit(v.titulo),". ",t(v.ano)?esc(t(v.ano)):"[s. d.]",". ",t(v.tec)?esc(t(v.tec))+(t(v.dim)?", "+esc(t(v.dim)):"")+". ":"",t(v.acervo)?endDot(esc(t(v.acervo))):"",online(v.url,v.acesso)),who:citeAuthors(v.autores),yr:yearOf(v.ano)||"[s. d.]"};},
+ tips:["Obra vista em site de museu: preencha o link e a data de acesso.","Útil para artigos sobre arte sacra, iconografia e liturgia."]},
+
+{id:"entrevista",cat:"midia",ic:"En",name:"Entrevista",desc:"Entrevista publicada ou gravada (vídeo, áudio, site ou instituição), referenciada pelo entrevistado.",kw:"entrevista entrevistado entrevistador depoimento conversa",
+ ess:["Entrevistado","Título da entrevista","Entrevistador","Local","Editora (se houver)","Data"],
+ model:"SOBRENOME, Prenome (entrevistado). <b>Título da entrevista</b>. Entrevistador: Nome. Local: Editora, ano.",
+ fields:[fx(F.autores,{label:"Entrevistado(a)"}),fx(F.titulo,{label:"Título da entrevista"}),{k:"entrev",label:"Entrevistador(es)",hint:"Nome na ordem direta",w:1},F.local,fx(F.editora,{hint:"Opcional"}),{k:"data",label:"Ano ou data",hint:"Ex.: 1991"},{k:"sup",label:"Descrição",hint:"Opcional. Ex.: 1 vídeo (35 min)"},F.url,F.acesso],
+ ex:{autores:"Cauduro, Flávio Vinicius",titulo:"Doutorado na Inglaterra",entrev:"Discentes do curso de Comunicação da FABICO",local:"Porto Alegre",editora:"UFRGS",data:"1991"},
+ build:function(v){var lp=t(v.editora)?pub(v.local,v.editora,v.data):(t(v.local)?esc(t(v.local)):"[S. l.]")+", "+(t(v.data)?esc(t(v.data)):"[s. d.]")+". ";
+  return {ref:join(endDot(fmtAuthors(v.autores)||miss("Entrevistado"))," ",tit(v.titulo),". ","Entrevistador: ",req(v.entrev,"Entrevistador"),". ",lp,t(v.sup)?endDot(esc(t(v.sup))):"",online(v.url,v.acesso)),who:citeAuthors(v.autores),yr:yearOf(v.data)||"[s. d.]"};},
+ tips:["Entrevista publicada em revista: use o tipo <a href=\"#periodico\">Artigo de revista</a> e acrescente, depois do título, Entrevista a Nome do entrevistador.","Entrevista que você mesmo fez na pesquisa de campo e não foi publicada não entra nas referências: indique (informação verbal) no texto e os dados em nota de rodapé (NBR 10520)."]},
+
 {id:"legislacao",cat:"documentos",ic:"§",name:"Legislação",desc:"Lei, decreto, resolução ou Constituição.",kw:"lei decreto resolução constituição planalto diário oficial",
  ess:["Jurisdição","Tipo e número","Data","Ementa","Dados da publicação","Link"],
  model:"BRASIL. Lei nº x, de dia de mês de ano. Ementa. Local: Órgão, ano. Disponível em: link. Acesso em: data.",
@@ -401,13 +489,55 @@ var TYPES=[
  build:function(v){var j=t(v.jur);return {ref:join(j?esc(j.toUpperCase()):miss("JURISDIÇÃO"),". ",req(v.lei,"Tipo e número"),", de ",req(v.dataExt,"data"),". ",t(v.ementa)?endDot(esc(t(v.ementa)))+" ":"",pub(v.local,v.orgao,v.ano),online(v.url,v.acesso)),who:j?j.split(/\s|\(/)[0].charAt(0).toUpperCase()+j.split(/\s|\(/)[0].slice(1).toLowerCase():"Brasil",yr:t(v.ano)};},
  tips:["Útil, por exemplo, para a Resolução CNS nº 510/2016 na pesquisa de campo.","A ementa é o resumo oficial que vem logo abaixo do número da lei."]},
 
+{id:"jurisprudencia",cat:"documentos",ic:"⚖",name:"Jurisprudência",desc:"Súmula, acórdão, sentença ou decisão de tribunal.",kw:"jurisprudência súmula acórdão sentença decisão tribunal stf stj relator",
+ ess:["Jurisdição e tribunal","Tipo e número","Ementa","Partes","Relator","Data","Dados da publicação"],
+ model:"BRASIL. Tribunal. Súmula nº x. Ementa. Relator: Nome, dia mês ano. Dados da publicação. Disponível em: link. Acesso em: data.",
+ fields:[{k:"jur",label:"Jurisdição e tribunal",hint:"Ex.: Brasil. Superior Tribunal de Justiça",w:1},{k:"doc",label:"Tipo e número",hint:"Ex.: Súmula nº 333; Recurso Especial nº 1.234.567"},{k:"ementa",label:"Ementa",type:"textarea",w:1},{k:"partes",label:"Partes envolvidas",hint:"Opcional. Ex.: Recorrente: Fulano. Recorrido: Beltrano",w:1},{k:"relator",label:"Relator(a)",hint:"Opcional. Ex.: Min. Nome Sobrenome"},{k:"data",label:"Data do julgamento",type:"date"},{k:"publ",label:"Dados da publicação",hint:"Opcional. Ex.: Diário da Justiça, Brasília, DF, 14 fev. 2007",w:1},F.url,F.acesso],
+ ex:{jur:"Brasil. Superior Tribunal de Justiça",doc:"Súmula nº 333",ementa:"Cabe mandado de segurança contra ato praticado em licitação promovida por sociedade de economia mista ou empresa pública",data:"2006-12-13",publ:"Diário da Justiça, Brasília, DF, 14 fev. 2007"},
+ build:function(v){var j=t(v.jur);var d=v.data?dataBR(v.data):"";
+  return {ref:join(j?esc(j.toUpperCase()):miss("JURISDIÇÃO"),". ",req(v.doc,"Tipo e número"),". ",t(v.ementa)?endDot(esc(t(v.ementa)))+" ":"",t(v.partes)?endDot(esc(t(v.partes)))+" ":"",t(v.relator)?"Relator: "+esc(t(v.relator))+(d?", "+d:"")+". ":(d?d+". ":miss("data")+" "),t(v.publ)?endDot(esc(t(v.publ))):"",online(v.url,v.acesso)),who:j?titleCase1(j.split(/[\s.(]/)[0]):"Brasil",yr:v.data?v.data.slice(0,4):""};},
+ tips:["A jurisdição e o tribunal vão em maiúsculas: BRASIL. SUPERIOR TRIBUNAL DE JUSTIÇA.","Súmulas não têm relator: deixe esse campo vazio."]},
+
+{id:"estatuto",cat:"documentos",ic:"Es",name:"Estatuto",desc:"Estatuto de instituição, igreja, convenção ou associação.",kw:"estatuto social igreja convenção associação instituição regimento aprovado",
+ ess:["Entidade","Título","Ementa ou aprovação","Local","Publicador","Ano"],
+ model:"NOME DA ENTIDADE. Estatuto. Dados da aprovação. Local: Publicador, ano. Disponível em: link. Acesso em: data.",
+ fields:[fx(F.autores,{label:"Entidade",hint:"Escreva o nome sem vírgula."}),fx(F.titulo,{hint:"Normalmente: Estatuto"}),{k:"ementa",label:"Ementa ou dados da aprovação",type:"textarea",w:1},F.local,fx(F.editora,{label:"Publicador"}),F.ano,F.url,F.acesso],
+ ex:{autores:"Universidade Federal do Rio Grande do Sul",titulo:"Estatuto",ementa:"Aprovado pelo Conselho Universitário em sessão de 23 de setembro de 1994 (Decisão nº 148/94) e publicado no Diário Oficial da União em 11 de janeiro de 1995",local:"Porto Alegre",editora:"UFRGS",ano:"1994",url:"http://www.ufrgs.br/ufrgs/a-ufrgs/estatuto-e-regimento",acesso:"__today"},
+ build:function(v){return {ref:join(endDot(fmtAuthors(v.autores)||miss("ENTIDADE"))," ",req(v.titulo,"Título"),". ",t(v.ementa)?endDot(esc(t(v.ementa)))+" ":"",pub(v.local,v.editora,v.ano),online(v.url,v.acesso)),who:citeAuthors(v.autores),yr:t(v.ano)||"[s. d.]"};},
+ tips:["Serve para o estatuto de igrejas, convenções e associações. Cânones e regimentos da igreja ficam em <a href=\"#eclesiastico\">Documento eclesiástico</a>.","Na chamada, o nome da entidade vai por extenso; a sigla pode vir depois: Universidade Federal do Rio Grande do Sul (1994)."]},
+
 {id:"eclesiastico",cat:"documentos",ic:"✝",name:"Documento eclesiástico",desc:"Cânones, regimentos, credos, atas, cartas pastorais e documentos de igreja.",kw:"cânones igreja metodista wesleyana regimento credo ata carta pastoral documento oficial",
  ess:["Instituição","Título","Edição","Local","Editora","Ano"],
  model:"NOME DA IGREJA. <b>Título do documento</b>: subtítulo. 2. ed. Local: Editora, ano. p. x-y.",
  fields:[fx(F.autores,{label:"Instituição autora",hint:"Escreva o nome sem vírgula."}),F.titulo,F.subtitulo,F.edicao,F.local,F.editora,F.ano,F.paginas,F.url,F.acesso],
  ex:{autores:"Igreja Metodista Wesleyana",titulo:"Cânones da Igreja Metodista Wesleyana"},
  build:function(v){return {ref:join(endDot(fmtAuthors(v.autores)||miss("INSTITUIÇÃO"))," ",tit(v.titulo,v.subtitulo),". ",ed(v.edicao),pub(v.local,v.editora,v.ano),pags(v.paginas),online(v.url,v.acesso)),who:citeAuthors(v.autores),yr:t(v.ano)||"[s. d.]"};},
- tips:["Preencha local, editora e ano com os dados da edição que você usou. Quando faltam, a referência mostra [S. l.], [s. n.] e [s. d.], como no exemplo.","Na chamada, o nome da instituição vai por extenso na primeira vez; a sigla pode vir depois."]}
+ tips:["Preencha local, editora e ano com os dados da edição que você usou. Quando faltam, a referência mostra [S. l.], [s. n.] e [s. d.], como no exemplo.","Na chamada, o nome da instituição vai por extenso na primeira vez; a sigla pode vir depois."]},
+
+{id:"documento",cat:"documentos",ic:"Do",name:"Documento (manual, cartilha, guia)",desc:"Manual, cartilha, guia, folheto ou outro documento publicado por órgão ou instituição.",kw:"documento manual cartilha guia folheto ministério órgão governo publicação institucional pdf",
+ ess:["Autor (pessoa ou órgão)","Título","Local","Editora","Data"],
+ model:"ÓRGÃO SUPERIOR. ÓRGÃO SUBORDINADO. <b>Título</b>. Local: Editora, ano. Disponível em: link. Acesso em: data.",
+ fields:[fx(F.autores,{hint:"Pessoa (Sobrenome, Prenome) ou órgão. Órgão subordinado: separe com ponto, como em Brasil. Ministério da Saúde."}),F.titulo,F.subtitulo,F.edicao,F.local,F.editora,F.ano,F.paginas,F.url,F.acesso],
+ ex:{autores:"Brasil. Ministério da Saúde",titulo:"Manual instrutivo do Melhor em Casa",local:"Brasília",editora:"Ministério da Saúde",ano:"2015",url:"http://189.28.128.100/dab/docs/geral/cartilha_melhor_em_casa.pdf",acesso:"__today"},
+ build:function(v){var a=fmtAuthors(v.autores);var head=a?endDot(a)+" "+tit(v.titulo,v.subtitulo)+". ":esc(upFirstWord(v.titulo||""))+(t(v.subtitulo)?": "+esc(t(v.subtitulo)):"")+". ";
+  return {ref:join(head,ed(v.edicao),pub(v.local,v.editora,v.ano),pags(v.paginas),online(v.url,v.acesso)),who:a?citeEnt(v.autores):citeTitle(v.titulo),yr:t(v.ano)||"[s. d.]"};},
+ tips:["Órgão do governo entra pela jurisdição: BRASIL. MINISTÉRIO DA SAÚDE. Na chamada: Brasil (2015).","Documento de igreja (cânones, credos, atas)? Use <a href=\"#eclesiastico\">Documento eclesiástico</a>."]},
+
+{id:"relatorio",cat:"documentos",ic:"Re",name:"Relatório",desc:"Relatório técnico, anual, de atividades ou de pesquisa de instituição, igreja ou missão.",kw:"relatório anual atividades técnico pesquisa missão gestão balanço prestação de contas",
+ ess:["Autor (pessoa ou instituição)","Título","Local","Editora ou instituição","Data"],
+ model:"INSTITUIÇÃO. ÓRGÃO SUBORDINADO. <b>Título do relatório</b>. Local: Instituição, ano.",
+ fields:[fx(F.autores,{hint:"Pessoa (Sobrenome, Prenome) ou instituição. Setor subordinado: separe com ponto."}),F.titulo,F.subtitulo,F.local,fx(F.editora,{label:"Editora ou instituição"}),F.ano,F.paginas,F.url,F.acesso],
+ ex:{autores:"Universidade Federal do Rio Grande do Sul. Pró-Reitoria de Extensão. Departamento de Difusão Cultural",titulo:"Relatório [da] Difusão Cultural 2015",local:"Porto Alegre",editora:"UFRGS",ano:"2015"},
+ build:function(v){return {ref:join(endDot(fmtAuthors(v.autores)||miss("Autor"))," ",tit(v.titulo,v.subtitulo),". ",pub(v.local,v.editora,v.ano),pags(v.paginas),online(v.url,v.acesso)),who:citeEnt(v.autores),yr:t(v.ano)||"[s. d.]"};},
+ tips:["Útil para relatórios de missões, de ação social da igreja ou de órgãos públicos usados na pesquisa.","Na chamada, use o primeiro nome da hierarquia: Universidade Federal do Rio Grande do Sul (2015)."]},
+
+{id:"mapa",cat:"documentos",ic:"⌖",name:"Mapa",desc:"Mapa, atlas ou carta geográfica, impresso ou on-line, inclusive mapas bíblicos.",kw:"mapa atlas carta geográfica escala cartografia mapas bíblicos terra santa",
+ ess:["Autor","Título do mapa","Local","Editora","Ano","Descrição física","Escala"],
+ model:"AUTOR. <b>Título do mapa</b>. Local: Editora, ano. 1 mapa. Escala 1:x.",
+ fields:[fx(F.autores,{hint:"Pessoa ou instituição. Órgão com local: Instituto Geográfico e Cartográfico (São Paulo)"}),fx(F.titulo,{label:"Título do mapa"}),F.subtitulo,F.local,F.editora,F.ano,{k:"desc",label:"Descrição física",hint:"Ex.: 1 mapa, color.; 1 atlas"},{k:"esc",label:"Escala",hint:"Ex.: 1:2.000. Vazio = Escala indeterminável"},F.url,F.acesso],
+ ex:{autores:"Instituto Geográfico e Cartográfico (São Paulo)",titulo:"Regiões de governo do Estado de São Paulo",local:"São Paulo",editora:"IGC",ano:"1994",desc:"1 atlas",esc:"1:2.000"},
+ build:function(v){var e=t(v.esc);return {ref:join(endDot(fmtAuthors(v.autores)||miss("Autor"))," ",tit(v.titulo,v.subtitulo),". ",pub(v.local,v.editora,v.ano),esc(t(v.desc)||"1 mapa"),". ",e?(/^escala/i.test(e)?esc(e):"Escala "+esc(e)):"Escala indeterminável",".",online(v.url,v.acesso)),who:citeEnt(v.autores),yr:t(v.ano)};},
+ tips:["Mapa avulso (de um livro ou de um site) entra aqui; o atlas bíblico inteiro também pode ser referenciado como <a href=\"#livro\">Livro</a>.","O nome do órgão vai em maiúsculas, com o local entre parênteses: INSTITUTO GEOGRÁFICO E CARTOGRÁFICO (SÃO PAULO)."]}
 ];
 
 /* ---------- Estado ---------- */
@@ -440,7 +570,7 @@ function cardHTML(T){
   var open=state.open===T.id;
   return '<article class="type'+(open?" open":"")+'" id="'+T.id+'">'+
     '<button class="type-h" aria-expanded="'+open+'" aria-controls="b-'+T.id+'" data-id="'+T.id+'">'+
-      '<span class="type-ic" aria-hidden="true">'+T.ic+'</span>'+
+      '<span class="type-ic" aria-hidden="true"'+(T.ic.length>2?' style="font-size:14px"':'')+'>'+T.ic+'</span>'+
       '<span class="type-t"><b>'+T.name+'</b><span>'+T.desc+'</span></span>'+
       '<span class="type-cat">'+catName(T.cat)+'</span>'+
       '<svg class="chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>'+
