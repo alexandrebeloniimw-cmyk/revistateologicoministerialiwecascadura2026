@@ -553,6 +553,7 @@ function renderArtigos(lista) {
       <div class="article-actions">
         <button type="button" class="article-more" data-id="${a.id}">Ver síntese</button>
         <a href="${esc(a.link)}" target="_blank" rel="noopener" class="article-button">Ler artigo</a>
+        <button type="button" class="article-ig" data-stories="${a.id}" aria-label="Compartilhar nos Stories do Instagram: ${esc(a.titulo)}" title="Compartilhar nos Stories do Instagram">${window.STORIES_ICON || "IG"}</button>
       </div>
     </article>
   `).join("");
@@ -708,6 +709,7 @@ function abrirSintese(id) {
       <div class="share" aria-label="Compartilhar este artigo">
         <span class="share-label">Compartilhar</span>
         <a class="share-btn share-wa" href="https://wa.me/?text=${encodeURIComponent(textoCompartilhar(a))}" target="_blank" rel="noopener">WhatsApp</a>
+        <button type="button" class="share-btn share-ig stories-btn" data-stories="${a.id}">${window.STORIES_ICON || ""}Stories</button>
         <button type="button" class="share-btn" id="shareCopy">Copiar link</button>
         ${navigator.share ? '<button type="button" class="share-btn" id="shareNative">Mais opções…</button>' : ""}
       </div>
