@@ -66,6 +66,7 @@ var qrcode=function(){var t=function(t,r){var e=t,n=g[r],o=null,i=0,a=null,u=[],
   const css = document.createElement("style");
   css.textContent = `
   .stories-btn{display:inline-flex;align-items:center;gap:6px}
+  .btn-stories{display:inline-flex;align-items:center;gap:8px;cursor:pointer;font:inherit;font-weight:600;background:transparent}
   .share-ig{border-color:#d62976;color:#b0205f}
   .share-ig:hover{background:linear-gradient(45deg,#f58529,#dd2a7b 55%,#8134af);border-color:transparent;color:#fff}
   .article-ig{flex:none;display:inline-grid;place-items:center;width:42px;border-radius:999px;border:1.5px solid var(--linha);background:var(--papel);color:#b0205f;cursor:pointer;transition:all .2s}
@@ -87,16 +88,19 @@ var qrcode=function(){var t=function(t,r){var e=t,n=g[r],o=null,i=0,a=null,u=[],
   const podeArquivo = () => { try { return !!(navigator.canShare && navigator.canShare({ files: [new File([new Blob(["x"], { type: "image/png" })], "t.png", { type: "image/png" })] })); } catch (e) { return false; } };
   let arquivo = null, url = null;
 
-  async function abrir(id) {
+  function abrir(id) {
     const a = artigos.find(x => x.id === id); if (!a) return;
+    mostrar(() => desenhar(a), "revista-iwe-artigo-" + a.numero + ".png");
+  }
+  async function mostrar(fazer, nome) {
     const go = $s("stGo"), share = podeArquivo();
     $s("stImg").removeAttribute("src"); go.disabled = true; go.textContent = "Gerando a imagem…";
     $s("stP").textContent = share ? "Toque no botão e escolha Instagram › Stories." : "No computador, baixe a imagem e publique nos Stories pelo celular.";
     if (typeof dlg.showModal === "function") dlg.showModal(); else dlg.setAttribute("open", "");
-    const cv = await desenhar(a);
+    const cv = await fazer();
     const blob = await new Promise(r => cv.toBlob(r, "image/png"));
     if (url) URL.revokeObjectURL(url); url = URL.createObjectURL(blob);
-    arquivo = new File([blob], "revista-iwe-artigo-" + a.numero + ".png", { type: "image/png" });
+    arquivo = new File([blob], nome, { type: "image/png" });
     $s("stImg").src = url; go.disabled = false; go.innerHTML = ICON + (share ? "Compartilhar no Instagram" : "Baixar imagem"); go.focus();
   }
   $s("stGo").addEventListener("click", async () => {
@@ -107,8 +111,52 @@ var qrcode=function(){var t=function(t,r){var e=t,n=g[r],o=null,i=0,a=null,u=[],
   $s("stX").addEventListener("click", () => dlg.close());
   dlg.addEventListener("click", e => { if (e.target === dlg) dlg.close(); });
   document.addEventListener("click", e => {
+    if (e.target.closest("[data-stories-revista]")) { e.preventDefault(); window.abrirStoriesRevista(); return; }
     const b = e.target.closest("[data-stories]"); if (!b) return;
     e.preventDefault(); abrir(Number(b.dataset.stories));
   });
   window.abrirStories = abrir;
+  async function desenharRevista() {
+    try { await Promise.all(['700 100px "Source Sans 3"', '600 40px "Source Sans 3"', '400 30px "Source Sans 3"', '600 80px "Cormorant Garamond"', 'italic 600 80px "Cormorant Garamond"'].map(f => document.fonts.load(f))); } catch (e) {}
+    const lg = await carregarLogo();
+    const W = 1080, H = 1920, cv = document.createElement("canvas"); cv.width = W; cv.height = H; const c = cv.getContext("2d");
+    let g = c.createLinearGradient(0, 0, W, H); g.addColorStop(0, C.medio); g.addColorStop(.55, C.azul); g.addColorStop(1, C.fundo); c.fillStyle = g; c.fillRect(0, 0, W, H);
+    g = c.createRadialGradient(W * .95, H * .1, 0, W * .95, H * .1, 720); g.addColorStop(0, "rgba(201,161,74,.30)"); g.addColorStop(1, "rgba(201,161,74,0)"); c.fillStyle = g; c.fillRect(0, 0, W, H);
+    g = c.createRadialGradient(-80, H * .8, 0, -80, H * .8, 640); g.addColorStop(0, "rgba(235,62,66,.38)"); g.addColorStop(1, "rgba(235,62,66,0)"); c.fillStyle = g; c.fillRect(0, 0, W, H);
+    c.fillStyle = C.verm; c.fillRect(0, 0, W, 14); c.fillStyle = C.ouro; c.fillRect(0, 14, W, 4);
+    const LH = 112, LW = lg ? Math.round(LH * lg.width / lg.height) : 184, lx = 80, ly = 230;
+    c.fillStyle = "#fff"; rr(c, lx, ly, LW + 44, LH + 30, 26); c.fill(); if (lg) c.drawImage(lg, lx + 22, ly + 15, LW, LH);
+    const hx = lx + LW + 80;
+    c.fillStyle = "#fff"; c.font = "600 32px " + SANS; c.fillText("Instituto Wesleyano", hx, ly + 62); c.fillText("de Educação", hx, ly + 102);
+    c.fillStyle = C.suave; c.font = "400 28px " + SANS; c.fillText("Curso Ministerial Teológico", hx, ly + 140);
+    // selo e título da revista
+    c.font = "700 26px " + SANS; esp(c, "4px"); const tag = "REVISTA · EDIÇÃO 2026", tw = c.measureText(tag).width + 56;
+    c.fillStyle = C.verm; rr(c, 80, 440, tw, 56, 28); c.fill(); c.fillStyle = "#fff"; c.fillText(tag, 108, 478); esp(c, "0px");
+    c.fillStyle = "#fff"; c.font = "600 150px " + SERIF; c.fillText("Artigo", 74, 660); c.fillText("Teológico", 74, 790);
+    c.fillStyle = C.ouroClaro; c.font = "italic 600 150px " + SERIF; c.fillText("Ministerial", 74, 920);
+    c.fillStyle = C.ouro; rr(c, 80, 965, 90, 8, 4); c.fill();
+    const nE = new Set(artigos.map(a => a.editoria)).size, nO = new Set(artigos.map(a => a.orientador)).size;
+    c.fillStyle = "#fff"; c.font = "400 38px " + SANS;
+    quebra(c, `Os ${artigos.length} artigos da turma do Polo Cascadura: perguntas da Igreja de hoje respondidas com Bíblia, teologia e pesquisa.`, W - 160).forEach((l, i) => c.fillText(l, 80, 1040 + i * 50));
+    // números
+    let sx = 80; [[artigos.length, "artigos"], [nE, "editorias"], [nO, "orientadores"]].forEach(([n, l]) => {
+      c.fillStyle = C.ouroClaro; c.font = "700 72px " + SANS; c.fillText(n, sx, 1270); const w = c.measureText(String(n)).width;
+      c.fillStyle = C.suave; c.font = "400 30px " + SANS; c.fillText(l, sx + w + 14, 1270); sx += w + 14 + c.measureText(l).width + 50;
+    });
+    // cartão com QR
+    const cy = 1340, ch = 330; c.fillStyle = "#fff"; rr(c, 80, cy, W - 160, ch, 36); c.fill();
+    c.save(); rr(c, 80, cy, W - 160, ch, 36); c.clip(); c.fillStyle = C.verm; c.fillRect(80, cy, 14, ch); c.restore();
+    const q = qrcode(0, "M"); q.addData(SITE_URL); q.make();
+    const n = q.getModuleCount(), qs = Math.floor(262 / n), qw = qs * n, qx = 124, qy = cy + (ch - qw) / 2;
+    c.fillStyle = C.azul; for (let r = 0; r < n; r++) for (let k = 0; k < n; k++) if (q.isDark(r, k)) c.fillRect(qx + k * qs, qy + r * qs, qs, qs);
+    const tx = qx + qw + 48;
+    c.fillStyle = C.verm; c.font = "700 28px " + SANS; esp(c, "3px"); c.fillText("LEIA A REVISTA", tx, cy + 92); esp(c, "0px");
+    c.fillStyle = C.azul; c.font = "700 36px " + SANS; let ty = cy + 144;
+    quebra(c, "Síntese, referências e como citar cada artigo", W - 80 - tx - 40).forEach(l => { c.fillText(l, tx, ty); ty += 44; });
+    c.fillStyle = "#5b5b63"; c.font = "400 26px " + SANS; c.fillText("Aponte a câmera para o código", tx, ty + 18);
+    c.fillStyle = C.suave; c.font = "600 30px " + SANS; c.textAlign = "center"; c.fillText("IWE Polo Cascadura  ·  @iwecascadura", W / 2, 1740); c.textAlign = "left";
+    return cv;
+  }
+  window.abrirStoriesRevista = () => mostrar(desenharRevista, "revista-artigo-teologico-ministerial-2026.png");
+
 })();
