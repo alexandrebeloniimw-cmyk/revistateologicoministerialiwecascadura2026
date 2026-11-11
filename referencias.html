@@ -606,7 +606,7 @@ function update(T){
   var r=T.build(getVals(T)),out=document.getElementById("out-"+T.id),ci=document.getElementById("cite-"+T.id);
   if(!out)return;out.innerHTML=r.ref;
   if(r.cite)ci.innerHTML='No texto: <code>'+r.cite+'</code>';
-  else{var who=esc(r.who||"Autor"),yr=esc(r.yr||"[s. d.]");ci.innerHTML='No texto: <code>'+who+' ('+yr+')</code> na indireta · <code>'+who+' ('+yr+', p. 00)</code> na direta';}
+  else{var who=esc(r.who||"Autor"),yr=esc(r.yr||"[s. d.]");ci.innerHTML='No texto: <code>'+who+' ('+yr+')</code> na indireta · <code>'+who+' ('+yr+', p. 00)</code> na direta · entre parênteses: <code>('+who+', '+yr+')</code>, só com a inicial maiúscula (NBR 10520:2023)';}
 }
 function render(){
   var list=TYPES.filter(matches);

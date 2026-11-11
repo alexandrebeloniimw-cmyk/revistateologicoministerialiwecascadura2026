@@ -851,7 +851,8 @@ function refParts(x){
 }
 const refHTML=x=>{const r=refParts(x);return `${esc(r.author)}. <b>${esc(r.main)}</b>${esc(r.sub)}.${esc(r.tail)}`};
 const refText=x=>{const r=refParts(x);return `${r.author}. ${r.main}${r.sub}.${r.tail}`};
-const citeText=x=>`(${lastName(x.a)}, ${x.y})`;
+const citeName=n=>lastName(n).toLowerCase().replace(/(^|[\s-])(\p{L})/gu,(m,a,b)=>a+b.toUpperCase()).replace(/ (De|Da|Do|Dos|Das|E) /g,m=>m.toLowerCase());
+const citeText=x=>`(${citeName(x.a)}, ${x.y})`; // NBR 10520:2023: só a inicial maiúscula
 
 async function copyOut(btn,html,text){
   const label=btn.textContent;
