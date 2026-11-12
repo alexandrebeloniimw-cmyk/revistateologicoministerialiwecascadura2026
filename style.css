@@ -463,8 +463,15 @@ button { font: inherit; color: inherit; }
   .footer-verse { grid-column: 1 / -1; }
 }
 
-/* menu recolhido abaixo de 1240px (os itens não cabem ao lado do título) */
-@media (max-width: 1240px) {
+/* menu um pouco mais compacto em telas médias */
+@media (max-width: 1640px) {
+  .menu { gap: 13px; }
+  .menu a { font-size: .86rem; }
+  .menu-insta a { padding: 5px 11px; }
+}
+
+/* menu recolhido abaixo de 1400px (os itens não cabem ao lado do título) */
+@media (max-width: 1400px) {
   .mobile-menu { display: flex; }
   .menu {
     position: absolute; top: 72px; left: 0; right: 0; flex-direction: column; gap: 0; background: var(--azul);
